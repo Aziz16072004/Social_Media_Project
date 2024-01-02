@@ -1,5 +1,6 @@
 {
-  "name": "xo_app",
+  "homepage": "https://Aziz16072004.github.io/Social_Media_Project",
+  "name": "social_media",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,6 +17,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
