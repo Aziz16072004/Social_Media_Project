@@ -453,43 +453,26 @@ main{
     align-items: center;
     margin: 10px 0px ;
 }
-.requests-person img{
-    margin: 18px 14px 10px 26px;
-}
+
 .requests-person small {
     color: #9f9f9f;
     font-size: 17px;
 
 }
 .requests{
-    PADDING: 8px 33px;
+    PADDING: 14px 0;
     border-radius: 15px;
     background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
-.btn-rquests-accept{
-    text-decoration: none;
-    color: white;
-    background: #6c4be1;
-    font-weight: bold;
-    width: 109px;
-    text-align: center;
-    height: 33px;
-    padding: 9px 26px;
-    border-radius: 39PX;
 
-}
 .btn-rquests-reject{
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-    background: #f1edf6;
-    width: 109px;
-    text-align: center;
-    height: 33px;
-    padding: 9px 36px;
-    border-radius: 39PX;
-    margin: 0 10px;
 
+    background: #f1edf6 !important;
+    color: black !important;
 
 }
 /* css of theme */
@@ -655,7 +638,22 @@ main{
 
 }
 
-
+.request-btn{
+    gap: 10px;
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+}
+.request-btn a{
+    text-decoration: none;
+    color: white;
+    background: #6c4be1;
+    font-weight: bold;
+    text-align: center;
+    padding: 7px 0px;
+    border-radius: 39PX;
+    width: 100%;
+}
 
 
 

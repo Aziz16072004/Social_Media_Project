@@ -89,8 +89,10 @@ export default function Friends(){
                         </div>
                         
                     </div>
+                    <div className="request-btn">
                     <a href="#post" class="btn-rquests-accept">Accept</a>
                     <a href="#post" class="btn-rquests-reject">Reject</a>
+                    </div>
                 </div>
                 )
                 })}
