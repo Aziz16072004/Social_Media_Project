@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Social_Media_Project/static/css/main.c94a9eb3.css",
+    "main.css": "/Social_Media_Project/static/css/main.b5709548.css",
     "main.js": "/Social_Media_Project/static/js/main.8b29a2a8.js",
     "static/js/787.1c634a98.chunk.js": "/Social_Media_Project/static/js/787.1c634a98.chunk.js",
     "static/media/yassine-profile.jpg": "/Social_Media_Project/static/media/yassine-profile.3ef4e0bc9b3f83440eb6.jpg",
@@ -32,12 +32,12 @@
     "static/media/share.png": "/Social_Media_Project/static/media/share.8f7deca4e2be5ff91343.png",
     "static/media/nike_profile.jpg": "/Social_Media_Project/static/media/nike_profile.cddedf180f00f8236a8d.jpg",
     "index.html": "/Social_Media_Project/index.html",
-    "main.c94a9eb3.css.map": "/Social_Media_Project/static/css/main.c94a9eb3.css.map",
+    "main.b5709548.css.map": "/Social_Media_Project/static/css/main.b5709548.css.map",
     "main.8b29a2a8.js.map": "/Social_Media_Project/static/js/main.8b29a2a8.js.map",
     "787.1c634a98.chunk.js.map": "/Social_Media_Project/static/js/787.1c634a98.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c94a9eb3.css",
+    "static/css/main.b5709548.css",
     "static/js/main.8b29a2a8.js"
   ]
 }
