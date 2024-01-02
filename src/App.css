@@ -1,0 +1,675 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:wght@300;400;500;600&display=swap');
+*{
+    font-family: 'poppins' , sans-serif;
+    margin: 0;
+    padding: 0;
+}
+:root{
+    --main-color : #6c4be1
+}
+.searche img {
+    
+    width: 17px;
+    height: 17px;
+    position: absolute;
+    left: 23px;
+
+}
+.header-rigth{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.profile-img img ,.profile-img-friends img{
+
+    width: 45px;
+    height: 45px;
+    border-radius: 50px;
+    margin: 9px 34px 0 0;
+}
+
+.button ,.btn2{
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    padding: 4px;
+    border: none;
+    width: 100%;
+    background-color: var(--main-color);
+    border-radius: 39PX;
+
+}
+.container-nav{
+    padding: 0 6%;
+}
+HEADER {
+    align-items: center}
+.searche{
+    position: relative;
+    align-items: center;
+}
+.searche input {
+    width: 100%;
+    height: 30px;
+    padding: 17px 50px;
+    border-radius: 39px;
+    background: #eee;
+    border: none;
+}
+
+section{
+    display: grid;
+    grid-template-columns: 18vh auto 20vw;
+    position: relative;
+    background-color: #f1edf6;
+
+}
+.container-main{
+    padding: 0 5%;
+    background-color: #f1edf6;
+
+}
+.paramettre{
+    background: white;
+    border-radius: 18px;
+    margin: 10px 0;
+}
+.profile-bar{
+    background: white;
+    border-radius: 18px;
+    display: flex;
+    HEIGHT: 77px;
+}
+.controle-bar{
+    position: relative;
+}
+.profile-bar .profile-img img{  
+    margin: 12px 0 0 27px;
+}
+.info{
+    
+    margin: 12px 26px;
+
+}
+.info small {
+    color: #858585;
+
+}
+p{
+    margin: 0 !important;
+}
+.home{
+    padding: 30px 11px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 33px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+.paramettre ion-icon{
+    margin-right: 23px;
+}
+.home:hover{
+    color: #6c4be1;
+    background-color:#f1edf6 ;
+}
+
+
+.line-home::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    border-top-left-radius: 19px;
+    height: 75px;
+    width: 12px;
+    top: 0px;
+    background-color: aqua;
+}
+.notification-bar{
+    BACKGROUND: white;
+    width: 519px;
+    position: absolute;
+    TOP: 255px;
+    border-radius: 28px;
+    left: 328px;
+    display: none;
+    transition: 1.3s;
+    z-index: 1000;
+}
+.notification-person{
+    display: flex;
+    align-items: center;
+}
+.notification-person img{
+    margin: 18px 14px 10px 26px;
+}
+.notification-person small {
+    color: #9f9f9f;
+
+}
+.notification-bar::before{
+    content: "";
+    width: 24px;
+    top: 28px;
+    left: -12px;
+    position: absolute;
+    height: 24px;
+    background-color: white;
+    border-radius: 22px;
+
+}
+.line-notification{
+    display: none;
+}
+.line-notification::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    height: 75px;
+    width: 12px;
+    top: 0px;
+    background-color: aqua;
+}
+.active{
+    display: none;
+}
+/* partie css story */
+
+
+.title{
+    color:  #c7c7c7;
+}
+.storys{
+    display: flex;
+    height: 221px;
+    justify-content: space-between;
+    position: relative;
+    
+
+
+}
+.img-profile-story img{
+    width: 33px;
+    height: 33px;
+    border-radius: 50px;
+    border: 3px solid blue;
+    margin: 17px 15px;
+}
+.story{
+    width: 154px;
+    border-radius: 15px;
+    margin: 0 4px;
+
+}
+.story p {
+    color: #ffffffcc;
+    font-size: 15px;
+    margin: 88px 0 0 22px;
+
+}
+.block_story_1{
+    background-image: url(./imgs/LivvyLand_story.jpg);
+    background-position: center;
+    background-size: cover;
+    
+}
+.block_story_2{
+    background-image: url(./imgs/nike_story.jpg);
+    background-position: center;
+    background-size: cover;
+    
+}
+.block_story_3{
+    background-image: url(./imgs/painting_story.jpg);
+    background-position: center;
+    background-size: cover;
+    
+}
+.block_story_4{
+    background-image: url(./imgs/neymar_story.jpg);
+    background-position: center;
+    background-size: cover;
+    
+}
+.block_story_5{
+    background-image: url(./imgs/tokyoghoul_story.jpg);
+    background-position: center;
+    background-size: cover;
+    
+}
+.block_story_6{
+    background-image: url(./imgs/Depression_story.jpg);
+    background-position: center;
+    background-size: cover;
+    
+}
+.story::before{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    
+    height: 100px;
+    background: linear-gradient(rgba(255, 255, 255, 0.06),rgba(0, 0, 0, 0.5) );
+    border-radius: 15px;
+}
+.post-bar{
+    margin: 15px 0;
+    display: flex;
+    position: relative;
+}
+.post-bar input{
+    width: 100%;
+    height: 45px;
+    border-radius: 50px;
+    border: none;
+    padding-left: 74px;
+    
+}
+.input-post-bar{
+    width: 100%;
+}
+.profile-img-post img{
+    width: 37px;
+    height: 37px;
+    top: -4px;
+    left: 19px;
+    position: absolute;
+}
+main{
+    background-color: #f1edf6;
+    padding: 24px 0;
+}
+.btn-post{
+    position: absolute;
+    right: 16px;
+    top: 4px;
+    width: 15% !important;
+}
+.icons-posts-right{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.post-title{
+    display: flex;
+    margin: 0px 24px;
+
+}
+.posts{
+    padding: 10px 0;
+    margin: 10px 0;
+    background: white;
+    border-radius: 15px;
+
+}
+
+.post-name-utilisateur{
+    
+    margin: 11px 18px 2px 18px;
+
+}
+.postes-images-post1{
+    background: url(./imgs/zenitsu-post.jpg) no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin: 0px 3%;
+    border-radius: 15px;
+    width: 94%;
+    height: 550px;
+}
+.postes-images img{
+    margin: 0 24px;
+
+}
+.icons-posts img{
+    width: 26px;
+    height: 26px;
+    margin: 0 9px;
+}
+.icons-posts{
+    display: flex;
+    justify-content: space-between;
+    margin: 13px 47px;
+}
+.icons-posts ion-icon{
+    font-size: 33px;
+    margin: -4px 8px;
+}
+.vue img{
+    width: 28px;
+    height: 28px;
+    /* position: absolute; */
+    border-radius: 15px;
+    border: 2px solid white;
+}
+.line1-vue{
+    display: flex;
+    position: relative;
+}
+.vue{
+    margin: 0 30px;
+}
+.img2{
+    position: absolute;
+    left:16px;
+    z-index: 1000;
+
+}
+.img3{
+    position: absolute;
+    left: 34px;
+    z-index: 1001;
+}
+.line1-vue p{
+    
+    margin: 4px 48px;
+
+}
+.line2-vue small{
+    color: #999;
+}
+.message{
+    PADDING: 24px 10px;
+    border-radius: 15px;
+    background-color: #fff;
+}
+.messages-title{
+    display: flex;
+    justify-content: space-between;
+}
+.messages-title ion-icon{
+    font-size: 27px;
+    padding: 5px 3px;
+}
+.searche-friends{
+    position: relative;
+    display: flex;
+    align-items: center;
+    
+}
+.searche-friends input{
+    width: 100%;
+    margin: 7px 0;
+    height: 50px;
+    border: none;
+    background: #f1edf6;
+    border-radius: 41px;
+    padding: 0 58px;
+    font-size: 16px;
+}
+.searche-friends ion-icon{
+    left: 18px;
+    top: 21px;
+    position: absolute;
+    font-size: 30px;
+}
+.show-friends a {
+    text-decoration: none;
+    color: black;
+    display: inline-block;
+    font-weight: bold;
+    margin: 7px 0;
+    font-size: 14px;
+
+
+
+}
+.profile-img-friends{
+    position: relative;
+}
+.profile-img-friends::before{
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 10px;
+    BACKGROUND: #8eff96;
+    position: absolute;
+    border: 2px solid white;
+    top: 48px;
+    LEFT: 54px;
+
+}
+.show-friends{
+    border-bottom: 4px solid #f1edf6;
+}
+.message-person{
+    display: flex;
+    align-items: center;
+    margin: 0 -21px;
+}
+.message-person img{
+    margin: 18px 14px 10px 26px;
+}
+.message-person small {
+    color: #9f9f9f;
+
+}
+.requests-person{
+    display: flex;
+    align-items: center;
+    margin: 10px 0px ;
+}
+.requests-person img{
+    margin: 18px 14px 10px 26px;
+}
+.requests-person small {
+    color: #9f9f9f;
+    font-size: 17px;
+
+}
+.requests{
+    PADDING: 8px 33px;
+    border-radius: 15px;
+    background-color: #fff;
+}
+.btn-rquests-accept{
+    text-decoration: none;
+    color: white;
+    background: #6c4be1;
+    font-weight: bold;
+    width: 109px;
+    text-align: center;
+    height: 33px;
+    padding: 9px 26px;
+    border-radius: 39PX;
+
+}
+.btn-rquests-reject{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    background: #f1edf6;
+    width: 109px;
+    text-align: center;
+    height: 33px;
+    padding: 9px 36px;
+    border-radius: 39PX;
+    margin: 0 10px;
+
+
+}
+/* css of theme */
+.main-theme-bar{
+    width: 196vh;
+    height: 100vh;
+    position: absolute;
+    z-index: 1096;
+    BACKGROUND: rgba(255, 255, 255, 0.496);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    display: none;
+}
+.theme_bar{
+    background: white;
+    width: 50%;
+    HEIGHT: 63%;
+    border-radius: 29px;
+    box-shadow: -1px 0px 8px #000000a3;
+}
+.theme-info{
+    margin: 61px auto;
+    text-align: center;
+    line-height: 31px;
+    width: 40%;
+}
+.theme-info p{
+    color: #4646467a;
+}
+.theme-font-title{
+    TEXT-ALIGN: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 89px;
+}
+.size-bar , .color-bar{
+    background-color: #f1edf6;
+    width: 80%;
+    height: 47px;
+    margin: 4px auto;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 31pX;
+    ALIGN-ITEMS: center;
+
+}
+.size-line {
+    width: 88%;
+    height: 6px;
+    background-color: #d6ccfc;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.size-line span{
+    width: 18px;
+    margin: -5px -4px;
+    height: 18px;
+    border-radius: 10px;
+    background-color: #d6ccfc;
+    cursor: pointer;
+
+}
+.theme-color-title , .theme-background-title{
+    TEXT-ALIGN: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 34px;
+}
+.color-bar span{
+    width: 36px;
+    height: 36px;
+    border-radius: 25px;
+    cursor: pointer;
+
+
+
+}
+#color_blue{
+    background-color: blue;
+}
+#color_yello{
+    background-color: yellow;
+}
+#color_red{
+    background-color: red;
+}
+#color_green{
+    background-color: green;
+}
+#color_blueciel{
+    background-color: rgb(78, 187, 255);
+}
+.background-bar{
+    display: flex;
+    justify-content: space-between;
+    width: 84%;
+    margin: 0 auto;    
+
+}
+.circal{
+    
+    width: 46px;
+    height: 46px;
+    border-radius: 50px;
+    background: transparent;
+    border: 2px solid #fdfdfd63;
+    position: absolute;
+    top: 11px;
+    left: 19px;
+    cursor: pointer;
+}
+.background p{
+    margin: 24px 85px;
+    font-weight: bold;
+    color: white;
+}
+.background{
+    position: relative;
+    width: 252px;
+    background: #14101f;
+    border-radius: 7px;
+    height: 74px;
+
+}
+.img-post img{
+    margin: 15px 0px 0 20px;
+}
+
+.postes-images-post2{
+    
+        background: url(./imgs/uchiha-itachi-post.jpg) no-repeat;
+        background-position: center;
+        background-size: cover;
+        margin: 0px 3%;
+        border-radius: 15px;
+        width: 94%;
+        height: 591px;
+
+}
+.postes-images-post3{
+    
+    background: url(./imgs/luffy-profile-photo.jpg) no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin: 0px 3%;
+    border-radius: 15px;
+    width: 94%;
+    height: 591px;
+
+}
+.postes-images-post4{
+    
+    background: url(./imgs/air-jordan.jpg) no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin: 0px 3%;
+    border-radius: 15px;
+    width: 94%;
+    height: 591px;
+
+}
+
+
+
+
+
+
+/* MEDIA QUERY /// WEB CITE RESPNSIVE ON TABLETTE */
+@media (min-width: 1400px){
+.container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    max-width: 1410px !important;
+}
+}
+@media (max-width: 1400px){
+    .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        max-width: 1410px !important;
+    }
+    }
