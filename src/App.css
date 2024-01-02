@@ -185,8 +185,8 @@ p{
 }
 .storys{
     display: flex;
+    overflow: hidden;
     height: 221px;
-    justify-content: space-between;
     position: relative;
     
 
