@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/Social_Media_Project/static/css/main.f7e44beb.css",
+    "main.js": "/Social_Media_Project/static/js/main.3d9f7841.js",
+    "static/js/787.1c634a98.chunk.js": "/Social_Media_Project/static/js/787.1c634a98.chunk.js",
+    "static/media/yassine-profile.jpg": "/Social_Media_Project/static/media/yassine-profile.3ef4e0bc9b3f83440eb6.jpg",
+    "static/media/mouhib-profile.jpg": "/Social_Media_Project/static/media/mouhib-profile.0df42f98b5a6dd43a844.jpg",
+    "static/media/ghassen-profile.jpg": "/Social_Media_Project/static/media/ghassen-profile.855692951c4fcfc9af0d.jpg",
+    "static/media/LivvyLand_story.jpg": "/Social_Media_Project/static/media/LivvyLand_story.9f9000744fcbc623f05d.jpg",
+    "static/media/painting_story.jpg": "/Social_Media_Project/static/media/painting_story.b5328235c3be2f410c9f.jpg",
+    "static/media/neymar_profile.jpg": "/Social_Media_Project/static/media/neymar_profile.aa53508c5791d2f24b4a.jpg",
+    "static/media/livvyland_profile.jpg": "/Social_Media_Project/static/media/livvyland_profile.478c6276b2002a985415.jpg",
+    "static/media/nike_story.jpg": "/Social_Media_Project/static/media/nike_story.a193103249daf63c857f.jpg",
+    "static/media/neymar_story.jpg": "/Social_Media_Project/static/media/neymar_story.c06289b2d1b2a3b65a2b.jpg",
+    "static/media/depression_profile.jpg": "/Social_Media_Project/static/media/depression_profile.4195cbfb76a966eac347.jpg",
+    "static/media/tokyoghoul_profile.jpg": "/Social_Media_Project/static/media/tokyoghoul_profile.c5a307f90dcc0fd3c58d.jpg",
+    "static/media/tokyoghoul_story.jpg": "/Social_Media_Project/static/media/tokyoghoul_story.452415683937716fc1fc.jpg",
+    "static/media/safouen-profile.jpg": "/Social_Media_Project/static/media/safouen-profile.05bb33508eeff665648b.jpg",
+    "static/media/ghofran-profile.jpg": "/Social_Media_Project/static/media/ghofran-profile.fad1410b3ddfb7f688d9.jpg",
+    "static/media/zenitsu.jpg": "/Social_Media_Project/static/media/zenitsu.cf1d48c9ca15320f47b5.jpg",
+    "static/media/chalouati-profile.jpg": "/Social_Media_Project/static/media/chalouati-profile.9350e6b9936a46905b7b.jpg",
+    "static/media/Depression_story.jpg": "/Social_Media_Project/static/media/Depression_story.9da8edc3e57cbff97b9b.jpg",
+    "static/media/zenitsu-post.jpg": "/Social_Media_Project/static/media/zenitsu-post.befba862225dac751db0.jpg",
+    "static/media/luffy-profile-photo.jpg": "/Social_Media_Project/static/media/luffy-profile-photo.9daddfe5b414665ca840.jpg",
+    "static/media/my-profile-photo.jpg": "/Social_Media_Project/static/media/my-profile-photo.b44ec289354bf827fbd0.jpg",
+    "static/media/uchiha-itachi-post.jpg": "/Social_Media_Project/static/media/uchiha-itachi-post.f578f106f0cb86e476ff.jpg",
+    "static/media/air-jordan.jpg": "/Social_Media_Project/static/media/air-jordan.a4c499be00fd9485e341.jpg",
+    "static/media/luffy-logo.jpg": "/Social_Media_Project/static/media/luffy-logo.02c0946280938ea2b2f8.jpg",
+    "static/media/profil-img.jfif": "/Social_Media_Project/static/media/profil-img.79005fb00ec88f43f405.jfif",
+    "static/media/painting_profile.jpg": "/Social_Media_Project/static/media/painting_profile.cf24cb4b467d76823e4b.jpg",
+    "static/media/chat.png": "/Social_Media_Project/static/media/chat.74a1dc72220c5f4b74ba.png",
+    "static/media/share.png": "/Social_Media_Project/static/media/share.8f7deca4e2be5ff91343.png",
+    "static/media/nike_profile.jpg": "/Social_Media_Project/static/media/nike_profile.cddedf180f00f8236a8d.jpg",
+    "index.html": "/Social_Media_Project/index.html",
+    "main.f7e44beb.css.map": "/Social_Media_Project/static/css/main.f7e44beb.css.map",
+    "main.3d9f7841.js.map": "/Social_Media_Project/static/js/main.3d9f7841.js.map",
+    "787.1c634a98.chunk.js.map": "/Social_Media_Project/static/js/787.1c634a98.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f7e44beb.css",
+    "static/js/main.3d9f7841.js"
+  ]
+}
