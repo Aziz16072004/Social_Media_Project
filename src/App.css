@@ -203,6 +203,7 @@ p{
     width: 154px;
     border-radius: 15px;
     margin: 0 4px;
+    position: relative;
 
 }
 .story p {
@@ -251,9 +252,9 @@ p{
     content: "";
     position: absolute;
     bottom: 0;
-    
+    width: 100%;
     height: 100px;
-    background: linear-gradient(rgba(255, 255, 255, 0.06),rgba(0, 0, 0, 0.5) );
+    background: linear-gradient(rgb(255 255 255 / 3%),rgb(0 0 0 / 45%) );
     border-radius: 15px;
 }
 .post-bar{
