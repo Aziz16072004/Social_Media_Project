@@ -1,6 +1,11 @@
+import { useState } from "react"
 import my_profile_photo from "../imgs/my-profile-photo.jpg"
-
+import profil_img from "../imgs/profil-img.jfif"
 export default function ControleBar() {
+    const [display , setDisplay] = useState(false)
+    function handleNotifications(){
+        setDisplay(!display)
+    }
     const Contoller = [
         {
             Name: "Home",
@@ -43,6 +48,50 @@ export default function ControleBar() {
             ionIconName : "settings-outline"
         },
     ]
+    const notifications = [
+        {
+            userName : "Keke Benjamin",
+            image : profil_img,
+            message : " accepted your friend request",
+            CreatedAt : "2 DAYS AGO"
+        },
+        {
+            userName : "Keke Benjamin",
+            image : profil_img,
+            message : " accepted your friend request",
+            CreatedAt : "2 DAYS AGO"
+        },
+        {
+            userName : "Keke Benjamin",
+            image : profil_img,
+            message : " accepted your friend request",
+            CreatedAt : "2 DAYS AGO"
+        },
+        {
+            userName : "Keke Benjamin",
+            image : profil_img,
+            message : " accepted your friend request",
+            CreatedAt : "2 DAYS AGO"
+        },
+        {
+            userName : "Keke Benjamin",
+            image : profil_img,
+            message : " accepted your friend request",
+            CreatedAt : "2 DAYS AGO"
+        },
+        {
+            userName : "Keke Benjamin",
+            image : profil_img,
+            message : " accepted your friend request",
+            CreatedAt : "2 DAYS AGO"
+        },
+        {
+            userName : "Keke Benjamin",
+            image : profil_img,
+            message : " accepted your friend request",
+            CreatedAt : "2 DAYS AGO"
+        },
+    ]
     return(
         <div class="controle-bar col-md-3  d-none d-md-block">
                 <div class="profile-bar">
@@ -56,12 +105,37 @@ export default function ControleBar() {
                 </div>
                 <div className="paramettre">
                     {Contoller.map((e , i)=>{
-
+                        if(e.Name === "notifications"){
+                            return (
+                            <div className="home"  key={i} onClick={()=>{handleNotifications()}}>
+                                <div className="home notifications" >
+                                <ion-icon name={e.ionIconName}></ion-icon>
+                                <span className={e.lineClass}></span>
+                                <p>{e.Name}</p>
+                                </div>
+                                <div class={ display ? "notification-bar" : "notification-bar notification-bar-active" }>
+                
+                {notifications.map((e , i)=>{
+                    return(
+                    <div class="notification-person" >
+                    <div class="profile-img">
+                        <img src={e.image} alt=""/>
+                    </div>
+                    <div class="notification-info"> 
+                        <b>{e.userName}</b> <small> {e.message}<br/>
+                        {e.CreatedAt}</small>
+                    </div>
+                </div>)
+                })}
+                </div>
+            </div>)
+                        }
+                        else{
                         return(<div className="home" key={i}>
                         <ion-icon name={e.ionIconName}></ion-icon>
                         <span className={e.lineClass}></span>
                         <p>{e.Name}</p>
-                        </div>)
+                        </div>)}
                     })}
                 </div>
 
@@ -69,75 +143,7 @@ export default function ControleBar() {
 
 
 
-            <div class="notification-bar">
-                <div class="notification-person">
-                <div class="profile-img">
-                    <img src="../imgs/profil-img.jfif" alt=""/>
-                </div>
-                <div class="notification-info"> 
-                    <b>Keke Benjamin</b> <small> accepted your friend request <br/>
-                    2 DAYS AGO</small>
-                </div>
-                </div>
-                <div class="notification-person">
-                    <div class="profile-img">
-                        <img src="images/profil-img.jfif" alt=""/>
-                    </div>
-                    <div class="notification-info"> 
-                        <b>Keke Benjamin</b> <small> accepted your friend request <br/>
-                        2 DAYS AGO</small>
-                    </div>
-                    </div>
-                    <div class="notification-person">
-                        <div class="profile-img">
-                            <img src="images/profil-img.jfif" alt=""/>
-                        </div>
-                        <div class="notification-info"> 
-                            <b>Keke Benjamin</b> <small> accepted your friend request <br/>
-                            2 DAYS AGO</small>
-                        </div>
-                        </div>
-                        <div class="notification-person">
-                            <div class="profile-img">
-                                <img src="images/profil-img.jfif" alt=""/>
-                            </div>
-                            <div class="notification-info"> 
-                                <b>Keke Benjamin</b> <small> accepted your friend request <br/>
-                                2 DAYS AGO</small>
-                            </div>
-                        </div>
-                        <div class="notification-person">
-                            <div class="profile-img">
-                                <img src="images/profil-img.jfif" alt=""/>
-                            </div>
-                            <div class="notification-info"> 
-                                <b>Keke Benjamin</b> <small> accepted your friend request <br/>
-                                2 DAYS AGO</small>                                
-                            </div>
-                        </div>
-                        <div class="notification-person">
-                            <div class="profile-img">
-                                <img src="images/profil-img.jfif" alt=""/>
-                            </div>
-                            <div class="notification-info"> 
-                                <b>Keke Benjamin</b> <small> accepted your friend request <br/>
-                                2 DAYS AGO</small>
-                            </div>
-                        </div>
-                        <div class="notification-person">
-                        <div class="profile-img">
-                            <img src="images/profil-img.jfif" alt=""/>
-                        </div>
-                        <div class="notification-info"> 
-                            <b>Keke Benjamin</b> <small> accepted your friend request <br/>
-                             2 DAYS AGO</small>
-                        </div>
-                        </div>
-
-
-
-
-            </div>
+            
             </div>
     )
 }

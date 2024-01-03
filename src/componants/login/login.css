@@ -1,0 +1,163 @@
+.userCard{
+    background-color: aquamarine;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    margin: 10px 0 ;
+    flex-direction: column;
+    
+    
+}
+.cardsContainer{
+    margin: 0 25px;
+}
+.change {
+  background: #c3c3c3bd;
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.change .container{
+  background-color: rgb(149 140 140 / 50%);
+  box-shadow: -2px 4px 20px gray;
+  background-color: rgba(138, 138, 138, 0.496);
+  width: 50%;
+  height: 60%;
+  padding: 60px;
+}
+.addProduct{
+  padding: 7px 13px;
+  color: #FFF;
+  background-color: #4bc970;
+  font-size: 18px;
+  text-align: center;
+  font-style: normal;
+  border-radius: 5px;
+  border: 1px solid #3ac162;
+  border-width: 1px 1px 3px;
+  box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+  margin-bottom: 10px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  color: #384047;
+}
+
+.login form , .signup form {
+  max-width: 300px;
+  margin: 10px auto;
+  padding: 10px 20px;
+  background: #f4f7f8;
+  border-radius: 8px;
+}
+
+.login h1 , .signup h1 {
+  margin: 0 0 30px 0;
+  text-align: center;
+}
+.login input[type="text"],.signup input[type="text"] ,
+.login input[type="password"],.signup input[type="password"] ,
+.login input[type="date"],.signup input[type="date"] ,
+.login input[type="datetime"],.signup input[type="datetime"] ,
+.login input[type="email"],.signup input[type="email"] ,
+.login input[type="number"],.signup input[type="number"] ,
+.login input[type="search"],.signup input[type="search"] ,
+.login input[type="tel"],.signup input[type="tel"] ,
+.login input[type="time"],.signup input[type="time"] ,
+.login input[type="url"],.signup input[type="url"] ,
+.login textarea, .signup textarea,
+.login select , .signup select{
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  font-size: 16px;
+  height: auto;
+  margin: 0;
+  outline: 0;
+  padding: 15px;
+  width: 100%;
+  background-color: #e8eeef;
+  color: #8a97a0;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+  margin-bottom: 30px;
+}
+
+.login input[type="radio"],.signup input[type="radio"],
+.login input[type="checkbox"],.signup input[type="checkbox"] {
+  margin: 0 4px 8px 0;
+}
+
+.login select ,.signup select {
+  padding: 6px;
+  height: 32px;
+  border-radius: 2px;
+}
+
+.login input[type="submit"] , .signup input[type="submit"] {
+  padding: 19px 39px 18px 39px;
+  color: #FFF;
+  background-color: #4bc970;
+  font-size: 18px;
+  text-align: center;
+  font-style: normal;
+  border-radius: 5px;
+  width: 100%;
+  border: 1px solid #3ac162;
+  border-width: 1px 1px 3px;
+  box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+  margin-bottom: 10px;
+}
+
+.login fieldset , .signup fieldset {
+  margin-bottom: 30px;
+  border: none;
+}
+
+.login legend , .signup legend {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+}
+
+.login label , .signup label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.login label.light , .signup label.light {
+  font-weight: 300;
+  display: inline;
+}
+
+.login .number , .signup .number {
+  background-color: #5fcf80;
+  color: #fff;
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  font-size: 0.8em;
+  margin-right: 4px;
+  line-height: 30px;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-radius: 100%;
+}
+
+@media screen and (min-width: 480px) {
+  .login form , .signup form  {
+    max-width: 480px;
+  }
+}

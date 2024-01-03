@@ -108,7 +108,10 @@ p{
     height: 33px;
     position: relative;
     cursor: pointer;
-    overflow: hidden;
+
+}
+.notifications{
+    padding: 0 !important;
 }
 .paramettre ion-icon{
     margin-right: 23px;
@@ -129,17 +132,59 @@ p{
     top: 0px;
     background-color: aqua;
 }
-.notification-bar{
+/* .notification-bar{
     BACKGROUND: white;
-    width: 519px;
+    width: 400px;
     position: absolute;
-    TOP: 255px;
+    TOP: 0;
     border-radius: 28px;
-    left: 328px;
-    display: none;
+    left: 104%;
+    display: block;
     transition: 1.3s;
     z-index: 1000;
 }
+ */
+
+/* after edit  */
+.notification-bar{
+    BACKGROUND: white;
+    width: 0;
+    padding: 14px 0px;
+    position: absolute;
+    TOP: 0;
+    border-radius: 28px;
+    left: 104%;
+    display: block;
+    transition: 1.3s;
+    z-index: 1000;
+}
+.notification-bar .notification-person {
+    display: none;
+    opacity:0;
+    visibility: 0;
+    transition: 1s;
+}
+.notification-bar-active{
+    width: 400px !important;
+    transition: 1s;
+    transition-timing-function: ease-in-out;
+}
+.notification-bar-active::before{
+    width: 24px !important;
+}
+.notification-bar-active .notification-person{
+    display: flex !important;
+    opacity: 1;
+}
+
+
+
+
+
+
+
+
+
 .notification-person{
     display: flex;
     align-items: center;
@@ -153,7 +198,7 @@ p{
 }
 .notification-bar::before{
     content: "";
-    width: 24px;
+    width: 0;
     top: 28px;
     left: -12px;
     position: absolute;
@@ -675,3 +720,7 @@ main{
         text-align: left;
     }
 }
+
+
+
+
