@@ -113,7 +113,7 @@ export default function ControleBar() {
                                 <span className={e.lineClass}></span>
                                 <p>{e.Name}</p>
                                 </div>
-                                <div class={ display ? "notification-bar" : "notification-bar notification-bar-active" }>
+                                <div class={ !display ? "notification-bar" : "notification-bar notification-bar-active" }>
                 
                 {notifications.map((e , i)=>{
                     return(
