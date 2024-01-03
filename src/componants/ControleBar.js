@@ -1,6 +1,48 @@
 import my_profile_photo from "../imgs/my-profile-photo.jpg"
 
 export default function ControleBar() {
+    const Contoller = [
+        {
+            Name: "Home",
+            lineClass : "line-home",
+            ionIconName : "home-outline"
+        },
+        {
+            Name: "Explore",
+            lineClass : "line-dawnload",
+            ionIconName : "download-outline"
+        },
+        {
+            Name: "notifications",
+            lineClass : "line-notification",
+            ionIconName : "notifications-outline"
+        },
+        {
+            Name: "Messages",
+            lineClass : "line-pricetag",
+            ionIconName : "pricetag-outline"
+        },
+        {
+            Name: "Bookmarks",
+            lineClass : "line-bookmark",
+            ionIconName : "bookmark-outline"
+        },
+        {
+            Name: "Analytics",
+            lineClass : "line-analytics",
+            ionIconName : "analytics-outline"
+        },
+        {
+            Name: "Theme",
+            lineClass : "line-cloudy",
+            ionIconName : "cloudy-outline"
+        },
+        {
+            Name: "Settings",
+            lineClass : "line-settings",
+            ionIconName : "settings-outline"
+        },
+    ]
     return(
         <div class="controle-bar col-md-3  d-none d-md-block">
                 <div class="profile-bar">
@@ -12,44 +54,15 @@ export default function ControleBar() {
                         <small id="tag-of-profile">@mohamed</small>
                     </div>
                 </div>
-                <div class="paramettre">
-                    <div class="home home1">
-                        <ion-icon name="home-outline"></ion-icon>
-                        <span class="line-home" ></span>
-                        <p>Home</p>
-                    </div>
-                    <div class="home">
-                        <ion-icon name="download-outline"></ion-icon>
-                        <span class="line-dawnload"></span>
-                        <p>Explore</p>
-                    </div>
-                    <div class="home space_notification"  >
-                        <ion-icon name="notifications-outline"></ion-icon>
-                        <span class="line-notification"></span>
-                        <p>notifications</p>
-                    </div>
-                    <div class="home">
-                        <ion-icon name="pricetag-outline"></ion-icon>
-                        <p>Messages</p>
-                    </div>
-                    <div class="home">
-                        <ion-icon name="bookmark-outline"></ion-icon>
-                        <p>Bookmarks</p>
-                    </div>
-                    <div class="home">
-                        <ion-icon name="analytics-outline"></ion-icon>
-                        <p>Analytics</p>
-                    </div>
-                    <div class="home" >
-                        <ion-icon name="cloudy-outline"></ion-icon>
-                        <p>Theme</p>
-                    </div>
-                    <div class="home">
-                        <ion-icon name="settings-outline"></ion-icon>
-                        <p>Settings</p>
-                    </div>
+                <div className="paramettre">
+                    {Contoller.map((e , i)=>{
 
-
+                        return(<div className="home" key={i}>
+                        <ion-icon name={e.ionIconName}></ion-icon>
+                        <span className={e.lineClass}></span>
+                        <p>{e.Name}</p>
+                        </div>)
+                    })}
                 </div>
 
                 <button class="button btn2">Create Post</button>

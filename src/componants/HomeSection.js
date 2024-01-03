@@ -12,6 +12,7 @@ import zenitsu from "../imgs/zenitsu.jpg"
 import uchiha from "../imgs/uchiha-logo.jpg"
 import luffy from "../imgs/luffy-logo.jpg"
 import nike from "../imgs/nike-logo-photo.jpg"
+import my_profile_photo from "../imgs/my-profile-photo.jpg"
 
 export default function HomeSection() {
     const Stories  = [
@@ -63,8 +64,8 @@ export default function HomeSection() {
         },
     ]
     return (
-        <div class="acceuil col-12 col-md-9 col-lg-6">
-            <div class="storys">
+        <div className="acceuil col-12 col-md-9 col-lg-6">
+            <div className="storys">
             {Stories.map((ele , index)=>{
                 let className = `block_story_${index + 1} story`;
                 return(<div className={className} >
@@ -78,7 +79,16 @@ export default function HomeSection() {
             })}
                 
         </div>
-        <div class="section2">
+        <div className="post-bar">
+                    <div className="profile-img profile-img-post">
+                        <img src={my_profile_photo} alt=""/>
+                    </div>
+                    <div className="input-post-bar">
+                        <input type="text" placeholder="what's on your mind , Diana?"/>
+                    </div>
+                    <a href="#post" className="button btn-post">Post</a>
+        </div>
+        <div className="section2">
         {posts.map((ele , index)=>{
             let className = `postes-images-post${index + 1}`;
             return(
@@ -104,12 +114,12 @@ export default function HomeSection() {
                         </div>
                             <div className="vue">
                                 <div className="line1-vue">
-                                    <img src={painting_profile} alt="" class="img1"/>
-                                    <img src={nike_profile} alt=""  class="img2"/>
-                                    <img src={livvyland_profile} alt=""  class="img3"/>
+                                    <img src={painting_profile} alt="" className="img1"/>
+                                    <img src={nike_profile} alt=""  className="img2"/>
+                                    <img src={livvyland_profile} alt=""  className="img3"/>
                                     <p>Like by <b>Emest Achiever</b> and <b>2,323</b> </p>
                                 </div>
-                                <div class="line2-vue">
+                                <div className="line2-vue">
                                 <p> <b>Lana Rose </b>Lorem ipsum dolor sit amet consectetur . #lifeStyle</p>
                                 <small>Vue all 277 comments</small>
                                 </div>
