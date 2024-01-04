@@ -16,8 +16,8 @@ function App() {
       <Routes>
         <Route path="/Social_Media_Project"  element={<Login />} />
 
-        <Route path="/Social_Media_Project/signup" element={<SignUp />} />
-        <Route path="/Social_Media_Project/home" element={<Home />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </Router>
   );

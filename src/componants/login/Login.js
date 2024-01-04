@@ -9,7 +9,7 @@
 
     async function handleSubmit(e) {
       e.preventDefault();
-      navigate("/Social_Media_Project/home");
+      navigate("/home");
 }
 
     return (
@@ -23,7 +23,7 @@
             password : <input type="password" onChange={(e) => setPassword(e.target.value)} />
           </p>
           <input type="submit" value="login" />
-          Or <Link to="/Social_Media_Project/signup">SignUp</Link>
+          Or <Link to="/signup">SignUp</Link>
         </form>
       </div>
     );
