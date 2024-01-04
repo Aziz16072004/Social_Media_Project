@@ -11,11 +11,9 @@ import SignUp from './componants/login/Singup';
 function App() {
   return (
     
-    <Router>
-
+    <Router basename="/Social_Media_Project">
       <Routes>
-        <Route path="/Social_Media_Project"  element={<Login />} />
-
+        <Route path="/" exact element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/home" element={<Home />} />
       </Routes>

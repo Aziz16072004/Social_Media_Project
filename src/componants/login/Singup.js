@@ -6,9 +6,9 @@ function Singup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const history = useNavigate();
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    history("/Social_Media_Project" );
+    history.push("/Social_Media_Project");
   }
   return (
 
@@ -32,7 +32,7 @@ function Singup() {
 
 
 <input type="submit" value="SignUp"/>
-Or <Link to="/Social_Media_Project">Login page</Link>
+Or <Link to="/">Login page</Link>
 
 
 
