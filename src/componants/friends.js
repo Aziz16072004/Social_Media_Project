@@ -46,29 +46,29 @@ export default function Friends(){
         }
     ]
     return(
-        <div class="friend col-md-3 d-none d-lg-block">
-                <div class="message">
-                    <div class="messages-title">
+        <div className="friend col-md-3 d-none d-lg-block">
+                <div className="message">
+                    <div className="messages-title">
                         <h4>Messages</h4>
                         <ion-icon name="clipboard-outline"></ion-icon>
                     </div>
-                    <div class="searche-friends">
+                    <div className="searche-friends">
                         <ion-icon name="search-outline"></ion-icon>
                         <input type="text" placeholder="searche messages"/>
                     </div>
-                    <div class="show-friends row">
-                        <a href="#" class="col-4">Primary</a>
-                        <a href="#" class="col-4">General</a>
-                        <a href="#" class="col-4">Requests</a>
+                    <div className="show-friends row">
+                        <a href="#" className="col-4">Primary</a>
+                        <a href="#" className="col-4">General</a>
+                        <a href="#" className="col-4">Requests</a>
                     </div>
                     {friends.map((element)=>{
 
                     return(
-                    <div class="message-person ">
-                        <div class="profile-img-friends ">
+                    <div className="message-person ">
+                        <div className="profile-img-friends ">
                             <img src={element.image} alt=""/>
                         </div>
-                        <div class="message-info"> 
+                        <div className="message-info"> 
                             <b>{element.username}</b> <br/> <small> {element.lastMessage}</small>
                         </div>
                     </div>)
@@ -76,22 +76,22 @@ export default function Friends(){
                     
 
                 </div>
-                <h2 class="title">Requests</h2>
+                <h2 className="title">Requests</h2>
                 {Requests.map((element)=>{
                     return(
-                <div class="requests">
-                    <div class="requests-person ">
-                        <div class="profile-img">
+                <div className="requests">
+                    <div className="requests-person ">
+                        <div className="profile-img">
                             <img src={element.image} alt=""/>
                         </div>
-                        <div class="requests-info"> 
+                        <div className="requests-info"> 
                             <b>{element.username}</b> <br/> <small> 8 mutal friends</small>
                         </div>
                         
                     </div>
                     <div className="request-btn">
-                    <a href="#post" class="btn-rquests-accept">Accept</a>
-                    <a href="#post" class="btn-rquests-reject">Reject</a>
+                    <a href="#post" className="btn-rquests-accept">Accept</a>
+                    <a href="#post" className="btn-rquests-reject">Reject</a>
                     </div>
                 </div>
                 )

@@ -93,12 +93,12 @@ export default function ControleBar() {
         },
     ]
     return(
-        <div class="controle-bar col-md-3  d-none d-md-block">
-                <div class="profile-bar">
-                    <div class="profile-img">
+        <div className="controle-bar col-md-3  d-none d-md-block">
+                <div className="profile-bar">
+                    <div className="profile-img">
                         <img src={my_profile_photo}alt=""/>
                     </div>
-                    <div class="info">
+                    <div className="info">
                         <b id="name-of-profile">Aziz chaabani</b> <br/>
                         <small id="tag-of-profile">@mohamed</small>
                     </div>
@@ -108,20 +108,20 @@ export default function ControleBar() {
                         if(e.Name === "notifications"){
                             return (
                             <div className="home"  key={i} onClick={()=>{handleNotifications()}}>
-                                <div className="home notifications" >
+                                <div className="home notifications"  >
                                 <ion-icon name={e.ionIconName}></ion-icon>
-                                <span className={e.lineClass}></span>
+                                <span className={e.lineClass} ></span>
                                 <p>{e.Name}</p>
                                 </div>
-                                <div class={ !display ? "notification-bar" : "notification-bar notification-bar-active" }>
+                                <div className={ !display ? "notification-bar" : "notification-bar notification-bar-active" }>
                 
                 {notifications.map((e , i)=>{
                     return(
-                    <div class="notification-person" >
-                    <div class="profile-img">
+                    <div className="notification-person" >
+                    <div className="profile-img">
                         <img src={e.image} alt=""/>
                     </div>
-                    <div class="notification-info"> 
+                    <div className="notification-info"> 
                         <b>{e.userName}</b> <small> {e.message}<br/>
                         {e.CreatedAt}</small>
                     </div>
@@ -139,9 +139,7 @@ export default function ControleBar() {
                     })}
                 </div>
 
-                <button class="button btn2">Create Post</button>
-
-
+                <button className="button btn2">Create Post</button>
 
             
             </div>

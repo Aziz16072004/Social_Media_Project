@@ -68,8 +68,8 @@ export default function HomeSection() {
             <div className="storys">
             {Stories.map((ele , index)=>{
                 let className = `block_story_${index + 1} story`;
-                return(<div className={className} >
-                    <div class="img-profile-story">
+                return(<div className={className} key={index}>
+                    <div className="img-profile-story">
                         <img src={ele.img} alt=""/>
                     </div>
                     <div className="story_info">
@@ -79,7 +79,7 @@ export default function HomeSection() {
             })}
                 
         </div>
-        <div className="post-bar">
+        <div className="post-bar" >
                     <div className="profile-img profile-img-post">
                         <img src={my_profile_photo} alt=""/>
                     </div>

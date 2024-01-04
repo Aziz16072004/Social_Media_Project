@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./login.css"
@@ -6,10 +7,26 @@ function Singup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const history = useNavigate();
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    history.push("/Social_Media_Project");
+    try {
+      const res = await axios.post("https://blushing-train-newt.cyclic.app/signup", {username, email, password});
+      if (res.data === "existe") {
+        alert("User already exists");
+      } else if (res.data === "nonexiste") {
+        alert("regitering successfuly")
+        history("/");
+      }
+      if (res.status !== 200) {
+        alert("Error: " + res.statusText);
+        return;
+      }
+    } catch (error) {
+      alert("Error");
+      console.log(error);
+    }
   }
+
   return (
 
     <div className="signup">
