@@ -13,8 +13,12 @@ import uchiha from "../imgs/uchiha-logo.jpg"
 import luffy from "../imgs/luffy-logo.jpg"
 import nike from "../imgs/nike-logo-photo.jpg"
 import my_profile_photo from "../imgs/my-profile-photo.jpg"
-
+import { useState } from "react"
 export default function HomeSection() {
+    
+    const [productWidget, setProductWidget] = useState(false);
+    const [productName, setProductName] = useState("");
+    const [changeRate , setChangeRate] = useState(null)
     const Stories  = [
         {
             img : livvyland_profile,
@@ -64,7 +68,37 @@ export default function HomeSection() {
         },
     ]
     return (
+        <>
+         {productWidget ? (
+          <div className="change">
+        
+          <div className="container">
+            <div>
+                <h1>Add Post </h1>
+            </div>
+          <form>
+            
+            <p>  
+            <label>Post name</label>
+            <input type="text" onChange={(e)=>setProductName(e.target.value)}/> 
+            </p>
+            <p>
+            <label>Select Image:</label>
+          <input type="file" accept="image/*"/></p>
+          
+            </form>
+          <div>
+          <button className="submit-btn" onClick={()=>{setProductWidget(false)}}> Save Post </button>
+            <button className="Reset-btn" onClick={()=>{setProductWidget(false)}}> Cancel </button>
+          </div>
+            </div>
+            
+          </div>
+          ):null
+
+        } 
         <div className="acceuil col-12 col-md-9 col-lg-6">
+           
             <div className="storys">
             {Stories.map((ele , index)=>{
                 let className = `block_story_${index + 1} story`;
@@ -86,13 +120,13 @@ export default function HomeSection() {
                     <div className="input-post-bar">
                         <input type="text" placeholder="what's on your mind , Diana?"/>
                     </div>
-                    <a href="#post" className="button btn-post">Post</a>
+                    <button href="#post" className="button btn-post"  onClick={()=>{setProductWidget(true)}}>Post</button>
         </div>
         <div className="section2">
         {posts.map((ele , index)=>{
             let className = `postes-images-post${index + 1}`;
             return(
-            <div className="posts">
+                <div className="posts">
             <div className="post-title">
                             <div className="profile-img img-post">
                                 <img src={ele.profileImg} alt=""/>
@@ -130,5 +164,6 @@ export default function HomeSection() {
 
         </div>
         
+         </>
     )
 }

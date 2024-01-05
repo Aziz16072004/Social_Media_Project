@@ -27,7 +27,7 @@
     width: 45px;
     height: 45px;
     border-radius: 50px;
-    margin: 9px 34px 0 0;
+    margin-right: 34px;
 }
 
 .button ,.btn2{
@@ -719,8 +719,58 @@ main{
     .logo h2{
         text-align: left;
     }
+    .change .container{
+        width: 93% !important;
+        padding: 36px 0 !important;
+    }
 }
+.change .submit-btn ,.change .Reset-btn{
+    padding: 19px 39px 18px 39px;
+    color: #FFF;
+    background-color: #4bc970;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid #3ac162;
+    border-width: 1px 1px 3px;
+    box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+    margin-bottom: 10px;
+  }
+  
 
-
-
-
+.change {
+    background: #c3c3c3bd;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  .change .container{
+    box-shadow: -2px 4px 20px gray;
+    background-color: rgb(204 204 204 / 46%);
+    width: 50%;
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    gap: 29px;
+    text-align: center;
+    }
+.Reset-btn{
+    background-color: gray !important;
+    border: none !important;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
