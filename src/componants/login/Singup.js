@@ -6,7 +6,7 @@ function Singup() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const history = useNavigate();
+  const navigation = useNavigate();
   async function handleSubmit(e) {
     e.preventDefault();
     try {
@@ -15,7 +15,7 @@ function Singup() {
         alert("User already exists");
       } else if (res.data === "nonexiste") {
         alert("regitering successfuly")
-        history("/");
+        navigation("/");
       }
       if (res.status !== 200) {
         alert("Error: " + res.statusText);

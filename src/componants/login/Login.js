@@ -13,7 +13,7 @@ import axios from "axios";
         const res = await axios.post("https://blushing-train-newt.cyclic.app/", { email, password });
         console.log(res);
         if (res.data.email === email &&  res.data.password === password ) {
-          navigate("/home");  
+          navigate("/home");
           localStorage.setItem("user",JSON.stringify(res.data));
           
           
