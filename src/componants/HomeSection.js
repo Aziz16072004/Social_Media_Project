@@ -7,18 +7,22 @@ import depression_profile from "../imgs/depression_profile.jpg"
 import chat from "../imgs/chat.png"
 import share from "../imgs/share.png"
 import ribbon from "../imgs/ribbon.png"
+import axios from "axios"
 
 import zenitsu from "../imgs/zenitsu.jpg"
 import uchiha from "../imgs/uchiha-logo.jpg"
 import luffy from "../imgs/luffy-logo.jpg"
 import nike from "../imgs/nike-logo-photo.jpg"
 import my_profile_photo from "../imgs/my-profile-photo.jpg"
-import { useState } from "react"
+import { useState , useEffect } from "react"
 export default function HomeSection() {
     
-    const [productWidget, setProductWidget] = useState(false);
-    const [productName, setProductName] = useState("");
-    const [changeRate , setChangeRate] = useState(null)
+    const [postWidget, setPostWidget] = useState(false);
+    const [postName, setPostName] = useState("");
+    const [postDescription, setPostDescription] = useState("");
+    const [postImage, setPostImage] = useState(null);
+    const [postes, setPosts] = useState([]);
+
     const Stories  = [
         {
             img : livvyland_profile,
@@ -67,30 +71,65 @@ export default function HomeSection() {
             profileImg : nike
         },
     ]
+    const handleImageChange = (e) => {
+        setPostImage(e.target.files[0]);
+      };
+    
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+    
+        const formData = new FormData();
+        formData.append('name', postName);
+        formData.append('description', postDescription);
+        formData.append('image', postImage);
+    
+        try {
+          const response = await axios.post('https://blushing-train-newt.cyclic.app/posts/upload', formData);
+          console.log('Product uploaded:', response.data);
+          // Handle any success logic, e.g., show a success message
+        } catch (error) {
+          console.error('Error uploading product:', error);
+        }
+      }
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get('https://blushing-train-newt.cyclic.app/posts');
+                setPosts(response.data);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
+        };
+
+        fetchProducts();
+    }, []);
     return (
         <>
-         {productWidget ? (
+         {postWidget ? (
           <div className="change">
         
           <div className="container">
             <div>
                 <h1>Add Post </h1>
             </div>
-          <form>
+          <form onSubmit={handleSubmit}>
             
             <p>  
             <label>Post name</label>
-            <input type="text" onChange={(e)=>setProductName(e.target.value)}/> 
+            <input type="text" onChange={(e)=>setPostName(e.target.value)}/> 
+            </p>
+            <p>  
+            <label>Post description</label>
+            <input type="text" onChange={(e)=>setPostDescription(e.target.value)}/> 
             </p>
             <p>
             <label>Select Image:</label>
-          <input type="file" accept="image/*"/></p>
-          
-            </form>
+          <input type="file" accept="image/*" onChange={handleImageChange}/></p>
           <div>
-          <button className="submit-btn" onClick={()=>{setProductWidget(false)}}> Save Post </button>
-            <button className="Reset-btn" onClick={()=>{setProductWidget(false)}}> Cancel </button>
+          <input type="submit" className="submit-btn" value="Save Post"  /> 
+            <button className="Reset-btn" onClick={()=>{setPostWidget(false)}}> Cancel </button>
           </div>
+            </form>
             </div>
             
           </div>
@@ -120,7 +159,7 @@ export default function HomeSection() {
                     <div className="input-post-bar">
                         <input type="text" placeholder="what's on your mind , Diana?"/>
                     </div>
-                    <button href="#post" className="button btn-post"  onClick={()=>{setProductWidget(true)}}>Post</button>
+                    <button href="#post" className="button btn-post"  onClick={()=>{setPostWidget(true)}}>Post</button>
         </div>
         <div className="section2">
         {posts.map((ele , index)=>{
@@ -160,6 +199,17 @@ export default function HomeSection() {
                             </div>
             </div>)
          })}
+         <div>
+            <h1>Product List</h1>
+            <ul>
+                {postes.map((product, index) => (
+                    <li key={index}>
+                        <h3>{product.name}</h3>
+                        <img src={`https://blushing-train-newt.cyclic.app/${product.image}`} alt={product.name} style={{ maxWidth: '200px' }} />
+                    </li>
+                ))}
+            </ul>
+        </div>
         </div>
 
         </div>
