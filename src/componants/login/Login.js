@@ -1,24 +1,35 @@
 
-  import { useState } from "react";
-  import { useNavigate, Link } from "react-router-dom";
-  import "./login.css"
 import axios from "axios";
-  function Login() {
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import "./login.css"
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup" ;
+function Login() {
     const navigate = useNavigate(); 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    async function handleSubmit(e) {
-      e.preventDefault();
+    const schema = yup.object().shape({
+      email: yup.string().email("email invalide").required("Email required"),
+      password: yup.string().required("Password required"),
+    })
+    
+    const {register , handleSubmit, formState :{errors}} = useForm({
+      resolver : yupResolver(schema) ,
+    }) ;
+    async function onSubmit(data) {
       try {
-        const res = await axios.post("https://blushing-train-newt.cyclic.app/", { email, password });
+        const res = await axios.post("https://blushing-train-newt.cyclic.app/",  {
+          email: data.email,
+          password: data.password
+        });
         console.log(res);
-        if (res.data.email === email &&  res.data.password === password ) {
+        if (res.data.email === data.email &&  res.data.password === data.password ) {
           navigate("/home");
           localStorage.setItem("user",JSON.stringify(res.data));
           
           
         } 
-        else if(res.data.email === email &&  res.data.password !== password )  {
+        else if(res.data.email === data.email &&  res.data.password !== data.password )  {
           alert("check your password")
         }
         else if (res.data === "nonexiste") {
@@ -37,14 +48,12 @@ import axios from "axios";
 
     return (
       <div className="login">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
         <h1>Login</h1>
-          <p>
-            email :<input type="email" onChange={(e) => setEmail(e.target.value)} />
-          </p>
-          <p>
-            password : <input type="password" onChange={(e) => setPassword(e.target.value)} />
-          </p>
+        <p className="errorMessage"> {errors.email?.message}</p>
+          <p> email :<input type="email" {...register("email")}/>  </p>
+          <p className="errorMessage"> {errors.password?.message}</p>
+          <p> password : <input type="password" {...register("password")}/> </p>
           <input type="submit" value="login" />
           Or <Link to="/signup">SignUp</Link>
         </form>

@@ -1,66 +1,69 @@
 import axios from "axios";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+
 import { useNavigate, Link } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup" ;
 import "./login.css"
+
 function Singup() {
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const navigation = useNavigate();
-  async function handleSubmit(e) {
-    e.preventDefault();
-    try {
-      const res = await axios.post("https://blushing-train-newt.cyclic.app/signup", {username, email, password});
-      if (res.data === "existe") {
-        alert("User already exists");
-      } else if (res.data === "nonexiste") {
-        alert("regitering successfuly")
-        navigation("/");
-      }
-      if (res.status !== 200) {
-        alert("Error: " + res.statusText);
-        return;
-      }
-    } catch (error) {
-      alert("Error");
-      console.log(error);
+  const schema = yup.object().shape({
+    username: yup.string().required("Name required"),
+    email: yup.string().email("email invalide").required("Email required"),
+    password: yup.string().required("Password required"),
+  })
+  
+const {register , handleSubmit, formState :{errors}} = useForm({
+  resolver : yupResolver(schema) ,
+}) ;
+async function onSubmit(data) {
+  try {
+    const res = await axios.post("https://blushing-train-newt.cyclic.app/signup", {
+      username: data.username,
+      email: data.email,
+      password: data.password
+    });
+
+    if (res.data === "existe") {
+      alert("User already exists");
+    } else if (res.data === "nonexiste") {
+      alert("Registering successfully");
+      navigation("/");
     }
+
+    if (res.status !== 200) {
+      alert("Error: " + res.statusText);
+    }
+  } catch (error) {
+    alert("Error");
+    console.log(error);
   }
+}
 
   return (
 
     <div className="signup">
-      <form action="POST" onSubmit={handleSubmit}>
+      <form action="POST" onSubmit={handleSubmit(onSubmit)}>
         <h1>Sign Up</h1>
 
 <fieldset>
   <legend><span className="number">1</span> Your basic info</legend>
   <label>Name:</label>
-  <input type="text" onChange={(e)=> setUsername(e.target.value)}/>
+  <p className="errorMessage"> {errors.username?.message}</p>
+  <input type="text" {...register("username")}/>
 
   <label >Email:</label>
-  <input type="email"  onChange={(e) => setEmail(e.target.value)}/>
+  <p className="errorMessage"> {errors.email?.message}</p>
+  <input type="email"   {...register("email")}/>
 
   <label >Password:</label>
-  <input type="password" onChange={(e) => setPassword(e.target.value)}/>
+  <p className="errorMessage"> {errors.password?.message}</p>
+  <input type="password"  {...register("password")}/>
   
 </fieldset>
-
-
-
-<input type="submit" value="SignUp"/>
-Or <Link to="/">Login page</Link>
-
-
-
-
-
-
-
-
-        {/* old code  */}
-       
-        
+      <input type="submit" value="SignUp"/>
+      Or <Link to="/">Login page</Link>
       </form>
       </div>
   );

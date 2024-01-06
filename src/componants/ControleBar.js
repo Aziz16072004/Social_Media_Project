@@ -1,7 +1,9 @@
 import { useState } from "react"
 import my_profile_photo from "../imgs/my-profile-photo.jpg"
 import profil_img from "../imgs/profil-img.jfif"
+
 export default function ControleBar() {
+    const data = JSON.parse(localStorage.getItem("user"));
     const [display , setDisplay] = useState(false)
     function handleNotifications(){
         setDisplay(!display)
@@ -95,12 +97,14 @@ export default function ControleBar() {
     return(
         <div className="controle-bar col-md-3  d-none d-md-block">
                 <div className="profile-bar">
+                    <div className="profile-bar-content">
                     <div className="profile-img">
                         <img src={my_profile_photo}alt=""/>
                     </div>
                     <div className="info">
-                        <b id="name-of-profile">Aziz chaabani</b> <br/>
-                        <small id="tag-of-profile">@mohamed</small>
+                        <b id="name-of-profile">{data.username}</b> <br/>
+                        <small id="tag-of-profile">{data.email}{data.email}ajjdsbhdsbfsnf,dsf</small>
+                    </div>
                     </div>
                 </div>
                 <div className="paramettre">
