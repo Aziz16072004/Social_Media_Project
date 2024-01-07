@@ -150,6 +150,18 @@ export default function HomeSection() {
                     </div>
                 </div>)
             })}
+            {Stories.map((ele , index)=>{
+                let className = `block_story_${index + 1} story`;
+                return(<div className={className} key={index}>
+                    <div className="img-profile-story">
+                        <img src={ele.img} alt=""/>
+                    </div>
+                    <div className="story_info">
+                        <p>{ele.storyName}</p>
+                    </div>
+                </div>)
+            })}
+            
                 
         </div>
         <div className="post-bar" >

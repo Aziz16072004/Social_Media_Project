@@ -7,7 +7,6 @@ import Home from './componants/Home';
 import Login from './componants/login/Login';
 import SignUp from './componants/login/Singup';
 
-
 function App() {
   return (
     

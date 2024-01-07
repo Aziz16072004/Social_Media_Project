@@ -200,6 +200,8 @@ p{
 
 .notification-person{
     display: flex;
+    overflow: hidden;
+    transition: 1s;
     align-items: center;
 }
 .notification-person img{
@@ -243,12 +245,16 @@ p{
 }
 .storys{
     display: flex;
-    overflow: hidden;
+    overflow-x: scroll;
     height: 221px;
     position: relative;
     
-
-
+}
+.story{ 
+    padding: 0 10px;
+}
+.storys::-webkit-scrollbar {
+    display: none;
 }
 .img-profile-story img{
     width: 33px;
@@ -311,6 +317,7 @@ p{
     position: absolute;
     bottom: 0;
     width: 100%;
+    left: 0;
     height: 100px;
     background: linear-gradient(rgb(255 255 255 / 3%),rgb(0 0 0 / 45%) );
     border-radius: 15px;
@@ -319,6 +326,13 @@ p{
     margin: 15px 0;
     display: flex;
     position: relative;
+}
+.notification-bar .notification-person{
+    width: 0;
+    transition: 2s;
+}
+.notification-bar-active .notification-person{
+    width: 100% !important;
 }
 .post-bar input{
     width: 100%;
@@ -332,10 +346,10 @@ p{
     width: 100%;
 }
 .profile-img-post img{
-    width: 37px;
-    height: 37px;
-    top: -4px;
-    left: 19px;
+    width: 40px;
+    height: 88%;
+    top: 7%;
+    left: 11px;
     position: absolute;
 }
 main{
@@ -344,8 +358,8 @@ main{
 }
 .btn-post{
     position: absolute;
-    right: 16px;
-    top: 4px;
+    right: 10px;
+    top: 7px;
     width: 15% !important;
 }
 .icons-posts-right{
@@ -354,9 +368,9 @@ main{
     justify-content: center;
 }
 .post-title{
+    gap: 23px;
     display: flex;
-    margin: 0px 24px;
-
+    margin: 0 24px 8px;
 }
 .posts{
     padding: 10px 0;
@@ -387,16 +401,16 @@ main{
 .icons-posts img{
     width: 26px;
     height: 26px;
-    margin: 0 9px;
+    margin-left:9px;
 }
 .icons-posts{
     display: flex;
     justify-content: space-between;
-    margin: 13px 47px;
+    margin: 13px 3%;
 }
 .icons-posts ion-icon{
     font-size: 33px;
-    margin: -4px 8px;
+    
 }
 .vue img{
     width: 28px;
@@ -410,18 +424,18 @@ main{
     position: relative;
 }
 .vue{
-    margin: 0 30px;
+    margin: 0 3%;
 }
 .img2{
     position: absolute;
     left:16px;
-    z-index: 1000;
+    z-index: 1;
 
 }
 .img3{
     position: absolute;
     left: 34px;
-    z-index: 1001;
+    z-index: 2;
 }
 .line1-vue p{
     

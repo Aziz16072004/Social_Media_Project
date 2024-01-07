@@ -103,7 +103,7 @@ export default function ControleBar() {
                     </div>
                     <div className="info">
                         <b id="name-of-profile">{data.username}</b> <br/>
-                        <small id="tag-of-profile">{data.email}{data.email}ajjdsbhdsbfsnf,dsf</small>
+                        <small id="tag-of-profile">{data.email}</small>
                     </div>
                     </div>
                 </div>
