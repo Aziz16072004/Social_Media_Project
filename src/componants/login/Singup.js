@@ -19,7 +19,7 @@ const {register , handleSubmit, formState :{errors}} = useForm({
 }) ;
 async function onSubmit(data) {
   try {
-    const res = await axios.post("https://blushing-train-newt.cyclic.app/signup", {
+    const res = await axios.post(/*"https://blushing-train-newt.cyclic.app/signup"*/"http://localhost:8000/signup", {
       username: data.username,
       email: data.email,
       password: data.password

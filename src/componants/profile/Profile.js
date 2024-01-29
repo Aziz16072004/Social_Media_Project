@@ -1,0 +1,90 @@
+
+
+import { useEffect, useState } from "react"
+import zenitsu from "../../imgs/zenitsu-post.jpg"
+import axios from "axios"
+import {Link} from "react-router-dom"
+import { useParams } from "react-router-dom";
+export default function Profile(){
+    const [userData , setUserData] = useState(null)
+    const [posts , setPosts] = useState([])
+    const [dataStoraged , setDataStoraged] = useState({})
+    const { id } = useParams();
+    const addFriend = async () =>{
+        try {
+            const res = await axios.post("http://localhost:8000/user/addFriend/",{sender: dataStoraged._id ,recipient :userData._id })
+            console.log(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    useEffect(()=>{
+        const fetchData = async()=>{
+            try {
+                const res = await axios.get(`http://localhost:8000/getOneUser/${id}`)
+                const res2 = await axios.get(`http://localhost:8000/posts/showPostJustForProfile?userId=${id}`)
+                setUserData(res.data)
+                setPosts(res2.data)
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        setDataStoraged(JSON.parse(localStorage.getItem('user')))
+
+        fetchData()
+    },[])
+    
+    return (
+         userData ? (
+            
+            <div className="row profileContent ">
+            
+            <div className="profileItem row col-10 col-md-8  mx-auto   align-items-center " >
+
+            <img src={`http://localhost:8000/${userData.profileImg}`} className="col-lg-4 col-12 mx-auto"/>
+            <div className="col-12 col-lg-8">
+            <div className="profileInfo row my-3 mx-auto justify-content-center align-items-center ">
+                    <p className="col-md-5 col-4 mx-auto">{userData.username}</p>
+                    <div className="col-md-5 col-5 ">
+
+                    {userData._id === dataStoraged._id ? (<Link to={`/setting/${userData._id}`} className="btn btn-success">modify profile</Link>) : <button className="btn btn-success w-100 w-md-50 text-left" onClick={()=>{addFriend()}}>Add friend</button> }
+                   
+                    </div>
+        </div>
+                    <div className="row postInfo">
+                    <p className="col-4">{posts.length} publications</p>
+                    <p className="col-4">127 amie</p>
+                    <p className="col-4">169 suivie</p>
+                    </div>
+                    </div>
+            </div>
+            <div className="posts  col-10 col-md-9 col-lg-8 mx-auto  align-items-center ">
+                <div className="row">
+                    {posts.map((post)=>(
+                    
+                        <div className="post col-12 col-md-6 col-lg-4">
+                            <img src={`http://localhost:8000/${post.image}`} />
+                        <div class="postpic__content">
+                        <div className='row'>
+                            <div className="col-6">
+                            <ion-icon name="heart-outline"></ion-icon>
+                            <p>{post.rates} likes</p>
+                            </div>
+                            <div  className="col-6">
+                            <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+                            <p>{post.comments.length} comment</p>
+                            </div>
+                        </div>
+                       
+                        </div>
+                        </div>
+                        
+                    ))}
+                    
+                </div>
+            </div>
+            </div>
+            ):null
+            
+    )
+} 

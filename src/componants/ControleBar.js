@@ -1,23 +1,57 @@
-import { useState } from "react"
-import my_profile_photo from "../imgs/my-profile-photo.jpg"
-import profil_img from "../imgs/profil-img.jfif"
+import { useEffect, useState } from "react"
+import React from 'react';
+import { Link } from 'react-router-dom';
+import axios from "axios";
 
 export default function ControleBar() {
-    const data = JSON.parse(localStorage.getItem("user"));
+
+    const [data,setData] = useState([])
+    const [dataStoraged,setDataStoraged] = useState({})
+    useState(()=>{
+        setDataStoraged(JSON.parse(localStorage.getItem("user")));
+    },[])
+    function formatPostDate(createdAt) {
+        
+      
+        const postDate = new Date(createdAt);
+        const currentDate = new Date();
+      
+        const yearDiff = currentDate.getFullYear() - postDate.getFullYear();
+        const monthDiff = currentDate.getMonth() - postDate.getMonth();
+        const dayDiff = currentDate.getDate() - postDate.getDate();
+      
+        if (yearDiff > 0) {
+          return `${yearDiff === 1 ? 'year' : 'years'} ago`;
+        } else if (monthDiff > 0) {
+          return `${monthDiff === 1 ? 'month' : 'months'} ago`;
+        } else if (dayDiff > 0) {
+          return `${dayDiff === 1 ? 'day' : 'days'} ago`;
+        } else {
+          return 'Today';
+        }
+      }
     const [display , setDisplay] = useState(false)
     function handleNotifications(){
         setDisplay(!display)
     }
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const res = await axios.get(`http://localhost:8000/user/getuser/${dataStoraged._id}`);
+            setData(res.data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+    
+        fetchData();
+      }, [dataStoraged._id]);
     const Contoller = [
         {
             Name: "Home",
+            NameDir: "home",
             lineClass : "line-home",
             ionIconName : "home-outline"
-        },
-        {
-            Name: "Explore",
-            lineClass : "line-dawnload",
-            ionIconName : "download-outline"
         },
         {
             Name: "notifications",
@@ -26,108 +60,75 @@ export default function ControleBar() {
         },
         {
             Name: "Messages",
+            NameDir: "chat",
             lineClass : "line-pricetag",
             ionIconName : "pricetag-outline"
         },
-        {
-            Name: "Bookmarks",
-            lineClass : "line-bookmark",
-            ionIconName : "bookmark-outline"
-        },
-        {
-            Name: "Analytics",
-            lineClass : "line-analytics",
-            ionIconName : "analytics-outline"
-        },
+       
         {
             Name: "Theme",
             lineClass : "line-cloudy",
             ionIconName : "cloudy-outline"
         },
         {
-            Name: "Settings",
-            lineClass : "line-settings",
-            ionIconName : "settings-outline"
+            Name : "Setting",
+            NameDir: "setting",
+            ionIconName : "settings-outline",
+            lineClass : "line-settings"
         },
+        {
+            Name : "Bookmarks",
+            NameDir: "bookmarks",
+            ionIconName : "bookmark-outline",
+            lineClass : "line-bookmark"
+        
+        },
+        {
+            Name : "Addfriends",
+            NameDir: "addfriends",
+            ionIconName : "person-add-outline",
+            lineClass : "line-addfriends"
+        }
     ]
-    const notifications = [
-        {
-            userName : "Keke Benjamin",
-            image : profil_img,
-            message : " accepted your friend request",
-            CreatedAt : "2 DAYS AGO"
-        },
-        {
-            userName : "Keke Benjamin",
-            image : profil_img,
-            message : " accepted your friend request",
-            CreatedAt : "2 DAYS AGO"
-        },
-        {
-            userName : "Keke Benjamin",
-            image : profil_img,
-            message : " accepted your friend request",
-            CreatedAt : "2 DAYS AGO"
-        },
-        {
-            userName : "Keke Benjamin",
-            image : profil_img,
-            message : " accepted your friend request",
-            CreatedAt : "2 DAYS AGO"
-        },
-        {
-            userName : "Keke Benjamin",
-            image : profil_img,
-            message : " accepted your friend request",
-            CreatedAt : "2 DAYS AGO"
-        },
-        {
-            userName : "Keke Benjamin",
-            image : profil_img,
-            message : " accepted your friend request",
-            CreatedAt : "2 DAYS AGO"
-        },
-        {
-            userName : "Keke Benjamin",
-            image : profil_img,
-            message : " accepted your friend request",
-            CreatedAt : "2 DAYS AGO"
-        },
-    ]
+   
     return(
-        <div className="controle-bar col-md-3  d-none d-md-block">
-                <div className="profile-bar">
+        <div className="controle-bar col-md-3  ">
+                <Link to={`/profile/${data._id}`} className="profile-bar">
                     <div className="profile-bar-content">
                     <div className="profile-img">
-                        <img src={my_profile_photo}alt=""/>
+                        <img src={`http://localhost:8000/${data.profileImg}`}alt=""/>
                     </div>
                     <div className="info">
                         <b id="name-of-profile">{data.username}</b> <br/>
                         <small id="tag-of-profile">{data.email}</small>
                     </div>
                     </div>
-                </div>
+                </Link>
                 <div className="paramettre">
                     {Contoller.map((e , i)=>{
+                        
                         if(e.Name === "notifications"){
                             return (
-                            <div className="home"  key={i} onClick={()=>{handleNotifications()}}>
+                                <div className="home"  key={i} onClick={()=>{handleNotifications()}}>
                                 <div className="home notifications"  >
                                 <ion-icon name={e.ionIconName}></ion-icon>
-                                <span className={e.lineClass} ></span>
-                                <p>{e.Name}</p>
+                                <div className="info">
+                        
+                        <span className={e.lineClass}></span>
+                        < p >{e.Name}</p>
+                        </div>
                                 </div>
                                 <div className={ !display ? "notification-bar" : "notification-bar notification-bar-active" }>
-                
-                {notifications.map((e , i)=>{
+                                
+                { data.notifications && data.notifications.map((notifi , i)=>{
                     return(
                     <div className="notification-person" >
                     <div className="profile-img">
-                        <img src={e.image} alt=""/>
+                        <img src={`http://localhost:8000/${notifi.user.profileImg}`} alt=""/>
                     </div>
                     <div className="notification-info"> 
-                        <b>{e.userName}</b> <small> {e.message}<br/>
-                        {e.CreatedAt}</small>
+                        <b>{notifi.user.username}</b> <small> {notifi.description}<br/>
+                        {formatPostDate(notifi.createdAt)}</small>
                     </div>
                 </div>)
                 })}
@@ -135,17 +136,16 @@ export default function ControleBar() {
             </div>)
                         }
                         else{
-                        return(<div className="home" key={i}>
+                        return(<Link to={e.NameDir=="home" ? `/${e.NameDir}`:(`/${e.NameDir}/${data._id}`)} className="home" >
                         <ion-icon name={e.ionIconName}></ion-icon>
+                        <div className="info">
+                        
                         <span className={e.lineClass}></span>
-                        <p>{e.Name}</p>
-                        </div>)}
-                    })}
-                </div>
-
-                <button className="button btn2">Create Post</button>
-
-            
+                        < p >{e.Name}</p>
+                        </div>
+                        </Link>)}})}   
+                            
+                     </div>
             </div>
     )
 }

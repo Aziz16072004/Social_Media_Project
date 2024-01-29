@@ -7,7 +7,26 @@
 :root{
     --main-color : #6c4be1
 }
-.searche img {
+.serachePerson{
+    margin: 10px 0;
+}
+.serachePerson img{
+    border-radius: 50px;
+    width: 50px;
+    padding: 0 !important;
+    text-align: center;
+
+}
+.searcheBar div {
+    padding: 0 !important;
+}
+.searchingBar ion-icon{
+    cursor: pointer;
+    position: absolute;
+    font-size: 26px;
+    right: 10px;
+}
+.searche .searcheImg {
     
     width: 17px;
     height: 17px;
@@ -20,8 +39,9 @@
     justify-content: center;
     align-items: center;
 }
-
-
+.profile-img-friends{
+    margin: 11px 15px;
+}
 .profile-img img ,.profile-img-friends img{
 
     width: 45px;
@@ -112,11 +132,13 @@ p{
     padding: 30px 11px;
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 100%;
     height: 33px;
     position: relative;
     cursor: pointer;
-
+    text-decoration: none;
+    color: black;
 }
 .notifications{
     padding: 0 !important;
@@ -135,10 +157,10 @@ p{
     position: absolute;
     left: 0;
     border-top-left-radius: 19px;
-    height: 75px;
+    height: 100%;
     width: 12px;
     top: 0px;
-    background-color: aqua;
+    background-color: var(--main-color);
 }
 /* .notification-bar{
     BACKGROUND: white;
@@ -189,15 +211,6 @@ p{
     display: flex !important;
     opacity: 1;
 }
-
-
-
-
-
-
-
-
-
 .notification-person{
     display: flex;
     overflow: hidden;
@@ -220,7 +233,6 @@ p{
     height: 24px;
     background-color: white;
     border-radius: 22px;
-
 }
 .line-notification{
     display: none;
@@ -234,12 +246,30 @@ p{
     top: 0px;
     background-color: aqua;
 }
+
+.createdPostHeader {
+    position: relative;
+}
+.createdPostHeader .exite-btn{
+    position: absolute;
+    cursor: pointer;
+    background-color: #eaebed;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    align-items: center;
+    padding: 4px;
+    border-radius: 50px;
+}
+.createdPostHeader .exite-btn ion-icon{
+    font-size: 25px;
+    color: rgb(126, 126, 126);
+}
 .active{
     display: none;
 }
-/* partie css story */
-
-
 .title{
     color:  #c7c7c7;
 }
@@ -248,7 +278,6 @@ p{
     overflow-x: scroll;
     height: 221px;
     position: relative;
-    
 }
 .story{ 
     padding: 0 10px;
@@ -268,49 +297,41 @@ p{
     border-radius: 15px;
     margin: 0 4px;
     position: relative;
-
 }
 .story p {
     color: #ffffffcc;
     font-size: 15px;
     margin: 88px 0 0 22px;
-
 }
 .block_story_1{
     background-image: url(./imgs/LivvyLand_story.jpg);
     background-position: center;
-    background-size: cover;
-    
+    background-size: cover; 
 }
 .block_story_2{
     background-image: url(./imgs/nike_story.jpg);
     background-position: center;
-    background-size: cover;
-    
+    background-size: cover;   
 }
 .block_story_3{
     background-image: url(./imgs/painting_story.jpg);
     background-position: center;
     background-size: cover;
-    
 }
 .block_story_4{
     background-image: url(./imgs/neymar_story.jpg);
     background-position: center;
     background-size: cover;
-    
 }
 .block_story_5{
     background-image: url(./imgs/tokyoghoul_story.jpg);
     background-position: center;
     background-size: cover;
-    
 }
 .block_story_6{
     background-image: url(./imgs/Depression_story.jpg);
     background-position: center;
     background-size: cover;
-    
 }
 .story::before{
     content: "";
@@ -367,70 +388,69 @@ main{
     align-items: center;
     justify-content: center;
 }
+.icons-posts-right img{
+    width: 25px;
+    cursor: pointer;
+}
 .post-title{
     gap: 23px;
     display: flex;
-    margin: 0 24px 8px;
+    margin-bottom:8px;
 }
 .posts{
-    padding: 10px 0;
+    padding: 10px 20px;
     margin: 10px 0;
     background: white;
     border-radius: 15px;
-
 }
 
 .post-name-utilisateur{
-    
     margin: 11px 18px 2px 18px;
+}
 
-}
-.postes-images-post1{
-    background: url(./imgs/zenitsu-post.jpg) no-repeat;
-    background-position: center;
-    background-size: cover;
-    margin: 0px 3%;
-    border-radius: 15px;
-    width: 94%;
-    height: 400px;
-}
 .postes-images img{
     margin: 0 24px;
-
+}
+.icons-posts-left img{
+    margin-right:9px;
 }
 .icons-posts img{
     width: 26px;
     height: 26px;
-    margin-left:9px;
 }
 .icons-posts{
     display: flex;
     justify-content: space-between;
-    margin: 13px 3%;
+    margin: 13px 0;
 }
 .icons-posts ion-icon{
     font-size: 33px;
-    
 }
 .vue img{
     width: 28px;
     height: 28px;
-    /* position: absolute; */
     border-radius: 15px;
     border: 2px solid white;
+}
+.line1-vue div{
+    width: 63px;
 }
 .line1-vue{
     display: flex;
     position: relative;
 }
-.vue{
-    margin: 0 3%;
+.line1-vue p{
+    cursor: pointer;
+}
+.dontsubmit{
+    background-color: #eaebed !important;
+    color: rgb(167, 167, 167) !important;
+    border: 1px solid gray !important;
 }
 .img2{
     position: absolute;
     left:16px;
     z-index: 1;
-
 }
 .img3{
     position: absolute;
@@ -487,9 +507,6 @@ main{
     font-weight: bold;
     margin: 7px 0;
     font-size: 14px;
-
-
-
 }
 .profile-img-friends{
     position: relative;
@@ -502,9 +519,8 @@ main{
     BACKGROUND: #8eff96;
     position: absolute;
     border: 2px solid white;
-    top: 48px;
-    LEFT: 54px;
-
+    bottom: 0 ;
+    right: 0 ;
 }
 .show-friends{
     border-bottom: 4px solid #f1edf6;
@@ -512,25 +528,26 @@ main{
 .message-person{
     display: flex;
     align-items: center;
-    margin: 0 -21px;
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 19px;
+    cursor: pointer;
+   
 }
-.message-person img{
-    margin: 18px 14px 10px 26px;
-}
+
 .message-person small {
     color: #9f9f9f;
-
 }
 .requests-person{
     display: flex;
     align-items: center;
     margin: 10px 0px ;
+    gap: 39px;
 }
-
 .requests-person small {
     color: #9f9f9f;
     font-size: 17px;
-
 }
 .requests{
     PADDING: 14px 0;
@@ -540,15 +557,12 @@ main{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin: 10px 0;
 }
-
 .btn-rquests-reject{
-
     background: #f1edf6 !important;
     color: black !important;
-
 }
-/* css of theme */
 .main-theme-bar{
     width: 196vh;
     height: 100vh;
@@ -593,7 +607,6 @@ main{
     justify-content: space-between;
     padding: 0 31pX;
     ALIGN-ITEMS: center;
-
 }
 .size-line {
     width: 88%;
@@ -601,9 +614,7 @@ main{
     background-color: #d6ccfc;
     display: flex;
     justify-content: space-between;
-
 }
-
 .size-line span{
     width: 18px;
     margin: -5px -4px;
@@ -624,9 +635,6 @@ main{
     height: 36px;
     border-radius: 25px;
     cursor: pointer;
-
-
-
 }
 #color_blue{
     background-color: blue;
@@ -678,46 +686,26 @@ main{
 .img-post img{
     margin: 15px 0px 0 20px;
 }
-
-.postes-images-post2{
-    
-        background: url(./imgs/uchiha-itachi-post.jpg) no-repeat;
-        background-position: center;
-        background-size: cover;
-        margin: 0px 3%;
+.postes-images-post{
         border-radius: 15px;
-        width: 94%;
         height: 400px;
+        overflow: hidden;
 }
-.postes-images-post3{
-    
-    background: url(./imgs/luffy-profile-photo.jpg) no-repeat;
-    background-position: center;
-    background-size: cover;
-    margin: 0px 3%;
-    border-radius: 15px;
-    width: 94%;
-    height: 400px;
+.postes-images-post img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
 }
-.postes-images-post4{
-    
-    background: url(./imgs/air-jordan.jpg) no-repeat;
-    background-position: center;
-    background-size: cover;
-    margin: 0px 3%;
-    border-radius: 15px;
-    width: 94%;
-    height: 400px;
-    
+.post-description{
+    padding: 0 25px;
 }
-
 .request-btn{
     gap: 10px;
     width: 90%;
     display: flex;
     justify-content: space-around;
 }
-.request-btn a{
+.request-btn button{
     text-decoration: none;
     color: white;
     background: #6c4be1;
@@ -726,9 +714,12 @@ main{
     padding: 7px 0px;
     border-radius: 39PX;
     width: 100%;
+    border: none;
 }
 
-
+.serachePerson button {
+    width: auto;
+}
 
 
 /* MEDIA QUERY /// WEB CITE RESPNSIVE ON TABLETTE */
@@ -741,63 +732,448 @@ main{
     .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
         max-width: 1410px !important;
     }
+    .sender {
+
+        width: 75% !important;
+    }
+    .reciever p {
+        width: 75% !important;
+    }
 }
 @media (max-width: 768px){
     .logo h2{
         text-align: left;
     }
-    .change .container{
-        width: 93% !important;
-        padding: 36px 0 !important;
+    
+    .friendsBar .message-person {
+        padding: 7px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .paramettre {
+        margin: 0;
+    }
+    .friendsBar img{
+        margin: 0;
+        
+    }
+    .controle-bar .info{
+        display: none;
+    }
+    
+    .controle-bar .home{
+        height: auto;
+        padding: 0;
+    }
+    .controle-bar .profile-bar{
+        border-radius: 0px 0px 0px 15px;
+    }
+    .controle-bar .profile-bar{
+        width: 20%;
+        height: auto;
+    }
+    .controle-bar .paramettre{
+        display: flex;
+        width: 80%;
+        border-radius: 0px 15px 15px 0px;
+    }
+    .controle-bar{
+        height: 0 ;
+    }
+    .controle-bar{
+        position: fixed;
+        z-index: 1000;
+        bottom: 5px;
+        display: flex;
+        height: 70px;
     }
 }
 .change .submit-btn ,.change .Reset-btn{
-    padding: 19px 39px 18px 39px;
+    padding: 14px;
     color: #FFF;
-    background-color: #4bc970;
+    background-color: var(--main-color);
     font-size: 18px;
     text-align: center;
     font-style: normal;
     border-radius: 5px;
     width: 100%;
-    border: 1px solid #3ac162;
+    border: none;
     border-width: 1px 1px 3px;
     box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
     margin-bottom: 10px;
   }
-  
 
 .change {
-    background: #c3c3c3bd;
+    background: #e4e4e4bd;
     position: fixed;
     left: 0;
     top: 0;
     height: 100vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     z-index: 1000;
+  }
+  .createdPostHeaderName{
+    padding: 10px 0;
+    border-bottom: 1px solid #d9d9d9;
+  }
+  .userPost img{
+    padding: 0;
+    width: 45px;
+    height: 45px;
+    border-radius: 50px;
+}
+  .userPost{
+    text-align: left;
+    padding: 0 20px;
   }
   .change .container{
     box-shadow: -2px 4px 20px gray;
-    background-color: rgb(204 204 204 / 46%);
-    width: 50%;
-    padding: 30px 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 30px;
-    gap: 29px;
+    background-color: rgb(255, 255, 255);
+    align-items: center; 
+    border-radius: 10px;
     text-align: center;
     }
 .Reset-btn{
     background-color: gray !important;
     border: none !important;
 }
-form{
+
+.comment , .addComment{
+    display: flex;
+    gap: 11px;
+    margin: 12px 0;
+    
+}
+.comment .comment_description{
+    background: #f1edf6;
+    padding: 4px 16px;
+    border-radius: 19px;
+}
+.addComment .comment_description{
+    width: 100%;
+    position: relative;
+}
+.addComment .comment_description input{
+    background: #f1edf6;
+    padding: 15px 10px;
+    border-radius: 19px;
+    width: 100%;
+    border: none;
+}
+.addComment .comment_description img{
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    cursor: pointer;
+}
+.comments{
+    margin: 4px 0;
+}
+.comments img{
+    width: 28px;
+    height: 28px;
+
+    border-radius: 15px;
+    border: 2px solid white;
+}
+.comments small{
+    cursor: pointer;
+}
+.addComment{
+    margin: 12px 0;
+}
+img {
+    image-rendering: optimizeQuality; /* Browsers' default rendering algorithm for better quality */
+    -webkit-image-rendering: optimizeQuality; /* For WebKit browsers (Safari, Chrome) */
+    -moz-image-rendering: optimizeQuality; /* For Firefox */
+    -o-image-rendering: optimizeQuality; /* For Opera */
+  }
+  
+  img {
+    max-width: 100%; 
+    height: auto; 
+  }
+  img {
+    border: 0;
+  }
+  img {
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+  img {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease
+  }
+img:hover {
+    transform: scale(1.1);
+}
+
+
+.formContent div input{
+    width: 100%;
+    margin-top: 5px;
+    padding-bottom: 15px;
+    border:1px solid white;
+}
+.addPostImage{
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding: 10px;
+}
+.albums:hover{
+    background-color: rgb(215, 216, 217) !important;
+}
+.exite-btn:hover{
+    background-color: rgb(215, 216, 217) !important;
+}
+.albums img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.albums{
+    background-color: #eaebed;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 270px;
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+}
+.showRates{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    background-color: #afafaf46;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.showRatesContent{
+    background-color: white;
+    height: 60%;
+    width: 40%;
+    border-radius: 10px;
+    padding: 15px 24px;
+    overflow: hidden;
+}  
+.topBarRates{
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: solid 3px #cbcaca;
+    box-shadow: 0px 4px 4px #c2c2c269;
+}
+.topBarRates img{
+    cursor: pointer;
+}
+.ratesBody{
+    overflow-y: scroll;
+    height: 90%;
+}
+.personRateInformation{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+.personRateInformation div{
+position: relative;
+}
+.ratesBody img{
+    width: 45px ;
+    height: 45px ;
+    border-radius: 29px;
+    border: 2px solid white;
+}
+.coloredHeartRate{
+    width: 15px !important;
+    height: 15px !important;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+::-webkit-scrollbar {
+    width: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #8e8e8e;
+    border-radius: 6px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #7e7e7e;
+  }
+  ::-webkit-scrollbar-corner {
+    background-color: #f1f1f1;
+  }
+  .searchingBar{
+    position: absolute;
+    width: 100%;
+    height: 350px;
+    overflow-y: scroll;
+    background-color: white;
+    top: 50px;
+    left: -50px;
+    z-index: 50;
+    border-radius: 6px;
+    padding: 5px 0px;
+  }
+  .profile_content{
+    background-color: red;
+    height: 800px;
+    overflow: hidden;
+    padding: 0 !important;
+  }
+  .profile_content .bannerImg{
+    height: 400px;
+    width: 100%;
+  }
+  .profileController {
+    position: relative;
+   
+  }
+  .profileContent .profileItem img{
+    width: 200px;
+    height: 200px;
+    border-radius: 200px;
+    padding: 0;
+    border:8px solid white;
+  }
+  a{
+    text-decoration: none;
+  }
+.profileContent .posts{
+    background-color: #eee;
+}
+.profileContent .posts .post{
+    background-color: pink;
+    aspect-ratio: 1 / 1; /*its good css propertie which mean the height equal to the width*/
+    border: 2px solid white;
+    padding: 0 !important;
+}
+.profileContent .posts .post img{
+    width: 100%;
+    height: 100%;
+    transform: scale(1);
+    object-fit: cover;
+    opacity: 1;
+    transition: opacity .2s ease-in-out;
+}
+.profileInfo button , .postInfo p{
+    font-size: 13px;
+    text-align: center;
+}
+.post:hover .postpic__content{
+    opacity: 1;
+}
+.postpic__content ion-icon{
+    font-size: 22px;
+}
+.postpic__content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    opacity: 0 ;
+    transition: opacity .2s ease-in-out;
+    background-color: #11111168;
+}
+.profileContent .post{
+    position: relative;
+}
+.chatBar-content{
+    overflow-y: scroll;
+}
+.chatBar {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding: 10px 5px;
+}
+.friendsBar ,.chatBar {
+    height: 100%;
+}
+.friendsBar .message-person{
+    margin-top: 8px;
+}
+.chat{
+    height: 90vh;
+    background-color: rgb(227, 227, 227);
+}
+.chatBar-content{
+    height: 100%;
+    border-radius: 19px;
+    width: 100%;
+    position: relative;
+}
+.addChat input{
+    width: 97%;
+    padding: 11px;
+    border-radius: 10px;
+    border: none;
+}
+.addChat{
+    position: sticky;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    bottom: 10px;
+  }
+.sender{
+    text-align: left;
+    padding: 12px 25px;
+    width: 48%;
+    position: relative;
+    border-radius: 5px;
+    background-color: var(--main-color);
+    color: white;
+}
+
+.discussion div{
+    margin: 6px 0;
+    float: revert-layer;
+}
+.discussion{
+    padding: 0px 0px 14px 70px;
+}
+.discussion img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50px;
+    position: absolute;
+    left: -50px;
+    top: 0;
+}
+
+.row{
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+}
+.reciever{
+    display: flex;
+    justify-content: right;
+}
+.sender-content{
+    background-color:   rgba(128, 128, 128, 0.41);
+    width: 48%;
+    padding: 12px 25px;
+    border-radius: 5px;
+    color: white;
 }

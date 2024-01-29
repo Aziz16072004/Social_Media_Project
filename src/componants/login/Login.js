@@ -18,7 +18,7 @@ function Login() {
     }) ;
     async function onSubmit(data) {
       try {
-        const res = await axios.post("https://blushing-train-newt.cyclic.app/",  {
+        const res = await axios.post(/*"https://blushing-train-newt.cyclic.app/"*/"http://localhost:8000/",  {
           email: data.email,
           password: data.password
         });
@@ -49,7 +49,7 @@ function Login() {
     return (
       <div className="login">
         <form onSubmit={handleSubmit(onSubmit)}>
-        <h1>Login AAA BBBB</h1>
+        <h1>Login</h1>
         <p className="errorMessage"> {errors.email?.message}</p>
           <p> email :<input type="email" {...register("email")}/>  </p>
           <p className="errorMessage"> {errors.password?.message}</p>
