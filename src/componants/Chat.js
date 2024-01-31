@@ -12,52 +12,57 @@ export default function Chat(){
     const [message , setMessage] = useState("")
     const [messages , setMessages] = useState([])
     const [showUser , setShowUser] = useState(null)
+    const [waitingMessage , setWaitingMessage] = useState(false)
     const [arrivalMessage, setArrivalMessage] = useState(null);
-    
+    const scrollRef = useRef()
     useEffect(() => {
         socket.on("receive-message", (message) => {
-            console.log(message);
             setArrivalMessage(message)
+            setWaitingMessage(false)
         });
     }, [showUser]);
     
     useEffect(() => {
         socket.on("receiving-message", (checking) => {
-            console.log(checking);
+            setWaitingMessage(checking)
         });
     }, [showUser]);
     
     useEffect(() => {
         if (showUser) {
-            
             socket.emit("add-user", id1);
         }
     }, [showUser]);
-      useEffect(() => {
-        arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
-      }, [arrivalMessage]);
-   
-      const hundleSendMessage = async () => {
-    try {
-        socket.emit("send-message", {
-            to: showUser.user._id,
-            from: id1,
-            message,
-        });
-        const res = await axios.post("http://localhost:8000/message/addmsg", {
-            from: id1,
-            to: showUser.user._id,
-            message: message,
-        });
-        setMessages((prevMessages) => [
-            ...prevMessages,
-            { fromSelf: true, message: message }
-        ]);
-    } catch (error) {
-        console.error("Error sending message:", error);
-    }
-};
+    useEffect(() => {
 
+        scrollRef.current?.scrollIntoView({ behavior: "smooth"});
+        
+    }, [messages]);
+    useEffect(() => {
+        arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
+    }, [arrivalMessage]);
+    const hundleSendMessage = async () => {
+        setMessage("")
+        try {
+            socket.emit("send-message", {
+                to: showUser.user._id,
+                from: id1,
+                message,
+            });
+            const res = await axios.post("http://localhost:8000/message/addmsg", {
+                from: id1,
+                to: showUser.user._id,
+                message: message,
+            });
+            setMessages((prevMessages) => [
+                ...prevMessages,
+                { fromSelf: true, message: message }
+            ]);
+        } catch (error) {
+            console.error("Error sending message:", error);
+        }
+    };
+    
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -74,15 +79,15 @@ export default function Chat(){
         };
         fetchData();
     }, [showUser]);
-     useEffect(()=>{
+    useEffect(()=>{
         const fetchData = async()=>{
             try {  
-                    const res = await axios.get(`http://localhost:8000/user/getuser/${id1}`)
-                    if (id2) {
-                        const res2 = await axios.get(`http://localhost:8000/user/getuser/${id2}`)
-                        setShowUser({user : res2.data})
-                    }
-                    setFriends(res.data.friends)
+                const res = await axios.get(`http://localhost:8000/user/getuser/${id1}`)
+                if (id2) {
+                    const res2 = await axios.get(`http://localhost:8000/user/getuser/${id2}`)
+                    setShowUser({user : res2.data})
+                }
+                setFriends(res.data.friends)
             }catch(err){
                 console.log(err);
             }
@@ -95,7 +100,7 @@ export default function Chat(){
             <div className="chat col-12 col-md-9 row mx-auto align-items-center ">       
                 <div className="friendsBar col-12 col-md-4 ">
                 {friends.map((friend)=>(
-
+                    
                     <div className="message-person" onClick={()=>{setShowUser(friend)}}>
                         
                         <div className="profile-img-friends ">
@@ -109,7 +114,7 @@ export default function Chat(){
                 </div>
                
                 {showUser ? (
-                <div className="chatBar col-10 col-md-8 ">
+                    <div className="chatBar col-10 col-md-8 ">
 
                     
                     <div className="chatNavBar ">
@@ -126,20 +131,26 @@ export default function Chat(){
                             <div className="discussion">
 
                                 {messages.map((msg)=>(
-                                    <div className={msg.fromSelf ? "reciever" : "sender"}>
+                                    <div className={msg.fromSelf ? "reciever" : "sender"} ref={scrollRef}>
                                         {/* <img src={`http://localhost:8000/${showUser.user.profileImg}`}/> */}
                                         <p>{msg.message}</p>
                                     </div>
                                 ))}
+                                {waitingMessage ? (
+                                    <div className= "sender">
+                                        <p>...</p>
+                                    </div>
+                                    ):null}
                             </div>
                         <div className="addChat">
-                            <input type="text"  onChange={(e)=>{
+                            <input type="text" value={message}onChange={(e)=>{
                                 setMessage(e.target.value) 
+                                
                                 socket.emit("sending-message", {
                                     to: showUser.user._id,
                                 });
 
-                                }}/>
+                            }}/>
                             <button onClick={hundleSendMessage}>send</button>
                         </div>
                     </div>
