@@ -7,9 +7,9 @@ export default function Friends(){
     const [friends , setFriends] = useState([])
     const [requests , setRequests] = useState([])
     const userData = JSON.parse(localStorage.getItem("user"));
-    
     const acceptFriend = async (req)=>{
         try {
+
             const res = await axios.post("http://localhost:8000/user/acceptfriend", {recipient : userData._id, sender :  req.user._id})
             setFriends((prevFriends) => (Array.isArray(prevFriends) ? [...prevFriends, {user :res.data}] : [{user : res.data}]));
             setRequests(prevRequests => prevRequests.filter(request => request.user._id !== req.user._id))
