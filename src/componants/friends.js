@@ -7,6 +7,7 @@ export default function Friends(){
     const [friends , setFriends] = useState([])
     const [requests , setRequests] = useState([])
     const userData = JSON.parse(localStorage.getItem("user"));
+    const [lastMessages, setLastMessages] = useState({});
     const acceptFriend = async (req)=>{
         try {
 
@@ -27,6 +28,11 @@ export default function Friends(){
             console.log(error);
         }
     }
+    // useEffect(() => {
+    //     socket.on("receive-message", (message) => {
+           
+    //     });
+    // }, []);
     useEffect(()=>{
         const fetchData = async() =>{
             
@@ -35,6 +41,25 @@ export default function Friends(){
                 setFriends(res.data.friends)
                 setRequests(res.data.requests)
                 setData(res.data)
+                const newLastMessages = [];
+
+await Promise.all(
+  res.data.friends.map(async (friend) => {
+    try {
+      const lastMsgResponse = await axios.get(
+        `http://localhost:8000/message/getLastMsg/?from=${userData._id}&to=${friend.user._id}`
+      );
+      const lastMessage = lastMsgResponse.data;
+      newLastMessages[friend.user._id] = lastMessage;
+
+    } catch (error) {
+      console.error(`Error fetching last message for ${friend.user.username}:`, error);
+    }
+  })
+);
+
+setLastMessages(newLastMessages);
+
             } catch (error) {
                 console.log(error);
             }
@@ -68,8 +93,9 @@ export default function Friends(){
                             <img src={`http://localhost:8000/${friend.user.profileImg}`} alt=""/>
                         </div>
                         <div className="message-info"> 
-                            <b>{friend.user.username}</b> <br/> <small> wake up brooo !!!!</small>
-                        </div>
+                            <b>{friend.user.username}</b> <br/> 
+                            
+                            <small>{lastMessages[friend.user._id]}</small>                        </div>
                     </Link>)
                     })}
                     

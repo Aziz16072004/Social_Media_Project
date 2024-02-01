@@ -511,17 +511,7 @@ main{
 .profile-img-friends{
     position: relative;
 }
-.profile-img-friends::before{
-    content: "";
-    width: 14px;
-    height: 14px;
-    border-radius: 10px;
-    BACKGROUND: #8eff96;
-    position: absolute;
-    border: 2px solid white;
-    bottom: 0 ;
-    right: 0 ;
-}
+
 .show-friends{
     border-bottom: 4px solid #f1edf6;
 }
@@ -788,7 +778,14 @@ main{
         display: flex;
         height: 70px;
     }
+    .friendsBarHidden{
+        display: none;
+    }
+    .chatNavBarHidden{
+        display: none;
+    }
 }
+
 .change .submit-btn ,.change .Reset-btn{
     padding: 14px;
     color: #FFF;
@@ -1113,7 +1110,7 @@ position: relative;
     margin-top: 8px;
 }
 .chat{
-    height: 90vh;
+    height: 100vh;
     background-color: rgb(227, 227, 227);
 }
 .chatBar-content{
@@ -1176,4 +1173,15 @@ position: relative;
     padding: 12px 25px;
     border-radius: 5px;
     color: white;
+}
+.activePerson{
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 10px;
+    BACKGROUND: #8eff96;
+    position: absolute;
+    border: 2px solid white;
+    bottom: 0 ;
+    right: 0 ;
 }

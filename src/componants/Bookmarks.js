@@ -72,7 +72,7 @@ export default function Bookmarks(){
               const createdAt = formatPostDate(post.post.createdAt)
             return(
               <div className="row">
-                <div className="posts col-md-6 mx-auto">
+                <div className="posts col-12 col-md-8 col-lg-6 mx-auto">
             <div className="post-title">
                             <div className="profile-img img-post">
                            
