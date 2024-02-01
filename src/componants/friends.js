@@ -2,11 +2,12 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import {Link} from "react-router-dom"
-export default function Friends(){
+export default function Friends({socket}){
     const [data , setData] = useState({})
     const [friends , setFriends] = useState([])
     const [requests , setRequests] = useState([])
     const userData = JSON.parse(localStorage.getItem("user"));
+    const [users , setUsers] = useState([])
     const [lastMessages, setLastMessages] = useState({});
     const acceptFriend = async (req)=>{
         try {
@@ -18,6 +19,11 @@ export default function Friends(){
             console.log(error);
         }
     }
+    useEffect(()=>{
+        socket.on("getUsers", getUsers => {
+            setUsers(getUsers);
+        });
+    },[])
     const rejectFriend = async (req)=>{
         try {
             await axios.delete("http://localhost:8000/user/rejectfriend", {
@@ -28,11 +34,10 @@ export default function Friends(){
             console.log(error);
         }
     }
-    // useEffect(() => {
-    //     socket.on("receive-message", (message) => {
-           
-    //     });
-    // }, []);
+    useEffect(() => {
+        socket.on("receive-message", (message) => {
+        });
+    }, []);
     useEffect(()=>{
         const fetchData = async() =>{
             
@@ -95,7 +100,11 @@ setLastMessages(newLastMessages);
                         <div className="message-info"> 
                             <b>{friend.user.username}</b> <br/> 
                             
-                            <small>{lastMessages[friend.user._id]}</small>                        </div>
+                            <small>{lastMessages[friend.user._id]}</small>
+                            {users.some(user => user.userId ===friend.user._id) ?(
+                                <span className="activePerson"></span>
+                            ):null}
+                        </div>
                     </Link>)
                     })}
                     

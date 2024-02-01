@@ -2,10 +2,9 @@ import { useEffect, useState, useRef } from "react"
 
 import { useParams } from "react-router-dom"
 import axios from "axios"
-import io from "socket.io-client"
-const socket = io.connect("http://localhost:8000");
+export default function Chat({socket}){
 
-export default function Chat(){
+    
     const {id1} = useParams()
     const {id2} = useParams()
     const [friends , setFriends] = useState([])
@@ -16,30 +15,30 @@ export default function Chat(){
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const [users , setUsers] = useState([])
     const scrollRef = useRef()
-    useEffect(() => {
-        socket.on("receive-message", (message) => {
-            setArrivalMessage(message)
-            setWaitingMessage(false)
-        });
-    }, [showUser]);
-    
-    useEffect(() => {
-        socket.on("receiving-message", (checking) => {
-            setWaitingMessage(checking)
-        });
-    }, [showUser]);
-    
-    useEffect(() => {
-            socket.emit("add-user", id1);
-            socket.on("getUsers",users =>{
-                setUsers(users)
+        useEffect(()=>{
+            socket.on("getUsers", getUsers => {
+                setUsers(getUsers);
             });
-    }, []);
-    useEffect(() => {
-
-        scrollRef.current?.scrollIntoView({ behavior: "smooth"});
+        },[])
+        useEffect(() => {
+            socket.on("receive-message", (message) => {
+                setArrivalMessage(message)
+                setWaitingMessage(false)
+            });
+        }, [showUser]);
         
-    }, [messages]);
+        useEffect(() => {
+            socket.on("receiving-message", (checking) => {
+                setWaitingMessage(checking)
+            });
+        }, [showUser]);
+        
+        
+        useEffect(() => {
+
+            scrollRef.current?.scrollIntoView({ behavior: "smooth"});
+            
+        }, [messages]);
     useEffect(() => {
         arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
     }, [arrivalMessage]);

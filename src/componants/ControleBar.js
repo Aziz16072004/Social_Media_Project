@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import axios from "axios";
+
 
 export default function ControleBar() {
 
@@ -143,8 +144,7 @@ export default function ControleBar() {
                         <span className={e.lineClass}></span>
                         < p >{e.Name}</p>
                         </div>
-                        </Link>)}})}   
-                            
+                        </Link>)}})}  
                      </div>
             </div>
     )

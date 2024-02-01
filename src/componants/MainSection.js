@@ -4,14 +4,15 @@ import Friends from "./friends";
 
 
 
-export default function MainSection(){
+export default function MainSection({socket}){
+    
     return(
         <main>
         <div className="container">
         <section className="row">   
             <ControleBar/>
-            <HomeSection/>
-            <Friends/>
+            <HomeSection />
+            <Friends socket={socket}/>
         </section>
         </div>
         </main>
