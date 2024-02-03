@@ -2,13 +2,17 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import {Link} from "react-router-dom"
-export default function Friends({socket}){
+export default function Friends({socket , users}){
+    
     const [data , setData] = useState({})
     const [friends , setFriends] = useState([])
     const [requests , setRequests] = useState([])
     const userData = JSON.parse(localStorage.getItem("user"));
-    const [users , setUsers] = useState([])
+  
     const [lastMessages, setLastMessages] = useState({});
+    
+    
+
     const acceptFriend = async (req)=>{
         try {
 
@@ -19,11 +23,7 @@ export default function Friends({socket}){
             console.log(error);
         }
     }
-    useEffect(()=>{
-        socket.on("getUsers", getUsers => {
-            setUsers(getUsers);
-        });
-    },[])
+  
     const rejectFriend = async (req)=>{
         try {
             await axios.delete("http://localhost:8000/user/rejectfriend", {
@@ -34,34 +34,29 @@ export default function Friends({socket}){
             console.log(error);
         }
     }
-    useEffect(() => {
-        socket.on("receive-message", (message) => {
-        });
-    }, []);
+    
     useEffect(()=>{
         const fetchData = async() =>{
-            
             try {
                 const res = await axios.get(`http://localhost:8000/user/getuser/${userData._id}`)
                 setFriends(res.data.friends)
                 setRequests(res.data.requests)
                 setData(res.data)
                 const newLastMessages = [];
+                await Promise.all(
+                res.data.friends.map(async (friend) => {
+                    try {
+                    const lastMsgResponse = await axios.get(
+                        `http://localhost:8000/message/getLastMsg/?from=${userData._id}&to=${friend.user._id}`
+                    );
+                    const lastMessage = lastMsgResponse.data;
+                    newLastMessages[friend.user._id] = lastMessage;
 
-await Promise.all(
-  res.data.friends.map(async (friend) => {
-    try {
-      const lastMsgResponse = await axios.get(
-        `http://localhost:8000/message/getLastMsg/?from=${userData._id}&to=${friend.user._id}`
-      );
-      const lastMessage = lastMsgResponse.data;
-      newLastMessages[friend.user._id] = lastMessage;
-
-    } catch (error) {
-      console.error(`Error fetching last message for ${friend.user.username}:`, error);
-    }
-  })
-);
+                    } catch (error) {
+                    console.error(`Error fetching last message for ${friend.user.username}:`, error);
+                    }
+                })
+                );
 
 setLastMessages(newLastMessages);
 
@@ -74,6 +69,7 @@ setLastMessages(newLastMessages);
     
     return(
         <div className="friend col-md-3 d-none d-lg-block">
+            
                 <div className="message">
                     <div className="messages-title">
                         <h4>Messages</h4>
@@ -96,14 +92,18 @@ setLastMessages(newLastMessages);
                         
                         <div className="profile-img-friends ">
                             <img src={`http://localhost:8000/${friend.user.profileImg}`} alt=""/>
+                            {users.some(user => user.userId ===friend.user._id) ?(
+
+                                <span className="activePerson"></span>
+                                
+                            ):null}
                         </div>
                         <div className="message-info"> 
                             <b>{friend.user.username}</b> <br/> 
-                            
                             <small>{lastMessages[friend.user._id]}</small>
-                            {users.some(user => user.userId ===friend.user._id) ?(
-                                <span className="activePerson"></span>
-                            ):null}
+                          
+                            
+                            
                         </div>
                     </Link>)
                     })}

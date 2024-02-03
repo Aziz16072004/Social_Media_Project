@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from "react"
-
+import io from "socket.io-client"
 import { useParams } from "react-router-dom"
 import axios from "axios"
+// const socket = io("http://localhost:8000");
 export default function Chat({socket}){
-
     
     const {id1} = useParams()
     const {id2} = useParams()
@@ -15,22 +15,33 @@ export default function Chat({socket}){
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const [users , setUsers] = useState([])
     const scrollRef = useRef()
+    
+    useEffect(() => {
+        if (socket) {
+            socket.emit('add-user', id1);
+        }
+    }, [socket]);
         useEffect(()=>{
+            if (socket) {
             socket.on("getUsers", getUsers => {
                 setUsers(getUsers);
             });
-        },[])
+        }
+        },[socket])
         useEffect(() => {
+            if (socket) {
             socket.on("receive-message", (message) => {
                 setArrivalMessage(message)
                 setWaitingMessage(false)
-            });
+            });}
         }, [showUser]);
         
         useEffect(() => {
+            if (socket) {
             socket.on("receiving-message", (checking) => {
                 setWaitingMessage(checking)
             });
+        }
         }, [showUser]);
         
         
@@ -45,11 +56,13 @@ export default function Chat({socket}){
     const hundleSendMessage = async () => {
         setMessage("")
         try {
+            if (socket) {
             socket.emit("send-message", {
                 to: showUser.user._id,
                 from: id1,
                 message,
             });
+            }
             const res = await axios.post("http://localhost:8000/message/addmsg", {
                 from: id1,
                 to: showUser.user._id,
@@ -97,7 +110,7 @@ export default function Chat({socket}){
     },[])
     return(
         <div className="row">
-           
+          
             <div className="chat col-12 col-md-9 row mx-auto align-items-center ">   
                 
                 <div className={!showUser?("friendsBar col-12 col-md-4"):("friendsBar friendsBarHidden col-12 col-md-4")}>    
@@ -148,11 +161,11 @@ export default function Chat({socket}){
                         <div className="addChat">
                             <input type="text" value={message}onChange={(e)=>{
                                 setMessage(e.target.value) 
-                                
+                                if (socket) {
                                 socket.emit("sending-message", {
                                     to: showUser.user._id,
                                 });
-
+                            }
                             }}/>
                             <button onClick={hundleSendMessage}>send</button>
                         </div>

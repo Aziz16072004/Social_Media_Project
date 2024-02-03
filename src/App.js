@@ -15,9 +15,16 @@ import io from "socket.io-client"
 
 
 function App() {
-  const socket = io("http://localhost:8000");
   
-
+  const [socket, setSocket] = useState(null);
+  
+  useEffect(() => {
+    const newSocket = io("http://localhost:8000");
+    setSocket(newSocket);
+    return () => {
+      newSocket.disconnect();
+    };
+  }, []); 
   return (
     
     <Router basename="/Social_Media_Project">

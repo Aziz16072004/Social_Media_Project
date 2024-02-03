@@ -4,13 +4,22 @@ import { useEffect, useState } from "react"
 import { Link } from 'react-router-dom';
 
 
-export default function Header(){
+export default function Header({socket}){
     const [showSearchingBar , setShowSearchingBar] = useState(false)
     const [users , setUsers] = useState([])
     const [dataStoraged , setDataStoraged] = useState({})
-
     const addFriend = async (user) =>{
+
         try {
+            if (socket) {
+                socket.emit("send-notification", {
+                    to: user._id,
+                    message : "send an invitation",
+                    img : dataStoraged.profileImg,
+                    username : dataStoraged.username,
+                    createdAt : Date.now()
+                });
+                }
             const res = await axios.post("http://localhost:8000/user/addFriend/",{sender: dataStoraged._id ,recipient :user._id })
         } catch (error) {
             console.log(error);

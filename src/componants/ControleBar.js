@@ -4,16 +4,23 @@ import { Link} from 'react-router-dom';
 import axios from "axios";
 
 
-export default function ControleBar() {
+export default function ControleBar({socket}) {
 
     const [data,setData] = useState([])
+    const [notification,setNotification] = useState([])
     const [dataStoraged,setDataStoraged] = useState({})
     useState(()=>{
         setDataStoraged(JSON.parse(localStorage.getItem("user")));
     },[])
+
+    useEffect(() => {
+        if (socket) {
+        socket.on("receive-notification", (notification) => {
+            setNotification(prevNotifi =>[notification , ...prevNotifi  ])
+        });}
+    }, [socket]);
+
     function formatPostDate(createdAt) {
-        
-      
         const postDate = new Date(createdAt);
         const currentDate = new Date();
       
@@ -40,6 +47,7 @@ export default function ControleBar() {
           try {
             const res = await axios.get(`http://localhost:8000/user/getuser/${dataStoraged._id}`);
             setData(res.data);
+            setNotification(res.data.notifications)
           } catch (error) {
             console.log(error);
           }
@@ -111,8 +119,12 @@ export default function ControleBar() {
                         if(e.Name === "notifications"){
                             return (
                                 <div className="home"  key={i} onClick={()=>{handleNotifications()}}>
+
                                 <div className="home notifications"  >
-                                <ion-icon name={e.ionIconName}></ion-icon>
+                                    <div className="notifiIcon">
+                                        <ion-icon name={e.ionIconName}></ion-icon>
+                                        <span className="newNotifi">2</span>
+                                    </div>
                                 <div className="info">
                         
                         <span className={e.lineClass}></span>
@@ -120,8 +132,8 @@ export default function ControleBar() {
                         </div>
                                 </div>
                                 <div className={ !display ? "notification-bar" : "notification-bar notification-bar-active" }>
-                                
-                { data.notifications && data.notifications.map((notifi , i)=>{
+            
+                { notification && notification.map((notifi , i)=>{
                     return(
                     <div className="notification-person" >
                     <div className="profile-img">
@@ -129,8 +141,10 @@ export default function ControleBar() {
                     </div>
                     <div className="notification-info"> 
                         <b>{notifi.user.username}</b> <small> {notifi.description}<br/>
-                        {formatPostDate(notifi.createdAt)}</small>
+                        {formatPostDate(notifi.createdAt)}
+                        </small>
                     </div>
+                    
                 </div>)
                 })}
                 </div>
@@ -140,8 +154,7 @@ export default function ControleBar() {
                         return(<Link to={e.NameDir=="home" ? `/${e.NameDir}`:(`/${e.NameDir}/${data._id}`)} className="home" >
                         <ion-icon name={e.ionIconName}></ion-icon>
                         <div className="info">
-                        
-                        <span className={e.lineClass}></span>
+                            <span className={e.lineClass}></span>
                         < p >{e.Name}</p>
                         </div>
                         </Link>)}})}  
