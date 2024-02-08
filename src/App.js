@@ -32,8 +32,8 @@ function App() {
         <Route path="/" exact element={<Login />} />
         <Route path="/signup" exact element={<SignUp />} />
         <Route path="/home" exact element={<Home socket={socket}/>} />
-        <Route path="/setting/:id"  element={<Setting/>} />
-        <Route path="/profile/:id"  element={<Profile/>} />
+        <Route path="/setting/:id"  element={<Setting />} />
+        <Route path="/profile/:id"  element={<Profile socket={socket}/>} />
         <Route path="/bookmarks/:id"  element={<Bookmarks />} />
         <Route path="/addfriends/:id"  element={<Addfriends />} />
         <Route path="/chat/:id1"  element={<Chat socket={socket}/>} />

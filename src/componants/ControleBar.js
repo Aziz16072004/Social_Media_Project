@@ -1,22 +1,38 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import React from 'react';
 import { Link} from 'react-router-dom';
 import axios from "axios";
-
-
+import { v4 as uuidv4 } from 'uuid';
+import song from '../audio/notification.mp3';
 export default function ControleBar({socket}) {
 
+    
     const [data,setData] = useState([])
     const [notification,setNotification] = useState([])
     const [dataStoraged,setDataStoraged] = useState({})
+    const [newNotifi,setNewNotifi] = useState(0)
+    const audioRef = useRef(null);
+    
+    const playAudio = () => {
+        if (audioRef.current) {
+            audioRef.current.play().catch(error => {
+            console.error('Error playing audio:', error);
+        });
+        }
+    };
     useState(()=>{
-        setDataStoraged(JSON.parse(localStorage.getItem("user")));
+       
+        const data = JSON.parse(localStorage.getItem("user"));
+        setDataStoraged(data)
     },[])
-
+    
     useEffect(() => {
+        
         if (socket) {
         socket.on("receive-notification", (notification) => {
+            playAudio()
             setNotification(prevNotifi =>[notification , ...prevNotifi  ])
+            setNewNotifi(prevNotifi =>prevNotifi+1)
         });}
     }, [socket]);
 
@@ -39,15 +55,51 @@ export default function ControleBar({socket}) {
         }
       }
     const [display , setDisplay] = useState(false)
-    function handleNotifications(){
+    const handleNotifications = async()=>{
         setDisplay(!display)
+        try{
+            await axios.post(`http://localhost:8000/notification/readAllNotifications?user=${dataStoraged._id}`)
+            setNewNotifi(0)
+        }catch(err){
+            console.log(err);
+        }
     }
+    const readOneNotification = async (Idnotifi) => {
+        try {
+            const res = await axios.post(`http://localhost:8000/notification/readOneNotification?notifi=${Idnotifi}`);
+            if (res) {
+                const updatedNotifications = notification.map((notifi) => {
+                    if (notifi._id === Idnotifi) {
+                        return { ...notifi, read: true };
+                    } else {
+                        return notifi;
+                    }
+                });
+                setNotification(updatedNotifications);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+    
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get(`http://localhost:8000/notification/getNotification?receiver=${dataStoraged._id}`);
+                setNotification(res.data)
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchData();
+    },[])
     useEffect(() => {
         const fetchData = async () => {
           try {
             const res = await axios.get(`http://localhost:8000/user/getuser/${dataStoraged._id}`);
             setData(res.data);
-            setNotification(res.data.notifications)
+            setNewNotifi(res.data.newNotifi)
           } catch (error) {
             console.log(error);
           }
@@ -55,6 +107,7 @@ export default function ControleBar({socket}) {
     
         fetchData();
       }, [dataStoraged._id]);
+    
     const Contoller = [
         {
             Name: "Home",
@@ -71,9 +124,8 @@ export default function ControleBar({socket}) {
             Name: "Messages",
             NameDir: "chat",
             lineClass : "line-pricetag",
-            ionIconName : "pricetag-outline"
+            ionIconName : "chatbubbles-outline"
         },
-       
         {
             Name: "Theme",
             lineClass : "line-cloudy",
@@ -91,26 +143,21 @@ export default function ControleBar({socket}) {
             ionIconName : "bookmark-outline",
             lineClass : "line-bookmark"
         
-        },
-        {
-            Name : "Addfriends",
-            NameDir: "addfriends",
-            ionIconName : "person-add-outline",
-            lineClass : "line-addfriends"
         }
     ]
-   
     return(
         <div className="controle-bar col-md-3  ">
-                <Link to={`/profile/${data._id}`} className="profile-bar">
-                    <div className="profile-bar-content">
-                    <div className="profile-img">
-                        <img src={`http://localhost:8000/${data.profileImg}`}alt=""/>
-                    </div>
-                    <div className="info">
-                        <b id="name-of-profile">{data.username}</b> <br/>
-                        <small id="tag-of-profile">{data.email}</small>
-                    </div>
+             <audio ref={audioRef} src={song} style={{display:"none"}}></audio> 
+             
+                <Link to={`/profile/${data._id}`}  className="profile-bar" >
+                    <div className="profile-bar-content"  >
+                        <div className="profile-img">
+                            <img src={`http://localhost:8000/${data.profileImg}`}alt=""/>
+                        </div>
+                        <div className="info">
+                            <b id="name-of-profile">{data.username}</b> <br/>
+                            <small id="tag-of-profile">{data.email}</small>
+                        </div>
                     </div>
                 </Link>
                 <div className="paramettre">
@@ -118,12 +165,12 @@ export default function ControleBar({socket}) {
                         
                         if(e.Name === "notifications"){
                             return (
-                                <div className="home"  key={i} onClick={()=>{handleNotifications()}}>
+                                <div className="home"  key={uuidv4()}>
 
-                                <div className="home notifications"  >
+                                <div className="home notifications" onClick={()=>{handleNotifications()}} >
                                     <div className="notifiIcon">
                                         <ion-icon name={e.ionIconName}></ion-icon>
-                                        <span className="newNotifi">2</span>
+                                        {newNotifi>0 && <span className="newNotifi">{newNotifi}</span>}
                                     </div>
                                 <div className="info">
                         
@@ -135,15 +182,15 @@ export default function ControleBar({socket}) {
             
                 { notification && notification.map((notifi , i)=>{
                     return(
-                    <div className="notification-person" >
-                    <div className="profile-img">
-                        <img src={`http://localhost:8000/${notifi.user.profileImg}`} alt=""/>
-                    </div>
-                    <div className="notification-info"> 
-                        <b>{notifi.user.username}</b> <small> {notifi.description}<br/>
-                        {formatPostDate(notifi.createdAt)}
-                        </small>
-                    </div>
+                    <div className={notifi.read ? "notification-person " :"notification-person notRead"} key={uuidv4()} onClick={()=>{readOneNotification(notifi._id)}} >
+                        <div className="profile-img">
+                            <img src={`http://localhost:8000/${notifi.sender.profileImg}`} alt=""/>
+                        </div>
+                        <div className="notification-info"> 
+                            <b>{notifi.sender.username}</b> <small> {notifi.description}<br/>
+                            {formatPostDate(notifi.createdAt)}
+                            </small>
+                        </div>
                     
                 </div>)
                 })}
@@ -151,7 +198,8 @@ export default function ControleBar({socket}) {
             </div>)
                         }
                         else{
-                        return(<Link to={e.NameDir=="home" ? `/${e.NameDir}`:(`/${e.NameDir}/${data._id}`)} className="home" >
+                        return(
+                        <Link to={e.NameDir==="home" ? `/${e.NameDir}`:(`/${e.NameDir}/${data._id}`)} className="home"  key={uuidv4()} >
                         <ion-icon name={e.ionIconName}></ion-icon>
                         <div className="info">
                             <span className={e.lineClass}></span>
@@ -159,6 +207,7 @@ export default function ControleBar({socket}) {
                         </div>
                         </Link>)}})}  
                      </div>
+                     
             </div>
     )
 }

@@ -9,10 +9,13 @@
 }
 .serachePerson{
     margin: 10px 0;
+    display: flex;
 }
 .serachePerson img{
     border-radius: 50px;
-    width: 50px;
+    width: 36px;
+    height: 36px;
+
     padding: 0 !important;
     text-align: center;
 
@@ -64,7 +67,8 @@
     padding: 0 6%;
 }
 HEADER {
-    align-items: center}
+    align-items: center
+}
 .searche{
     position: relative;
     align-items: center;
@@ -123,7 +127,19 @@ section{
 }
 .info small {
     color: #858585;
-
+}
+.serachePersonInformation{
+    text-align: left;
+    margin-left: 10px;
+    
+}
+.serachePersonInformation small{
+    color: #808080;
+}
+.serachePersonInformation p{
+    color: black;
+    font-weight: 600;
+    font-size: 17px;
 }
 p{
     margin: 0 !important;
@@ -170,18 +186,6 @@ p{
     top: 0px;
     background-color: var(--main-color);
 }
-/* .notification-bar{
-    BACKGROUND: white;
-    width: 400px;
-    position: absolute;
-    TOP: 0;
-    border-radius: 28px;
-    left: 104%;
-    display: block;
-    transition: 1.3s;
-    z-index: 1000;
-}
- */
 
 /* after edit  */
 .notification-bar{
@@ -196,15 +200,24 @@ p{
     transition-property: width;
   transition-duration: .5s;
   transition-delay: .1s;
-
+  max-height: 560px;
+  overflow-y: scroll;
+  overflow-x: hidden;
     z-index: 1000;
 }
 .notification-bar .notification-person {
     display: none;
+    margin: 5px 0;
     opacity:0;
     visibility: 0;
     transition-delay: 1s;
     transition: 1s;
+}
+.profileInfo button{
+    padding: 7px;
+}
+.btn-sended{
+    background-color: gray;
 }
 .notification-bar-active{
     width: 400px !important;
@@ -281,17 +294,36 @@ p{
 .title{
     color:  #c7c7c7;
 }
-.storys{
-    display: flex;
+.story{
+    position: relative;
+}
+.storyImg{
+    width: 100%;
+    height: 100%;
+    left: 0;
+    border-radius: inherit;
+}
+.allStories{
+    
     overflow-x: scroll;
+}
+.storys{
+    display: inline-flex;
     height: 221px;
     position: relative;
 }
-.story{ 
-    padding: 0 10px;
+.story_info{
+
+    position: absolute;
+    bottom: 0;
+    z-index: 5;
 }
-.storys::-webkit-scrollbar {
+.allStories::-webkit-scrollbar {
     display: none;
+}
+.img-profile-story{
+    position: absolute;
+    top: 0;
 }
 .img-profile-story img{
     width: 33px;
@@ -301,21 +333,18 @@ p{
     margin: 17px 15px;
 }   
 .story{
-    width: 154px;
+    width: 125px;
     border-radius: 15px;
     margin: 0 4px;
     position: relative;
+    overflow: hidden;
 }
 .story p {
     color: #ffffffcc;
     font-size: 15px;
     margin: 88px 0 0 22px;
 }
-.block_story_1{
-    background-image: url(./imgs/LivvyLand_story.jpg);
-    background-position: center;
-    background-size: cover; 
-}
+
 .block_story_2{
     background-image: url(./imgs/nike_story.jpg);
     background-position: center;
@@ -351,6 +380,38 @@ p{
     background: linear-gradient(rgb(255 255 255 / 3%),rgb(0 0 0 / 45%) );
     border-radius: 15px;
 }
+.addStory {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 25px;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%); 
+    z-index: 50;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    border: 4px solid white;
+    background-color: #6c4be1;
+}
+.storyImg:hover{
+    transform: scale(1);
+}
+.createStory {
+    cursor: pointer;
+}
+.createStory .storyImg{
+    height: 75%;
+    border-radius: 15px 15px 0 0;
+}
+
+.createStory .storyImg::before{
+    content: auto;
+
+}
 .post-bar{
     margin: 15px 0;
     display: flex;
@@ -385,6 +446,21 @@ main{
     background-color: #f1edf6;
     padding: 24px 0;
 }
+.story_info_create {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; 
+    background-color: white;
+    color: black !important;
+    text-align: center;
+    height: 25%;
+    width: 100%;
+    
+    box-sizing: border-box;
+}
+
+
 .btn-post{
     position: absolute;
     right: 10px;
@@ -778,19 +854,32 @@ main{
     }
     .controle-bar{
         height: 0 ;
-    }
-    .controle-bar{
+        left: 0;
         position: fixed;
         z-index: 1000;
         bottom: 5px;
         display: flex;
         height: 70px;
     }
+   
     .friendsBarHidden{
         display: none;
     }
     .chatNavBarHidden{
         display: none;
+    }
+    .notification-bar-active  {
+    padding: 14px 0px;
+    position: absolute;
+    bottom: 74px;
+    border-radius: 28px;
+    left: auto;
+    top: auto;
+    display: block;
+    transition-property: width;
+    transition-duration: .5s;
+    transition-delay: .1s;
+    z-index: 1000;
     }
 }
 
@@ -1209,4 +1298,7 @@ position: relative;
     border: 2px solid white;
     top: -10px ;
     right: 0 ;
+}
+.notRead {
+    background: #e9e4fa !important;
 }

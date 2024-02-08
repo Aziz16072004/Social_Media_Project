@@ -3,8 +3,6 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import {Link} from "react-router-dom"
 export default function Friends({socket , users}){
-    
-    const [data , setData] = useState({})
     const [friends , setFriends] = useState([])
     const [requests , setRequests] = useState([])
     const userData = JSON.parse(localStorage.getItem("user"));
@@ -12,10 +10,23 @@ export default function Friends({socket , users}){
     const [lastMessages, setLastMessages] = useState({});
     
     
-
+    useEffect(() => {
+        if (socket) {
+        socket.on("receive-addFriends", (userReq) => {
+            setRequests(prevReq => [userReq,...prevReq])
+        });}
+    }, [socket]);
     const acceptFriend = async (req)=>{
         try {
-
+            if (socket) {
+                socket.emit("send-notification", {
+                    to: req.user._id,
+                    message : "accept your friends request",
+                    img : userData.profileImg,
+                    username : userData.username,
+                    createdAt : Date.now()
+                });
+                }
             const res = await axios.post("http://localhost:8000/user/acceptfriend", {recipient : userData._id, sender :  req.user._id})
             setFriends((prevFriends) => (Array.isArray(prevFriends) ? [...prevFriends, {user :res.data}] : [{user : res.data}]));
             setRequests(prevRequests => prevRequests.filter(request => request.user._id !== req.user._id))
@@ -26,6 +37,15 @@ export default function Friends({socket , users}){
   
     const rejectFriend = async (req)=>{
         try {
+            if (socket) {
+                socket.emit("send-notification", {
+                    to: req.user._id,
+                    message : "reject your friends request",
+                    img : userData.profileImg,
+                    username : userData.username,
+                    createdAt : Date.now()
+                });
+                }
             await axios.delete("http://localhost:8000/user/rejectfriend", {
                 data: { recipient: userData._id, sender: req.user._id }
               })
@@ -41,7 +61,6 @@ export default function Friends({socket , users}){
                 const res = await axios.get(`http://localhost:8000/user/getuser/${userData._id}`)
                 setFriends(res.data.friends)
                 setRequests(res.data.requests)
-                setData(res.data)
                 const newLastMessages = [];
                 await Promise.all(
                 res.data.friends.map(async (friend) => {
@@ -66,7 +85,6 @@ setLastMessages(newLastMessages);
         }
         fetchData()
     },[])
-    
     return(
         <div className="friend col-md-3 d-none d-lg-block">
             
@@ -88,7 +106,7 @@ setLastMessages(newLastMessages);
                     {friends && friends.map((friend)=>{
 
                     return(
-                    <Link to={`/chat/${userData._id}/${friend.user._id}`}  className="message-person ">
+                    <Link to={`/chat/${userData._id}/${friend.user._id}`}   className="message-person ">
                         
                         <div className="profile-img-friends ">
                             <img src={`http://localhost:8000/${friend.user.profileImg}`} alt=""/>
@@ -114,7 +132,7 @@ setLastMessages(newLastMessages);
                 {requests && requests.map((req)=>{
                     return(
 
-                <div className="requests">
+                <div className="requests" key={req.user._id}>
                     <div className="requests-person ">
                         <div className="profile-img">
                             <img src={`http://localhost:8000/${req.user.profileImg}`} alt=""/>

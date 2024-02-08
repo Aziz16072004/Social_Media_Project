@@ -57,7 +57,7 @@ export default function Setting(){
     else if (currentPassword !== "" &&  newPassword === ""){
     return setErrorMessage("new password should be full")
   }
-    else if (currentPassword != userData.password  &&  newPassword !== ""){
+    else if (currentPassword !== userData.password  &&  newPassword !== ""){
       return setErrorMessage("current Password is invalide")
   }
     else {
@@ -77,61 +77,61 @@ export default function Setting(){
   };
     return(
         <form className="container-parametre" onSubmit={hundleSubmit}>
-        <div class="container rounded bg-white mt-5 mb-5">
-        <div class="row">
-        <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+        <div className="container rounded bg-white mt-5 mb-5">
+        <div className="row">
+        <div className="col-md-3 border-right">
+            <div className="d-flex flex-column align-items-center text-center p-3 py-5">
                 
-            <div class="profilepic" onClick={()=>{handleClick()}}>  
+            <div className="profilepic" onClick={()=>{handleClick()}}>  
             <input
         type="file"
         ref={fileInputRef}
         style={{ display: 'none' }}
         onChange={handleFileChange}
       />
-  <img class="profilepic__image" src={showProfileImg !== "" ?showProfileImg :`http://localhost:8000/${userData.profileImg}`} width="150" height="150" alt="Profibild" />
-  <div class="profilepic__content">
+  <img className="profilepic__image" src={showProfileImg !== "" ?showProfileImg :`http://localhost:8000/${userData.profileImg}`} width="150" height="150" alt="Profibild" />
+  <div className="profilepic__content">
   <ion-icon name="camera-outline"></ion-icon>
 
-    <span class="profilepic__text">Edit Profile</span>
+    <span className="profilepic__text">Edit Profile</span>
   </div>
 </div>
-<span class="font-weight-bold">{username}</span><span class="text-black-50">{userData.email}</span><span> </span>
+<span className="font-weight-bold">{username}</span><span className="text-black-50">{userData.email}</span><span> </span>
                 
                 
                 </div>
         </div>
-        <div class="col-md-5 border-right" >
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Profile Settings</h4>
+        <div className="col-md-5 border-right" >
+            <div className="p-3 py-5">
+                <div className="d-flex justify-content-between align-items-center mb-3">
+                    <h4 className="text-right">Profile Settings</h4>
                 </div>
-                <div class="row mt-2">
+                <div className="row mt-2">
                     <p className="alert alert-danger" style={ErrorMessage.length > 0 ? { display: 'block' } : { display: 'none' }}>{ErrorMessage}</p>
                     <p className="alert alert-success" style={validation.length > 0 ? { display: 'block' } : { display: 'none' }}>{validation}</p>
-                    <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" value={username} onChange={(e)=>{setUsername(e.target.value)}}/></div>
+                    <div className="col-md-6"><label className="labels">Name</label><input type="text" className="form-control" placeholder="first name" value={username} onChange={(e)=>{setUsername(e.target.value)}}/></div>
                     
                 </div>
-                <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" /></div>
+                <div className="row mt-3">
+                    <div className="col-md-12"><label className="labels">Mobile Number</label><input type="text" className="form-control" placeholder="enter phone number" onChange={()=>{}} /></div>
     
-                    <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" readOnly value={userData.email}/></div>
-                    <div class="col-md-12"><label class="labels">current password</label><input type="password" class="form-control" placeholder="enter password" value={currentPassword} onChange={(e)=>{setCurrentPassword(e.target.value)}}/></div>
-                    <div class="col-md-12"><label class="labels">new password</label><input type="password" class="form-control" placeholder="enter password" value={newPassword} onChange={(e)=>{setNewPassword(e.target.value)}}/></div>
+                    <div className="col-md-12"><label className="labels">Email ID</label><input type="text" className="form-control" placeholder="enter email id" readOnly value={userData.email} onChange={()=>{}}/></div>
+                    <div className="col-md-12"><label className="labels">current password</label><input type="password" className="form-control" placeholder="enter password" value={currentPassword} onChange={(e)=>{setCurrentPassword(e.target.value)}}/></div>
+                    <div className="col-md-12"><label className="labels">new password</label><input type="password" className="form-control" placeholder="enter password" value={newPassword} onChange={(e)=>{setNewPassword(e.target.value)}}/></div>
                     
                 </div>
-                <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value=""/></div>
-                    <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" placeholder="state"/></div>
+                <div className="row mt-3">
+                    <div className="col-md-6"><label className="labels">Country</label><input type="text" className="form-control" placeholder="country" value="" onChange={()=>{}}/></div>
+                    <div className="col-md-6"><label className="labels">State/Region</label><input type="text" className="form-control" value="" placeholder="state" onChange={()=>{}}/></div>
                 </div>
-                <div class="mt-5 text-center"><input class="btn btn-primary profile-button" type="submit" value="Save Profile"/></div>
+                <div className="mt-5 text-center"><input className="btn btn-primary profile-button" type="submit" value="Save Profile" onChange={()=>{}}/></div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span></div><br/>
-                <div class="col-md-12"><label class="labels">Experience in Designing</label><input type="text" class="form-control" placeholder="experience" value=""/></div> <br/>
-                <div class="col-md-12"><label class="labels">Additional Details</label><input type="text" class="form-control" placeholder="additional details" value=""/></div>
+        <div className="col-md-4">
+            <div className="p-3 py-5">
+                <div className="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span className="border px-3 p-1 add-experience"><i className="fa fa-plus"></i>&nbsp;Experience</span></div><br/>
+                <div className="col-md-12"><label className="labels">Experience in Designing</label><input type="text" className="form-control" placeholder="experience" value="" onChange={()=>{}}/></div> <br/>
+                <div className="col-md-12"><label className="labels">Additional Details</label><input type="text" className="form-control" placeholder="additional details" value="" onChange={()=>{}}/></div>
             </div>
         </div>
     </div>

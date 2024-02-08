@@ -1,20 +1,41 @@
 
 
 import { useEffect, useState } from "react"
-import zenitsu from "../../imgs/zenitsu-post.jpg"
 import axios from "axios"
 import {Link} from "react-router-dom"
 import { useParams } from "react-router-dom";
-export default function Profile(){
+export default function Profile({socket}){
     const [userData , setUserData] = useState(null)
     const [posts , setPosts] = useState([])
     const [dataStoraged , setDataStoraged] = useState({})
     const { id } = useParams();
     const addFriend = async () =>{
         try {
-            const res = await axios.post("http://localhost:8000/user/addFriend/",{sender: dataStoraged._id ,recipient :userData._id })
-            console.log(res.data);
-        } catch (error) {
+            if (socket) {
+                socket.emit("addFriend", {
+                    to: userData._id,
+                    from: dataStoraged._id,
+                    img : dataStoraged.profileImg,
+                    username : dataStoraged.username,
+                });
+                socket.emit("send-notification", {
+                    to: userData._id,
+                    message : "send an invitation",
+                    img : dataStoraged.profileImg,
+                    username : dataStoraged.username,
+                    createdAt : Date.now()
+                });
+            }
+            await axios.post("http://localhost:8000/user/addFriend/",{sender: dataStoraged._id ,recipient :userData._id })
+            
+            userData.requests = [{user:dataStoraged._id}, ...userData.requests]
+            setUserData((prevUserData) => {
+                const newRequests = [{ user: dataStoraged._id }, ...prevUserData.requests];
+                return { ...prevUserData, requests: newRequests };
+            });    
+            
+        }
+        catch (error) {
             console.log(error);
         }
     }
@@ -33,7 +54,6 @@ export default function Profile(){
 
         fetchData()
     },[])
-    
     return (
          userData ? (
             
@@ -41,13 +61,30 @@ export default function Profile(){
             
             <div className="profileItem row col-10 col-md-8  mx-auto   align-items-center " >
 
-            <img src={`http://localhost:8000/${userData.profileImg}`} className="col-lg-4 col-12 mx-auto"/>
+            <img src={`http://localhost:8000/${userData.profileImg}`} alt="" className="col-lg-4 col-12 mx-auto"/>
             <div className="col-12 col-lg-8">
             <div className="profileInfo row my-3 mx-auto justify-content-center align-items-center ">
                     <p className="col-md-5 col-4 mx-auto">{userData.username}</p>
                     <div className="col-md-5 col-5 ">
 
-                    {userData._id === dataStoraged._id ? (<Link to={`/setting/${userData._id}`} className="btn btn-success">modify profile</Link>) : <button className="btn btn-success w-100 w-md-50 text-left" onClick={()=>{addFriend()}}>Add friend</button> }
+{
+  userData._id === dataStoraged._id ? (
+    <Link to={`/setting/${userData._id}`} className="btn btn-success">modify profile</Link>
+  ) : (
+    userData.friends.some((friend) => friend.user === dataStoraged._id) ? (
+      <button className="btn button btn-success w-100 w-md-50 text-left btn-friend">friend</button>
+    ) : (
+      userData.requests.some((req) => req.user === dataStoraged._id) ? (
+        <button className="btn button w-100 w-md-50 text-left btn-sended">sended</button>
+      ) : (
+        <button className="btn button w-100 w-md-50 text-left" onClick={() => { addFriend() }}>add friend</button>
+      )
+    )
+  )
+}
+
+
+
                    
                     </div>
         </div>
@@ -62,9 +99,9 @@ export default function Profile(){
                 <div className="row">
                     {posts.map((post)=>(
                     
-                        <div className="post col-12 col-md-6 col-lg-4">
-                            <img src={`http://localhost:8000/${post.image}`} />
-                        <div class="postpic__content">
+                        <div className="post col-12 col-md-6 col-lg-4" key={post._id}>
+                            <img src={`http://localhost:8000/${post.image}`} alt="" />
+                        <div className="postpic__content">
                         <div className='row'>
                             <div className="col-6">
                             <ion-icon name="heart-outline"></ion-icon>

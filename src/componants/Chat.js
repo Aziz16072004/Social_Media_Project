@@ -1,10 +1,7 @@
 import { useEffect, useState, useRef } from "react"
-import io from "socket.io-client"
 import { useParams } from "react-router-dom"
 import axios from "axios"
-// const socket = io("http://localhost:8000");
-export default function Chat({socket}){
-    
+export default function Chat({socket}){  
     const {id1} = useParams()
     const {id2} = useParams()
     const [friends , setFriends] = useState([])
@@ -23,7 +20,7 @@ export default function Chat({socket}){
     }, [socket]);
         useEffect(()=>{
             if (socket) {
-            socket.on("getUsers", getUsers => {
+                socket.on("getUsers", getUsers => {
                 setUsers(getUsers);
             });
         }
@@ -63,7 +60,7 @@ export default function Chat({socket}){
                 message,
             });
             }
-            const res = await axios.post("http://localhost:8000/message/addmsg", {
+            await axios.post("http://localhost:8000/message/addmsg", {
                 from: id1,
                 to: showUser.user._id,
                 message: message,

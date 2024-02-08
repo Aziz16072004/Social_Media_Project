@@ -17,6 +17,7 @@ import chat from "../imgs/chat.png"
 import share from "../imgs/share.png"
 import ribbon from "../imgs/ribbon.png"
 import bookmark from "../imgs/bookmark.png"
+import Stories from "./Stories"
 export default function HomeSection() {
     
     const [postWidget, setPostWidget] = useState(false);
@@ -84,32 +85,6 @@ export default function HomeSection() {
           console.log("Update Rating Error:", error);
         }
     }
-    const Stories  = [
-        {
-            img : livvyland_profile,
-            storyName : "Livvy Land"
-        },
-        {
-            img : nike_profile,
-            storyName : "Air Nike"
-        },
-        {
-            img : painting_profile,
-            storyName : "Painting"
-        },
-        {
-            img : neymar_profile,
-            storyName : "Neymar"
-        },
-        {
-            img : tokyoghoul_profile,
-            storyName : "Tokyo Ghoul"
-        },
-        {
-            img : depression_profile,
-            storyName : "ERROR"
-          },
-    ]
     const handleImageChange = (e) => {
       setPostImage(e.target.files[0]);
     };
@@ -189,7 +164,7 @@ export default function HomeSection() {
             <div className="w-100 albums" onClick={()=>{handleClick()}}>
             {postImage ? 
             
-            (<img src={URL.createObjectURL(postImage)}/>)
+            (<img src={URL.createObjectURL(postImage)} alt=""/>)
             : (<div>
               <ion-icon name="albums-outline"></ion-icon>
               <p>Add pictures or videos</p>      
@@ -212,39 +187,15 @@ export default function HomeSection() {
             </div>
             </form>
             </div>
-            
           </div>
           ):null
-
         } 
         <div className="acceuil col-12 col-md-9 col-lg-6">
-           
-            <div className="storys">
-            {Stories.map((ele , index)=>{
-                let className = `block_story_${index + 1} story`;
-                return(<div className={className} key={index}>
-                    <div className="img-profile-story">
-                        <img src={ele.img} alt=""/>
-                    </div>
-                    <div className="story_info">
-                        <p>{ele.storyName}</p>
-                    </div>
-                </div>)
-            })}
-            {Stories.map((ele , index)=>{
-                let className = `block_story_${index + 1} story`;
-                return(<div className={className} key={index}>
-                    <div className="img-profile-story">
-                        <img src={ele.img} alt=""/>
-                    </div>
-                    <div className="story_info">
-                        <p>{ele.storyName}</p>
-                    </div>
-                </div>)
-            })}
+         
+
+           <Stories user={data}/>
+        
             
-                
-        </div>
         <div className="post-bar" >
                     <div className="profile-img profile-img-post">
                     {data && data.profileImg && (
@@ -261,8 +212,8 @@ export default function HomeSection() {
          {posts.map((post)=>{
              const createdAt = formatPostDate(post.createdAt)
             return(
-                <div className="posts">
-            <div className="post-title">
+                <div className="posts" key={post._id}>
+                    <div className="post-title">
                             <div className="profile-img img-post">
                            
                                 <img src={`http://localhost:8000/${post.userId.profileImg}`} alt=""/>
@@ -303,7 +254,7 @@ export default function HomeSection() {
                                 <div className="line1-vue">
                                   <div>
                                   {post.peopleRated.map((rater, index) => (
-  index < 3 ? <img src={`http://localhost:8000/${rater.user.profileImg}`} alt="" className={`img${index+1}`} /> : ""
+  index < 3 ? <img src={`http://localhost:8000/${rater.user.profileImg}`} alt="" className={`img${index+1}`} key={rater.user._id} /> : ""
 ))}
               </div>
                                     <p onClick={()=>{fetchData(post._id) ;setShowRatings(true)}}>Like by <b>{post.peopleRated.length > 0 ? post.peopleRated[0].user.username : ""}</b> and <b>{post.rates > 0 ? post.rates - 1 : 0} other</b></p>
@@ -346,7 +297,8 @@ export default function HomeSection() {
         <div className="ratesBody">
           {ratingData.comments && ratingData.comments.length>0 ?
           ratingData.comments.map((com)=>(
-            <div className="comment">
+            <div className="comment" key={com._id}>
+              
                   <img src={`http://localhost:8000/${com.user.profileImg}`} alt=""/>
                   <div className="comment_description">
                     <p className="comment_title"><b>{com.user.username}</b></p>
