@@ -6,36 +6,62 @@ import { Link } from 'react-router-dom';
 
 export default function Header(){
     const [showSearchingBar , setShowSearchingBar] = useState(false)
+    const [searchItem, setSearchItem] = useState('')
     const [users , setUsers] = useState([])
+    const [filteredUsers, setFilteredUsers] = useState([])
     const [dataStoraged , setDataStoraged] = useState({})
-
     const hundleFocuse = async () => {
-  setShowSearchingBar(true);
-
-  try {
-    const res = await axios.get("http://localhost:8000/getAllUsers");
-    setUsers(res.data);
-  } catch (error) {
-    console.error('Error fetching users:', error);
-  }
-}
-useEffect(()=>{
-    setDataStoraged(JSON.parse(localStorage.getItem('user')))
+        setShowSearchingBar(true);
+        // setShowSearchingBar(true);
+        
+        // try {
+        //     const res = await axios.get("http://localhost:8000/getAllUsers");
+        //     setUsers(res.data);
+        // } catch (error) {
+        //     console.error('Error fetching users:', error);
+        // }
+    }
+    const handleInputChange = (e) => { 
+        const searchTerm = e.target.value;
+        setSearchItem(searchTerm)
+    
+        // console.log(user.username.toLowerCase().includes(searchTerm.toLowerCase()))
+        const filteredItems = users.filter((user) =>
+        user.username.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredUsers(filteredItems)
+        
+      }
+      useEffect(()=>{
+        const fetchData=async()=>{
+            
+            try {
+                const res = await axios.get("http://localhost:8000/getAllUsers");
+                setUsers(res.data);
+                setFilteredUsers(res.data)
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        }
+        fetchData()
+      },[])
+    useEffect(()=>{
+        setDataStoraged(JSON.parse(localStorage.getItem('user')))
 },[])
-    return(
-        <div className="container">
+return(
+    <div className="container">
         <header className="row d-sm-flex justify-content-between" >
             <div className="logo col-8 col-md-4 text-center ">
                 <h2>Social Media</h2>
             </div>
             <div className="searche  d-none col-md-5 d-md-flex col-6 text-center" >
                 <img src={searcheImg} alt="" className="searcheImg"/>
-                <input type="text" onFocus={()=>{hundleFocuse() }}  placeholder="searche for creator , inspiration and projects"/>
+                <input type="text"  onChange={handleInputChange} onFocus={()=>{hundleFocuse() }}  placeholder="searche for creator , inspiration and projects"/>
                 {showSearchingBar ? (
                     <div className="searchingBar">
                     <ion-icon name="close-outline" onClick={(e) => { e.stopPropagation(); setShowSearchingBar(false); }}></ion-icon>
-                    
-                   {users.map((user)=>{
+                   
+                   {filteredUsers.map((user)=>{
                     const isFriend = user.friends.find((friend) => friend.user === dataStoraged._id )
                     return(
                     <div  className="serachePerson container align-items-center" key={user._id}>

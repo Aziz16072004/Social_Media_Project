@@ -12,6 +12,7 @@ import Bookmarks from './componants/Bookmarks';
 import Addfriends from './componants/Addfriends';
 import Chat from './componants/Chat';
 import io from "socket.io-client"
+import StoriesCreate from './componants/StoriesCreate';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
         <Route path="/addfriends/:id"  element={<Addfriends />} />
         <Route path="/chat/:id1"  element={<Chat socket={socket}/>} />
         <Route path="/chat/:id1/:id2"  element={<Chat/>} />
+        <Route path="/stories/create/:id"  element={<StoriesCreate/>} />
       </Routes>
     </Router>
   );
