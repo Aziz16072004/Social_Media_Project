@@ -69,10 +69,10 @@ export default function Profile({socket}){
 
 {
   userData._id === dataStoraged._id ? (
-    <Link to={`/setting/${userData._id}`} className="btn btn-success">modify profile</Link>
+    <Link to={`/setting/${userData._id}`} className="btn">modify profile</Link>
   ) : (
     userData.friends.some((friend) => friend.user === dataStoraged._id) ? (
-      <button className="btn button btn-success w-100 w-md-50 text-left btn-friend">friend</button>
+      <button className="btn button w-100 w-md-50 text-left btn-friend">friend</button>
     ) : (
       userData.requests.some((req) => req.user === dataStoraged._id) ? (
         <button className="btn button w-100 w-md-50 text-left btn-sended">sended</button>

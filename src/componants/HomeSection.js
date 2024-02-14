@@ -10,7 +10,8 @@ import depression_profile from "../imgs/depression_profile.jpg"
 
 import close from "../imgs/close.png"
 import send from "../imgs/paper-plane-top.png"
-import love from "../imgs/love.png"
+import whiteLove from "../imgs/whiteLove.png"
+import blackLove from "../imgs/blackLove.png"
 import loveColored from "../imgs/loveColored.png"
 
 import chat from "../imgs/chat.png"
@@ -18,7 +19,7 @@ import share from "../imgs/share.png"
 import ribbon from "../imgs/ribbon.png"
 import bookmark from "../imgs/bookmark.png"
 import Stories from "./Stories"
-export default function HomeSection() {
+export default function HomeSection({theme}) {
     
     const [postWidget, setPostWidget] = useState(false);
     const [postName, setPostName] = useState("");
@@ -232,10 +233,11 @@ export default function HomeSection() {
                             <div className="icons-posts-left">
                             <img
                               alt=""
-                              src={post.peopleRated.some(rate => rate.user._id === data._id) ? loveColored : love}
+                              src={post.peopleRated.some(rate => rate.user._id === data._id) ? loveColored : (theme === "blackMode" || theme === "darkMode" ? whiteLove : blackLove)}
                               onClick={async ()=>{hundleClickLike(post)}}/>
-                    <img src={chat} alt="" onClick={()=>{fetchData(post._id) ; setShowPostInformation(true) ; setShowComments(true)}}/>
-                    <img src={share} alt=""/>
+                              <ion-icon name="chatbubble-ellipses-outline" onClick={()=>{fetchData(post._id) ; setShowPostInformation(true) ; setShowComments(true)}}></ion-icon>
+                  
+                              <ion-icon name="share-social-outline"></ion-icon>
                     </div>
                     <div className="icons-posts-right"><img  src={data.postMarkes.some(marke => marke.post === post._id) ? bookmark : ribbon} alt="" onClick={async ()=>{
                       try {

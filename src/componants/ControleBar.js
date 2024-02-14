@@ -4,7 +4,7 @@ import { Link} from 'react-router-dom';
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
 import song from '../audio/notification.mp3';
-export default function ControleBar({socket}) {
+export default function ControleBar({socket , updateSetShowTheme}) {
 
     
     const [data,setData] = useState([])
@@ -127,11 +127,6 @@ export default function ControleBar({socket}) {
             ionIconName : "chatbubbles-outline"
         },
         {
-            Name: "Theme",
-            lineClass : "line-cloudy",
-            ionIconName : "cloudy-outline"
-        },
-        {
             Name : "Setting",
             NameDir: "setting",
             ionIconName : "settings-outline",
@@ -205,7 +200,14 @@ export default function ControleBar({socket}) {
                             <span className={e.lineClass}></span>
                         < p >{e.Name}</p>
                         </div>
-                        </Link>)}})}  
+                        </Link>)}})}
+                        <div className="home"  onClick={()=>{updateSetShowTheme(true)}}>
+                            <ion-icon name="cloudy-outline"></ion-icon>
+                            <div className="info">
+                                <span className="theme"></span>
+                            <p>theme</p>
+                            </div>
+                        </div>
                      </div>
                      
             </div>

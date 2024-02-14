@@ -4,8 +4,50 @@
     margin: 0;
     padding: 0;
 }
+body *{
+    color:  var(--color-dark);
+}
 :root{
-    --main-color : #6c4be1
+    --main-color : #6c4be1 ;
+    --main-background-color : #f1edf6;
+    --light-color-lightness: 15%;
+    --white-color-lightness: 20%;
+    --dark-color-lightness: 95%;
+    --color-white: /*hsl(252, 30%, var(--white-color-lightness))*/ white;
+    --color-light: hsl(252, 30%, var(--light-color-lightness));
+    --color-dark:  /*hsl(252, 30%, var(--dark-color-lightness)) */ black; 
+}
+.green{
+    --main-color:#4de69e;
+}
+.red{
+    --main-color:#E64D61;
+}
+.aqua{
+    --main-color:#4DADE6;
+}
+.yellow{
+    --main-color:#E6D14D;
+}
+.mainColor{
+    --main-color : #6c4be1 ;
+}
+
+.chat ion-icon{
+    font-size: 30px;
+}
+.darkMode{
+    --main-background-color : hsl(252, 30%, var(--light-color-lightness));
+    --color-white: hsl(252, 30%, var(--white-color-lightness));
+    --color-dark:  hsl(252, 30%, var(--dark-color-lightness)) 
+}
+.messanger{
+    background-color: var(--main-background-color);
+}
+.blackMode{
+    --main-background-color : black;
+    --color-white: #110e1b;
+    --color-dark:  hsl(252, 30%, var(--dark-color-lightness)) 
 }
 .serachePerson{
     margin: 10px 0;
@@ -67,6 +109,9 @@
 .container-nav{
     padding: 0 6%;
 }
+nav{
+    background-color: var(--color-white);
+}
 HEADER {
     align-items: center
 }
@@ -79,7 +124,7 @@ HEADER {
     height: 30px;
     padding: 17px 50px;
     border-radius: 39px;
-    background: #eee;
+    background: var(--main-background-color);
     border: none;
 }
 
@@ -87,16 +132,17 @@ section{
     display: grid;
     grid-template-columns: 18vh auto 20vw;
     position: relative;
-    background-color: #f1edf6;
+    background-color: var(--main-background-color);
 
 }
 .container-main{
     padding: 0 5%;
-    background-color: #f1edf6;
+    background-color: var(--main-background-color);
 
 }
 .paramettre{
-    background: white;
+    background: var(--color-white);
+
     border-radius: 18px;
     margin: 10px 0;
 }
@@ -106,7 +152,7 @@ section{
     align-items: center;
 }
 .profile-bar{
-    background: white;
+    background: var(--color-white);
     border-radius: 18px;
     HEIGHT: 77px;
 }
@@ -152,6 +198,7 @@ p{
     justify-content: center;
     width: 100%;
     height: 33px;
+    font-weight :500;
     position: relative;
     cursor: pointer;
     text-decoration: none;
@@ -173,7 +220,7 @@ p{
 }
 .home:hover{
     color: #6c4be1;
-    background-color:#f1edf6 ;
+    background-color:var(--main-background-color) ;
 }
 
 
@@ -205,6 +252,15 @@ p{
   overflow-y: scroll;
   overflow-x: hidden;
     z-index: 1000;
+    background-color: var(--color-white);
+}
+
+.container-parametre{
+    min-height: 100vh;
+    background-color: var(--main-background-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .notification-bar .notification-person {
     display: none;
@@ -290,7 +346,7 @@ p{
     color: rgb(126, 126, 126);
 }
 .active{
-    display: none;
+    /* display: none; */
 }
 .title{
     color:  #c7c7c7;
@@ -298,14 +354,17 @@ p{
 .story{
     position: relative;
 }
+
 .storyImg{
     cursor: pointer;
-}
-.storyImg{
     width: 100%;
     height: 100%;
     left: 0;
     border-radius: inherit;
+    overflow: hidden;
+    width: 100%;
+    
+    border-radius: 15px 15px 0 0;
 }
 .allStories{
     
@@ -330,10 +389,22 @@ p{
     width: 100%;
 }
 .story_info{
-
+    padding: 3px 11px;
+    font-weight: 500;
     position: absolute;
     bottom: 0;
     z-index: 5;
+}
+.btn-addStory{
+    background-color: var(--main-color);
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    padding: 5px 29px;
+    border: none;
+    
+    
+    border-radius: 39PX;
 }
 .allStories::-webkit-scrollbar {
     display: none;
@@ -420,10 +491,7 @@ p{
 .createStory {
     cursor: pointer;
 }
-.createStory .storyImg{
-    height: 75%;
-    border-radius: 15px 15px 0 0;
-}
+
 
 .createStory .storyImg::before{
     content: auto;
@@ -443,6 +511,7 @@ p{
 }
 .post-bar input{
     width: 100%;
+    background-color: var(--color-white);
     height: 45px;
     border-radius: 50px;
     border: none;
@@ -460,7 +529,7 @@ p{
     position: absolute;
 }
 main{
-    background-color: #f1edf6;
+    background-color: var(--main-background-color);
     padding: 24px 0;
 }
 .story_info_create {
@@ -501,7 +570,7 @@ main{
 .posts{
     padding: 10px 20px;
     margin: 10px 0;
-    background: white;
+    background: var(--color-white);
     border-radius: 15px;
 }
 
@@ -513,11 +582,14 @@ main{
     margin: 0 24px;
 }
 .icons-posts-left img{
-    margin-right:9px;
+    width: 30px;
+    height: 30px;
+    box-shadow: none;
 }
-.icons-posts img{
-    width: 26px;
-    height: 26px;
+.icons-posts-left{
+    display: flex;
+    gap: 5px;
+    align-items: center;
 }
 .icons-posts{
     display: flex;
@@ -569,7 +641,7 @@ main{
 .message{
     PADDING: 24px 10px;
     border-radius: 15px;
-    background-color: #fff;
+    background-color: var(--color-white);
 }
 .messages-title{
     display: flex;
@@ -590,7 +662,7 @@ main{
     margin: 7px 0;
     height: 50px;
     border: none;
-    background: #f1edf6;
+    background: var(--main-background-color);
     border-radius: 41px;
     padding: 0 58px;
     font-size: 16px;
@@ -603,7 +675,6 @@ main{
 }
 .show-friends a {
     text-decoration: none;
-    color: black;
     display: inline-block;
     font-weight: bold;
     margin: 7px 0;
@@ -614,14 +685,13 @@ main{
 }
 
 .show-friends{
-    border-bottom: 4px solid #f1edf6;
+    border-bottom: 4px solid var(--main-background-color);
 }
 .message-person{
     display: flex;
     align-items: center;
     display: flex;
     align-items: center;
-    background: white;
     border-radius: 19px;
     cursor: pointer;
    
@@ -651,11 +721,11 @@ main{
     margin: 10px 0;
 }
 .btn-rquests-reject{
-    background: #f1edf6 !important;
+    background: var(--main-background-color) !important;
     color: black !important;
 }
 .main-theme-bar{
-    width: 196vh;
+    width: 100vw;
     height: 100vh;
     position: absolute;
     z-index: 1096;
@@ -664,20 +734,32 @@ main{
     align-items: center;
     justify-content: center;
     position: fixed;
-    display: none;
+    /* display: none; */
 }
+.theme_bar ion-icon{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 29px;
+    cursor: pointer;
+}
+.size-line .active{
+    background-color: var(--main-color) !important;
+}
+.darkMode .theme-info p ,.blackMode .theme-info p {
+    color: #ffffffd6;
+}
+
 .theme_bar{
-    background: white;
-    width: 50%;
-    HEIGHT: 63%;
+    position: relative;
+    background: var(--color-white);
     border-radius: 29px;
-    box-shadow: -1px 0px 8px #000000a3;
+    box-shadow: 0 0 20px var(--main-color);
 }
 .theme-info{
     margin: 61px auto;
     text-align: center;
     line-height: 31px;
-    width: 40%;
 }
 .theme-info p{
     color: #4646467a;
@@ -689,7 +771,7 @@ main{
     margin-top: 89px;
 }
 .size-bar , .color-bar{
-    background-color: #f1edf6;
+    background-color: var(--main-background-color);
     width: 80%;
     height: 47px;
     margin: 4px auto;
@@ -727,39 +809,40 @@ main{
     border-radius: 25px;
     cursor: pointer;
 }
-#color_blue{
-    background-color: blue;
+
+#color1{
+    background-color: #6c4be1 ;
 }
-#color_yello{
-    background-color: yellow;
+#color2{
+    background-color: #E6D14D;
 }
-#color_red{
-    background-color: red;
+#color3{
+    background-color: #E64D61;
 }
-#color_green{
-    background-color: green;
+#color4{
+    background-color: #4de69e;
 }
-#color_blueciel{
-    background-color: rgb(78, 187, 255);
+#color5{
+    background-color: #4DADE6;
 }
-.background-bar{
+.activeColor{
+    border: 4px solid white;
+}
+.activeTheme{
+    border: 2px solid var(--main-color);
+}
+.background-bar {
     display: flex;
     justify-content: space-between;
-    width: 84%;
-    margin: 0 auto;    
-
+    gap: 10px;
+    padding: 18px;
+    margin: 0 auto;
 }
 .circal{
-    
     width: 46px;
     height: 46px;
-    border-radius: 50px;
-    background: transparent;
-    border: 2px solid #fdfdfd63;
-    position: absolute;
-    top: 11px;
-    left: 19px;
-    cursor: pointer;
+    border-radius: 46px;
+    border: 2px solid gray;
 }
 .background p{
     margin: 24px 85px;
@@ -769,10 +852,22 @@ main{
 .background{
     position: relative;
     width: 252px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
     background: #14101f;
     border-radius: 7px;
     height: 74px;
-
+}
+.bachgroundLight p{
+    color: black ;
+}
+.bachgroundLight{
+    background-color: white;
+}
+.bachgroundDark{
+    background-color: #382a5e;
 }
 .img-post img{
     margin: 15px 0px 0 20px;
@@ -956,7 +1051,7 @@ main{
     
 }
 .comment .comment_description{
-    background: #f1edf6;
+    background: var(--main-background-color);
     padding: 4px 16px;
     border-radius: 19px;
 }
@@ -965,7 +1060,7 @@ main{
     position: relative;
 }
 .addComment .comment_description input{
-    background: #f1edf6;
+    background: var(--main-background-color);
     padding: 15px 10px;
     border-radius: 19px;
     width: 100%;
@@ -1154,23 +1249,30 @@ position: relative;
     position: relative;
    
   }
+  .profileContent .posts{
+    background-color: var(--color-white);
+  }
+  .profileItem button ,.profileItem a{
+    background-color: var(--main-color);
+  }
+  .profileContent{
+    background-color: var(--main-background-color);
+  }
   .profileContent .profileItem img{
     width: 200px;
     height: 200px;
     border-radius: 200px;
     padding: 0;
-    border:8px solid white;
+    border:8px solid var(--color-white);
   }
   a{
     text-decoration: none;
   }
-.profileContent .posts{
-    background-color: #eee;
-}
+
 .profileContent .posts .post{
     background-color: pink;
-    aspect-ratio: 1 / 1; /*its good css propertie which mean the height equal to the width*/
-    border: 2px solid white;
+    aspect-ratio: 1 / 1;
+    border: 2px solid var(--color-white);
     padding: 0 !important;
 }
 .profileContent .posts .post img{
@@ -1226,7 +1328,7 @@ position: relative;
 }
 .chat{
     height: 100vh;
-    background-color: rgb(227, 227, 227);
+    background-color: var(--color-white);
 }
 .chatBar-content{
     height: 100%;
@@ -1335,11 +1437,7 @@ position: relative;
     height: 90vh;
     position: relative;
 }
-.storyImg{
-    overflow: hidden;
-    width: 100%;
-    height: 92%;
-}
+
 .storyImg img{
     width: 100%;
     height: 100%;
@@ -1396,4 +1494,33 @@ font-size: 20px ;
     position: absolute;
     right: 10px;
     bottom: 10px;
+}
+.swipperStoriesHeaderContent{
+    display: flex;
+    align-items: center;
+    color: white;
+    font-weight: 600;
+    gap: 5px;
+   
+    
+}
+.swipperStoriesHeader ion-icon{
+    font-size: 25px;
+    color: white;
+    cursor: pointer;
+}
+.swipperStoriesHeader{
+    position: absolute;
+    z-index: 1222;
+    top: 15px;
+}
+.swipperStoriesHeader{
+    width: 400px;
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+.swipperStoriesContent{
+    position: relative;
 }

@@ -93,7 +93,7 @@ const StoriesCreate = () => {
 
             {storyImage ? (
                 
-                    <button className='btn btn-info' onClick={()=>uploadStorie()}>Save</button>
+                    <button className='btn-addStory' onClick={()=>uploadStorie()}>Save</button>
                 
             ) : null}
         </div>

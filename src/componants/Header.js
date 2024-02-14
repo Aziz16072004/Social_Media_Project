@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { Link } from 'react-router-dom';
 
 
-export default function Header(){
+export default function Header({theme , color}){
     const [showSearchingBar , setShowSearchingBar] = useState(false)
     const [searchItem, setSearchItem] = useState('')
     const [users , setUsers] = useState([])
@@ -49,7 +49,9 @@ export default function Header(){
         setDataStoraged(JSON.parse(localStorage.getItem('user')))
 },[])
 return(
-    <div className="container">
+    <nav className={`${theme} ${color}`}>
+
+    <div className="container" >
         <header className="row d-sm-flex justify-content-between" >
             <div className="logo col-8 col-md-4 text-center ">
                 <h2>Social Media</h2>
@@ -62,9 +64,9 @@ return(
                     <ion-icon name="close-outline" onClick={(e) => { e.stopPropagation(); setShowSearchingBar(false); }}></ion-icon>
                    
                    {filteredUsers.map((user)=>{
-                    const isFriend = user.friends.find((friend) => friend.user === dataStoraged._id )
-                    return(
-                    <div  className="serachePerson container align-items-center" key={user._id}>
+                       const isFriend = user.friends.find((friend) => friend.user === dataStoraged._id )
+                       return(
+                           <div  className="serachePerson container align-items-center" key={user._id}>
                         <img src={`http://localhost:8000/${user.profileImg}`} alt="" className=""/>
                         <Link to={`/profile/${user._id}`} className="serachePersonInformation ">
                             <p>{user.username}</p>
@@ -81,5 +83,6 @@ return(
             </div>
         </header>
         </div>
+    </nav>
     )
 }

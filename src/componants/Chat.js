@@ -106,8 +106,8 @@ export default function Chat({socket}){
         fetchData()
     },[])
     return(
-        <div className="row">
-          
+        <div className='row messanger'>
+         
             <div className="chat col-12 col-md-9 row mx-auto align-items-center ">   
                 
                 <div className={!showUser?("friendsBar col-12 col-md-4"):("friendsBar friendsBarHidden col-12 col-md-4")}>    
@@ -130,7 +130,8 @@ export default function Chat({socket}){
                 {showUser ? (
                     <div className="chatBar col-12 col-md-8 ">                    
                     <div className={showUser? "chatNavBar" :"chatNavBar chatNavBarHidden" }>
-                            <button onClick={()=>setShowUser(false)}>back</button>
+                            <ion-icon name="arrow-back-outline" onClick={()=>setShowUser(false)}></ion-icon>
+                            
                         <div className="message-person ">
                             <div className="profile-img-friends ">
                                     <img src={`http://localhost:8000/${showUser.user.profileImg}`} alt=""/>

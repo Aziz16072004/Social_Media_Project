@@ -125,8 +125,6 @@ setLastMessages(newLastMessages);
                         </div>
                     </Link>)
                     })}
-                    
-
                 </div>
                 <h2 className="title">Requests</h2>
                 {requests && requests.map((req)=>{
@@ -140,11 +138,10 @@ setLastMessages(newLastMessages);
                         <div className="requests-info"> 
                             <b>{req.user.username}</b> <br/> <small> 8 mutal friends</small>
                         </div>
-                        
                     </div>
                     <div className="request-btn">
-                    <button className="btn-rquests-accept" onClick={()=>{acceptFriend(req)}} >Accept</button>
-                    <button className="btn-rquests-reject"  onClick={()=>{rejectFriend(req)}}>Reject</button>
+                        <button className="btn-rquests-accept" onClick={()=>{acceptFriend(req)}} >Accept</button>
+                        <button className="btn-rquests-reject"  onClick={()=>{rejectFriend(req)}}>Reject</button>
                     </div>
                 </div>
                 )

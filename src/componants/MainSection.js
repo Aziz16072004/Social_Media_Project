@@ -4,15 +4,15 @@ import Friends from "./friends";
 
 
 
-export default function MainSection({socket , users}){
+export default function MainSection({socket , users , updateSetShowTheme , theme }){
     
     return(
         <main>
         <div className="container">
         
         <section className="row">   
-            <ControleBar socket={socket}/>
-            <HomeSection />
+            <ControleBar socket={socket} updateSetShowTheme={updateSetShowTheme}/>
+            <HomeSection  theme={theme}/>
             <Friends socket={socket} users={users}/>
         </section>
         </div>

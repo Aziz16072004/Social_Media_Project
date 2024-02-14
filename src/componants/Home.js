@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import Header from './Header';
 import MainSection from './MainSection';
-const Home = ({socket}) => {
+const Home = ({socket ,theme ,updateSetShowTheme}) => {
     const [users, setUsers] = useState([]);
-
 useEffect(() => {
   const handleGetUsers = (receivedUsers) => {
     setUsers(receivedUsers);
@@ -25,11 +24,13 @@ useEffect(() => {
 }, [socket]);
 
 
+  
     return (
         <>
-            
+        
+           
             <Header socket={socket}/>
-            <MainSection socket={socket} users={users}/>
+            <MainSection socket={socket} theme={theme} users={users} updateSetShowTheme={updateSetShowTheme}/>
         </>
     );
 };

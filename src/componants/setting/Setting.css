@@ -1,22 +1,30 @@
 
-.container-parametre .container{
-    background-color: #f1edf6 !important;
-    box-shadow: 0 0 38px #d8d8d8de;
-}
+
 .form-control:focus {
     box-shadow: none;
     /* cursor: pointer; */
     border-color: #BA68C8
 }
-
+.container-parametre *{
+  color:  var(--color-dark);
+}
+.container-parametre input{
+  color: black ;
+}
+.container-parametre .container{
+  background-color: var(--color-white) !important;
+  box-shadow: 0 0 35px -5px var(--main-color);
+}
 .profile-button {
-    background: rgb(99, 39, 120);
+    background: var(--main-color);
+    color: white !important;
     box-shadow: none;
     border: none;
 }
 
 .profile-button:hover {
-    background: #682773
+    background: white ;
+    color: black !important;
 }
 
 .profile-button:focus {
@@ -30,7 +38,7 @@
 }
 
 .back:hover {
-    color: #682773;
+    color: var(--main-color);
     cursor: pointer
 }
 
@@ -39,10 +47,10 @@
 }
 
 .add-experience:hover {
-    background: #BA68C8;
+    background: var(--main-color);
     color: #fff;
     cursor: pointer;
-    border: solid 1px #BA68C8
+    border: solid 1px var(--main-color)
 }
 .profilepic {
     position: relative;
