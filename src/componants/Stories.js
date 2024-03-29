@@ -31,20 +31,20 @@ function Stories({user}) {
     return (
         <div className="allStories">
             <div className="storys">
-                <Link to={`/stories/create/${user._id}`} className="block_story story createStory">
-                    <img src={`http://localhost:8000/${user.profileImg}`} className='storyImg'/>
+                <Link to={`/stories/create/${user?._id}`} className="block_story story createStory">
+                    <img src={`http://localhost:8000/${user?.profileImg}`} className='storyImg'/>
                     <div className='addStory'>
                         <ion-icon name="add-outline"></ion-icon>
                     </div>
                     <p className="story_info story_info_create ">create Story</p>
                 </Link>
                     {stories.length>0 && stories.map((ele , index)=>(
-                        <div className="block_story story" key={index} onClick={()=>{hundleStorie(ele.lastStory.user._id)}}>
+                        <div className="block_story story" key={index} onClick={()=>{hundleStorie(ele.lastStory.user?._id)}}>
                             <img src={`http://localhost:8000/${ele.lastStory.image}`} className='storyImg'/>
                             <div className="img-profile-story">
-                                <img src={`http://localhost:8000/${ele.lastStory.user.profileImg}`} alt=""/>
+                                <img src={`http://localhost:8000/${ele.lastStory.user?.profileImg}`} alt=""/>
                             </div>
-                            <p className="story_info">{ele.lastStory.user.username}</p>
+                            <p className="story_info">{ele.lastStory.user?.username}</p>
                         </div>
                     ))}
             </div>
@@ -55,8 +55,8 @@ function Stories({user}) {
                     {storiesContent.length>0 ?
                     (<div className='swipperStoriesHeader'>
                         <div className='swipperStoriesHeaderContent profile-img'>
-                            <img src={`http://localhost:8000/${storiesContent[0].user.profileImg}`} />
-                            <div>{storiesContent[0].user.username}</div>
+                            <img src={`http://localhost:8000/${storiesContent[0].user?.profileImg}`} />
+                            <div>{storiesContent[0].user?.username}</div>
                         </div>
                         <ion-icon name="close-outline" onClick={()=>{setShowStories(false)}}></ion-icon>
                     </div>

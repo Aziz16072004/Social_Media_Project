@@ -12,6 +12,13 @@
     margin: 0 25px;
 }
 
+.login ,.signup{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--main-background-color);
+}
 
 .addProduct{
   padding: 7px 13px;
@@ -45,10 +52,11 @@ body {
 
 .login form , .signup form {
   max-width: 300px;
-  margin: 10px auto;
   padding: 10px 20px;
-  background: #f4f7f8;
+  background-color: var(--color-white);
   border-radius: 8px;
+  width: 40%;
+  max-width: 80%;
 }
 
 .login h1 , .signup h1 {
@@ -95,13 +103,13 @@ body {
 .login input[type="submit"] , .signup input[type="submit"] {
   padding: 19px 39px 18px 39px;
   color: #FFF;
-  background-color: #4bc970;
+  background-color: var(--main-color);
   font-size: 18px;
   text-align: center;
   font-style: normal;
   border-radius: 5px;
   width: 100%;
-  border: 1px solid #3ac162;
+  border: 1px solid var(--main-color);
   border-width: 1px 1px 3px;
   box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
   margin-bottom: 10px;
@@ -128,7 +136,7 @@ body {
 }
 
 .login .number , .signup .number {
-  background-color: #5fcf80;
+  background-color: var(--main-color);
   color: #fff;
   height: 30px;
   width: 30px;

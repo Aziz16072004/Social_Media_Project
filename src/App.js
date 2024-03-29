@@ -45,14 +45,27 @@ function App() {
     return () => {
       newSocket.disconnect();
     };
-  }, []); 
+  }, []);
+  useEffect(()=>{
+    const data = JSON.parse(localStorage.getItem("theme"));
+    if (data) {
+      
+      setTheme(data.theme)
+      setColor(data.color)
+    }
+  },[])
+  useEffect(() => {
+    localStorage.setItem("theme", JSON.stringify({ theme: theme, color: color }));
+}, [theme, color]);
   const updateSetShowTheme = (newValue) => {
     setShowTheme(newValue);
   };
   return (
+    
     <div className={`${theme} ${color}`}>
+      
     {showTheme ?(
-
+      
       <div className={"main-theme-bar row " + theme +" " +color}>
       
               <div class="theme_bar col-11 col-md-9 col-lg-7 mx-auto">
@@ -70,50 +83,50 @@ function App() {
                   {
                     Array.from({ length: 5 }).map((_, i) => (
                       <span
-                        id={`active${i + 1}`}
-                        onClick={() => {
-                          const allElements = document.querySelectorAll('.size-line span');
-                      allElements.forEach(element => {
-                        element.classList.remove('active');
-                      });
-                          document.getElementById(`active${i + 1}`).classList.toggle('active');
-                        }}
+                      id={`active${i + 1}`}
+                      onClick={() => {
+                        const allElements = document.querySelectorAll('.size-line span');
+                        allElements.forEach(element => {
+                          element.classList.remove('active');
+                        });
+                        document.getElementById(`active${i + 1}`).classList.toggle('active');
+                      }}
                       ></span>
-                    ))
-                  }
+                      ))
+                    }
                   </div>
                   <h2>Aa</h2>
                   </div>
                   <p class="theme-color-title">Font Size</p>
                   <div class="color-bar">
                   {colors.map((color, index) => (
-        <span
-          key={index}
-          id={`color${index + 1}`}
-          onClick={() => {
-            const allElements = document.querySelectorAll('.color-bar span');
-            allElements.forEach(element => {
-              element.classList.remove('activeColor');
-            });
-            document.getElementById(`color${index + 1}`).classList.toggle('activeColor');
-            setColor(color);
-          }}
-        ></span>
-      ))}
+                    <span
+                    key={index}
+                    id={`color${index + 1}`}
+                    onClick={() => {
+                      const allElements = document.querySelectorAll('.color-bar span');
+                      allElements.forEach(element => {
+                        element.classList.remove('activeColor');
+                      });
+                      document.getElementById(`color${index + 1}`).classList.toggle('activeColor');
+                      setColor(color);
+                    }}
+                    ></span>
+                    ))}
                   </div>
                   <p class="theme-background-title">Background</p>
                   <div class="background-bar">
                     {themeMapping.map((e,i)=>(
-                        <div className={`${e.class} background`}  id={`activeTheme${i + 1}`}
-                        onClick={() => {
-                          const allElements = document.querySelectorAll('.background-bar div');
-                          allElements.forEach(element => {
-                            element.classList.remove('activeTheme');
-                          });
-                          document.getElementById(`activeTheme${i + 1}`).classList.toggle('activeTheme');
-                          setTheme(e.themeMoode)
-                       
-                        }}>
+                      <div className={`${e.class} background`}  id={`activeTheme${i + 1}`}
+                      onClick={() => {
+                        const allElements = document.querySelectorAll('.background-bar div');
+                        allElements.forEach(element => {
+                          element.classList.remove('activeTheme');
+                        });
+                        document.getElementById(`activeTheme${i + 1}`).classList.toggle('activeTheme');
+                        setTheme(e.themeMoode)
+                        
+                      }}>
                         <div class="circal"></div>
                         <p>{e.paragraphe}</p>
                     </div>
@@ -137,6 +150,7 @@ function App() {
       </Routes>
     </Router>
     </div>
+                   
   );
 }
 

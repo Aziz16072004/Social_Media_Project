@@ -12,22 +12,12 @@ export default function Header({theme , color}){
     const [dataStoraged , setDataStoraged] = useState({})
     const hundleFocuse = async () => {
         setShowSearchingBar(true);
-        // setShowSearchingBar(true);
-        
-        // try {
-        //     const res = await axios.get("http://localhost:8000/getAllUsers");
-        //     setUsers(res.data);
-        // } catch (error) {
-        //     console.error('Error fetching users:', error);
-        // }
     }
     const handleInputChange = (e) => { 
         const searchTerm = e.target.value;
         setSearchItem(searchTerm)
-    
-        // console.log(user.username.toLowerCase().includes(searchTerm.toLowerCase()))
         const filteredItems = users.filter((user) =>
-        user.username.toLowerCase().includes(searchTerm.toLowerCase())
+        user?.username.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredUsers(filteredItems)
         
@@ -64,12 +54,12 @@ return(
                     <ion-icon name="close-outline" onClick={(e) => { e.stopPropagation(); setShowSearchingBar(false); }}></ion-icon>
                    
                    {filteredUsers.map((user)=>{
-                       const isFriend = user.friends.find((friend) => friend.user === dataStoraged._id )
+                       const isFriend = user?.friends.find((friend) => friend.user === dataStoraged._id )
                        return(
-                           <div  className="serachePerson container align-items-center" key={user._id}>
-                        <img src={`http://localhost:8000/${user.profileImg}`} alt="" className=""/>
-                        <Link to={`/profile/${user._id}`} className="serachePersonInformation ">
-                            <p>{user.username}</p>
+                           <div  className="serachePerson container align-items-center" key={user?._id}>
+                        <img src={`http://localhost:8000/${user?.profileImg}`} alt="" className=""/>
+                        <Link to={`/profile/${user?._id}`} className="serachePersonInformation ">
+                            <p>{user?.username}</p>
                            <small className="status">{isFriend ? "Ami(e)" : "Non ami(e)"}</small>
                         </Link>
                         

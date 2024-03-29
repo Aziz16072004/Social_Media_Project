@@ -173,16 +173,17 @@ export default function ControleBar({socket , updateSetShowTheme}) {
                         < p >{e.Name}</p>
                         </div>
                                 </div>
+                                {notification.length>0 && (
                                 <div className={ !display ? "notification-bar" : "notification-bar notification-bar-active" }>
             
                 { notification && notification.map((notifi , i)=>{
                     return(
                     <div className={notifi.read ? "notification-person " :"notification-person notRead"} key={uuidv4()} onClick={()=>{readOneNotification(notifi._id)}} >
                         <div className="profile-img">
-                            <img src={`http://localhost:8000/${notifi.sender.profileImg}`} alt=""/>
+                            <img src={`http://localhost:8000/${notifi.sender?.profileImg}`} alt=""/>
                         </div>
                         <div className="notification-info"> 
-                            <b>{notifi.sender.username}</b> <small> {notifi.description}<br/>
+                            <b>{notifi.sender?.username}</b> <small> {notifi.description}<br/>
                             {formatPostDate(notifi.createdAt)}
                             </small>
                         </div>
@@ -190,6 +191,7 @@ export default function ControleBar({socket , updateSetShowTheme}) {
                 </div>)
                 })}
                 </div>
+                )}
             </div>)
                         }
                         else{
@@ -209,6 +211,7 @@ export default function ControleBar({socket , updateSetShowTheme}) {
                             </div>
                         </div>
                      </div>
+                     
                      
             </div>
     )

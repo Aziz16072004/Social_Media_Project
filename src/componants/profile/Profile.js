@@ -95,10 +95,12 @@ export default function Profile({socket}){
                     </div>
                     </div>
             </div>
-            <div className="posts  col-10 col-md-9 col-lg-8 mx-auto  align-items-center ">
+            {posts.length>0 && (
+
+                <div className="posts  col-10 col-md-9 col-lg-8 mx-auto  align-items-center ">
                 <div className="row">
-                    {posts.map((post)=>(
-                    
+                    { posts.map((post)=>(
+                        
                         <div className="post col-12 col-md-6 col-lg-4" key={post._id}>
                             <img src={`http://localhost:8000/${post.image}`} alt="" />
                         <div className="postpic__content">
@@ -116,10 +118,11 @@ export default function Profile({socket}){
                         </div>
                         </div>
                         
-                    ))}
+                        ))}
                     
                 </div>
             </div>
+                        )}
             </div>
             ):null
             

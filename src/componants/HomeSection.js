@@ -1,12 +1,12 @@
 import { useState , useEffect, useRef } from "react"
+import * as React from 'react';
 import {Link} from "react-router-dom"
 import axios from "axios"
-import livvyland_profile from "../imgs/livvyland_profile.jpg"
-import nike_profile from "../imgs/nike_profile.jpg"
-import painting_profile from "../imgs/painting_profile.jpg"
-import neymar_profile from "../imgs/neymar_profile.jpg"
-import tokyoghoul_profile from "../imgs/tokyoghoul_profile.jpg"
-import depression_profile from "../imgs/depression_profile.jpg"
+
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import close from "../imgs/close.png"
 import send from "../imgs/paper-plane-top.png"
@@ -15,7 +15,6 @@ import blackLove from "../imgs/blackLove.png"
 import loveColored from "../imgs/loveColored.png"
 
 import chat from "../imgs/chat.png"
-import share from "../imgs/share.png"
 import ribbon from "../imgs/ribbon.png"
 import bookmark from "../imgs/bookmark.png"
 import Stories from "./Stories"
@@ -28,14 +27,33 @@ export default function HomeSection({theme}) {
     const [data,setData] = useState({})
     const [coloredLove , SetColoredLove] = useState(false)
     const [comment , setComment] = useState("")
+    const [optionSelected ,setOptionSelected ]=useState("")
     const [showPostInformation , setShowPostInformation] = useState(false)
     const [showRatings , setShowRatings] = useState(false)
     const [showComments , setShowComments] = useState(false)
     const [ratingData , setRatingData] = useState({})
     const fileInputRef = useRef(null);
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClickButton = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose = async(item) => {
+      setOptionSelected(item);
+      setAnchorEl(null);
+    };
+    const options = [
+      'delete',
+      'modify',
+      'share'
+    ];
+    
+    const ITEM_HEIGHT = 48;
+    
     const handleClick = () => {
       if (fileInputRef.current) {
-        fileInputRef.current.click();
+        fileInputRef.current.click();        
       }
     };
     async function fetchData(postId){
@@ -52,7 +70,7 @@ export default function HomeSection({theme}) {
         try {
           let updatedRates;
           
-          if (!post.peopleRated.some(rate => rate.user._id === data._id)) {
+          if (!post.peopleRated.some(rate => rate.user?._id === data._id)) {
             await axios.post("http://localhost:8000/posts/addRate", {
               postId: post && post._id,
               userId: data && data._id,
@@ -70,8 +88,8 @@ export default function HomeSection({theme}) {
               if (p._id === post._id) {
                 return {
                   ...p,
-                  peopleRated: post.peopleRated.some(rate => rate.user._id === data._id)
-                    ? p.peopleRated.filter(rate => rate.user._id !== data._id)
+                  peopleRated: post.peopleRated.some(rate => rate.user?._id === data._id)
+                    ? p.peopleRated.filter(rate => rate.user?._id !== data._id)
                     
                     : [...p.peopleRated, { user: { _id: data._id ,profileImg : data.profileImg , username : data.username} }],
                   rates: updatedRates,
@@ -138,6 +156,7 @@ export default function HomeSection({theme}) {
         <>
          {postWidget ? (
           <div className="change row">
+           
         
           <div className="container col-10 col-md-8 my-auto col-lg-6">
             <div className="createdPostHeader w-100">
@@ -214,14 +233,49 @@ export default function HomeSection({theme}) {
              const createdAt = formatPostDate(post.createdAt)
             return(
                 <div className="posts" key={post._id}>
+                  <div className="optionsButton">
+                  <IconButton
+                  aria-label="more"
+                  id="long-button"
+                  aria-controls={open ? 'long-menu' : undefined}
+                  aria-expanded={open ? 'true' : undefined}
+                  aria-haspopup="true"
+                  onClick={handleClickButton}
+                >
+                  <MoreVertIcon />
+                </IconButton>
+                <Menu
+                  id="long-menu"
+                  MenuListProps={{
+                    'aria-labelledby': 'long-button',
+                  }}
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  PaperProps={{
+                    style: {
+                      maxHeight: ITEM_HEIGHT * 4.5,
+                      width: '20ch',
+                    },
+                  }}
+                >
+                  {options.map((option) => (
+                    <MenuItem key={option} selected={option === 'Pyxis'} onClick={()=>handleClose(option)}>
+                      {option}
+                    </MenuItem>
+                  ))}
+
+                  
+                </Menu>
+                </div>
                     <div className="post-title">
                             <div className="profile-img img-post">
                            
-                                <img src={`http://localhost:8000/${post.userId.profileImg}`} alt=""/>
+                                <img src={`http://localhost:8000/${post.userId?.profileImg}`} alt=""/>
                             
                                 </div>
                             <div className="post-name-utilisateur">
-                                <h3><Link to={`/profile/${post.userId._id}`}> {post.userId?.username}</Link> </h3>
+                                <h3><Link to={`/profile/${post.userId?._id}`}> {post.userId?.username}</Link> </h3>
                                 <p>{createdAt} , post Created</p>
                             </div>
                         </div>
@@ -233,7 +287,7 @@ export default function HomeSection({theme}) {
                             <div className="icons-posts-left">
                             <img
                               alt=""
-                              src={post.peopleRated.some(rate => rate.user._id === data._id) ? loveColored : (theme === "blackMode" || theme === "darkMode" ? whiteLove : blackLove)}
+                              src={post.peopleRated.some(rate => rate.user?._id === data?._id) ? loveColored : (theme === "blackMode" || theme === "darkMode" ? whiteLove : blackLove)}
                               onClick={async ()=>{hundleClickLike(post)}}/>
                               <ion-icon name="chatbubble-ellipses-outline" onClick={()=>{fetchData(post._id) ; setShowPostInformation(true) ; setShowComments(true)}}></ion-icon>
                   
@@ -256,10 +310,10 @@ export default function HomeSection({theme}) {
                                 <div className="line1-vue">
                                   <div>
                                   {post.peopleRated.map((rater, index) => (
-  index < 3 ? <img src={`http://localhost:8000/${rater.user.profileImg}`} alt="" className={`img${index+1}`} key={rater.user._id} /> : ""
+  index < 3 ? <img src={`http://localhost:8000/${rater.user?.profileImg}`} alt="" className={`img${index+1}`} key={rater.user?._id} /> : ""
 ))}
               </div>
-                                    <p onClick={()=>{fetchData(post._id) ;setShowRatings(true)}}>Like by <b>{post.peopleRated.length > 0 ? post.peopleRated[0].user.username : ""}</b> and <b>{post.rates > 0 ? post.rates - 1 : 0} other</b></p>
+                                    <p onClick={()=>{fetchData(post._id) ;setShowRatings(true)}}>Like by <b>{post.peopleRated.length > 0 ? post.peopleRated[0].user?.username : ""}</b> and <b>{post.rates > 0 ? post.rates - 1 : 0} other</b></p>
 </div>
 
 
@@ -275,12 +329,12 @@ export default function HomeSection({theme}) {
           
           {ratingData && ratingData.peopleRated ? (
             ratingData.peopleRated.map((rate) => (
-              <div className="personRateInformation" key={rate.user._id}>
+              <div className="personRateInformation" key={rate.user?._id}>
                 <div>
-                  <img src={`http://localhost:8000/${rate.user.profileImg}`} alt="" />
+                  <img src={`http://localhost:8000/${rate.user?.profileImg}`} alt="" />
                   <img src={loveColored} className="coloredHeartRate" alt="Love Colored" />
                 </div>
-                <p>{rate.user.username}</p>
+                <p>{rate.user?.username}</p>
               </div>
             ))
           ) : (
@@ -301,9 +355,9 @@ export default function HomeSection({theme}) {
           ratingData.comments.map((com)=>(
             <div className="comment" key={com._id}>
               
-                  <img src={`http://localhost:8000/${com.user.profileImg}`} alt=""/>
+                  <img src={`http://localhost:8000/${com.user?.profileImg}`} alt=""/>
                   <div className="comment_description">
-                    <p className="comment_title"><b>{com.user.username}</b></p>
+                    <p className="comment_title"><b>{com.user?.username}</b></p>
                     <p className="comment_writing"> {com.comment}</p>
                   </div>
                 </div>
@@ -326,9 +380,9 @@ export default function HomeSection({theme}) {
               {post.comments.length>0 ?
                 <div className="comment">
                   
-                  <img src={`http://localhost:8000/${post.comments[0].user.profileImg}`} alt=""/>
+                  <img src={`http://localhost:8000/${post.comments[0].user?.profileImg}`} alt=""/>
                   <div className="comment_description">
-                    <p className="comment_title"><b>{post.comments[0].user.username}</b></p>
+                    <p className="comment_title"><b>{post.comments[0].user?.username}</b></p>
                     <p className="comment_writing"> {post.comments[0].comment}</p>
                   </div>
                 </div>
@@ -337,13 +391,28 @@ export default function HomeSection({theme}) {
                 <img src={`http://localhost:8000/${data.profileImg}`} alt=""/>
                   <div className="comment_description">
                     <input type="text" placeholder="write a comment ...." value={comment} onChange={(e)=>setComment(e.target.value)} />
-                    <img src={send} alt="dddd" className="imggggggg" onClick={async ()=>{
+                    <img src={send} alt="addcomment" className="imageAddComment" onClick={async ()=>{
                       setComment("");
                       await axios.post("http://localhost:8000/posts/addComment", {
                         postId: post && post._id,
                         userId: data && data._id,
                         comment : comment
                       });
+                      setPosts(prevPosts => {
+                        const updatedPosts = prevPosts.map(p => {
+                          if (p._id === post._id) {
+                            const updatedComments = [...p.comments, {comment: comment , user: {profileImg : data.profileImg,username :data.username}}];
+                            return {
+                              ...p,
+                              comments: updatedComments
+                            };
+                          }
+                          return p;
+                        });
+                        console.log(updatedPosts);
+                        return updatedPosts;
+                      });
+                     
                     }}/>
                   </div>
                 </div>

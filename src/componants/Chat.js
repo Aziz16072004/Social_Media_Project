@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
+import send from "../imgs/paper-plane-top.png"
 export default function Chat({socket}){  
     const {id1} = useParams()
     const {id2} = useParams()
@@ -55,14 +56,14 @@ export default function Chat({socket}){
         try {
             if (socket) {
             socket.emit("send-message", {
-                to: showUser.user._id,
+                to: showUser.user?._id,
                 from: id1,
                 message,
             });
             }
             await axios.post("http://localhost:8000/message/addmsg", {
                 from: id1,
-                to: showUser.user._id,
+                to: showUser.user?._id,
                 message: message,
             });
             setMessages((prevMessages) => [
@@ -80,7 +81,7 @@ export default function Chat({socket}){
                 if (showUser) {
                     const response = await axios.post("http://localhost:8000/message/getmsg", {
                         from: id1,
-                        to: showUser.user._id,
+                        to: showUser.user?._id,
                     });
                     setMessages(response.data);
                 }
@@ -115,13 +116,13 @@ export default function Chat({socket}){
                     
                     <div className="message-person" onClick={()=>{setShowUser(friend)}}>
                         <div className="profile-img-friends ">
-                            <img src={`http://localhost:8000/${friend.user.profileImg}`} alt=""/>
-                            {users.some(user => user.userId ===friend.user._id) ?(
+                            <img src={`http://localhost:8000/${friend.user?.profileImg}`} alt=""/>
+                            {users.some(user => user?.userId ===friend.user?._id) ?(
                                 <span className="activePerson"></span>
                             ):null}
                         </div>
                         <div className="message-info"> 
-                            <b>{friend.user.username}</b> <br/> <small> wake up brooo !!!!</small>
+                            <b>{friend.user?.username}</b> <br/> <small> wake up brooo !!!!</small>
                         </div>
                     </div>
                     ))}
@@ -134,10 +135,10 @@ export default function Chat({socket}){
                             
                         <div className="message-person ">
                             <div className="profile-img-friends ">
-                                    <img src={`http://localhost:8000/${showUser.user.profileImg}`} alt=""/>
+                                    <img src={`http://localhost:8000/${showUser.user?.profileImg}`} alt=""/>
                             </div>
                             <div className="message-info"> 
-                                <b>{showUser.user.username}</b> <br/> <small> wake up brooo !!!!</small>
+                                <b>{showUser.user?.username}</b> <br/> <small> wake up brooo !!!!</small>
                             </div>
                         </div>
                     </div>
@@ -146,8 +147,8 @@ export default function Chat({socket}){
 
                                 {messages.map((msg)=>(
                                     <div className={msg.fromSelf ? "reciever" : "sender"} ref={scrollRef}>
-                                        {/* <img src={`http://localhost:8000/${showUser.user.profileImg}`}/> */}
-                                        <p>{msg.message}</p>
+                                        {/* <img src={`http://localhost:8000/${showUser.user?.profileImg}`}/> */}
+                                        <div>{msg.message}</div>
                                     </div>
                                 ))}
                                 {waitingMessage ? (
@@ -156,18 +157,19 @@ export default function Chat({socket}){
                                     </div>
                                     ):null}
                             </div>
+                    </div>
                         <div className="addChat">
                             <input type="text" value={message}onChange={(e)=>{
                                 setMessage(e.target.value) 
                                 if (socket) {
                                 socket.emit("sending-message", {
-                                    to: showUser.user._id,
+                                    to: showUser.user?._id,
                                 });
                             }
                             }}/>
-                            <button onClick={hundleSendMessage}>send</button>
+                            <img src={send} alt="addcomment" className="imgSendMessage" onClick={hundleSendMessage}/>
+                            
                         </div>
-                    </div>
                 </div>
                 ):null}
                 

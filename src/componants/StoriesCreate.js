@@ -61,7 +61,7 @@ const StoriesCreate = () => {
         }
     }
   return (
-    <div className='row'>
+    <div className='row creatingStoryContainer'>
         <div className='leftBar col-4'>
             <div className='Storyheader'>
                 <Link to="/home">

@@ -6,10 +6,17 @@ export default function Friends({socket , users}){
     const [friends , setFriends] = useState([])
     const [requests , setRequests] = useState([])
     const userData = JSON.parse(localStorage.getItem("user"));
-  
+    const [searchUsers , setSearchUsers] = useState([])
     const [lastMessages, setLastMessages] = useState({});
     
-    
+    const searchingUsers = (e)=>{
+        const searche = e.target.value
+        const filteredUsers = friends.filter((friend) =>
+        friend.user?.username.toLowerCase().includes(searche.toLowerCase())
+        );
+        setSearchUsers(filteredUsers)
+
+    }
     useEffect(() => {
         if (socket) {
         socket.on("receive-addFriends", (userReq) => {
@@ -20,16 +27,16 @@ export default function Friends({socket , users}){
         try {
             if (socket) {
                 socket.emit("send-notification", {
-                    to: req.user._id,
+                    to: req.user?._id,
                     message : "accept your friends request",
                     img : userData.profileImg,
                     username : userData.username,
                     createdAt : Date.now()
                 });
                 }
-            const res = await axios.post("http://localhost:8000/user/acceptfriend", {recipient : userData._id, sender :  req.user._id})
+            const res = await axios.post("http://localhost:8000/user/acceptfriend", {recipient : userData._id, sender :  req.user?._id})
             setFriends((prevFriends) => (Array.isArray(prevFriends) ? [...prevFriends, {user :res.data}] : [{user : res.data}]));
-            setRequests(prevRequests => prevRequests.filter(request => request.user._id !== req.user._id))
+            setRequests(prevRequests => prevRequests.filter(request => request.user?._id !== req.user?._id))
         } catch (error) {
             console.log(error);
         }
@@ -39,7 +46,7 @@ export default function Friends({socket , users}){
         try {
             if (socket) {
                 socket.emit("send-notification", {
-                    to: req.user._id,
+                    to: req.user?._id,
                     message : "reject your friends request",
                     img : userData.profileImg,
                     username : userData.username,
@@ -47,9 +54,9 @@ export default function Friends({socket , users}){
                 });
                 }
             await axios.delete("http://localhost:8000/user/rejectfriend", {
-                data: { recipient: userData._id, sender: req.user._id }
+                data: { recipient: userData._id, sender: req.user?._id }
               })
-            setRequests(prevRequests => prevRequests.filter(request => request.user._id !== req.user._id))
+            setRequests(prevRequests => prevRequests.filter(request => request.user?._id !== req.user?._id))
         } catch (error) {
             console.log(error);
         }
@@ -60,19 +67,21 @@ export default function Friends({socket , users}){
             try {
                 const res = await axios.get(`http://localhost:8000/user/getuser/${userData._id}`)
                 setFriends(res.data.friends)
+                setSearchUsers(res.data.friends)
+                console.log(res.data.friends);
                 setRequests(res.data.requests)
                 const newLastMessages = [];
                 await Promise.all(
                 res.data.friends.map(async (friend) => {
                     try {
                     const lastMsgResponse = await axios.get(
-                        `http://localhost:8000/message/getLastMsg/?from=${userData._id}&to=${friend.user._id}`
+                        `http://localhost:8000/message/getLastMsg/?from=${userData._id}&to=${friend.user?._id}`
                     );
                     const lastMessage = lastMsgResponse.data;
-                    newLastMessages[friend.user._id] = lastMessage;
+                    newLastMessages[friend.user?._id] = lastMessage;
 
                     } catch (error) {
-                    console.error(`Error fetching last message for ${friend.user.username}:`, error);
+                    console.error(`Error fetching last message for ${friend.user?.username}:`, error);
                     }
                 })
                 );
@@ -95,7 +104,7 @@ setLastMessages(newLastMessages);
                     </div>
                     <div className="searche-friends">
                         <ion-icon name="search-outline"></ion-icon>
-                        <input type="text" placeholder="searche messages"/>
+                        <input type="text" placeholder="searche messages" onChange={(e)=>searchingUsers(e)}/>
                     </div>
                     <div className="show-friends row">
                         <a href="#" className="col-4">Primary</a>
@@ -103,22 +112,22 @@ setLastMessages(newLastMessages);
                         <a href="#" className="col-4">Requests</a>
                     </div>
                     
-                    {friends && friends.map((friend)=>{
+                    {searchUsers && searchUsers.map((friend)=>{
 
                     return(
-                    <Link to={`/chat/${userData._id}/${friend.user._id}`}   className="message-person ">
+                    <Link to={`/chat/${userData._id}/${friend.user?._id}`}   className="message-person ">
                         
                         <div className="profile-img-friends ">
-                            <img src={`http://localhost:8000/${friend.user.profileImg}`} alt=""/>
-                            {users.some(user => user.userId ===friend.user._id) ?(
+                            <img src={`http://localhost:8000/${friend.user?.profileImg}`} alt=""/>
+                            {users.some(user => user?.userId ===friend.user?._id) ?(
 
                                 <span className="activePerson"></span>
                                 
                             ):null}
                         </div>
                         <div className="message-info"> 
-                            <b>{friend.user.username}</b> <br/> 
-                            <small>{lastMessages[friend.user._id]}</small>
+                            <b>{friend.user?.username}</b> <br/> 
+                            <small>{lastMessages[friend.user?._id]}</small>
                           
                             
                             
@@ -130,13 +139,13 @@ setLastMessages(newLastMessages);
                 {requests && requests.map((req)=>{
                     return(
 
-                <div className="requests" key={req.user._id}>
+                <div className="requests" key={req.user?._id}>
                     <div className="requests-person ">
                         <div className="profile-img">
-                            <img src={`http://localhost:8000/${req.user.profileImg}`} alt=""/>
+                            <img src={`http://localhost:8000/${req.user?.profileImg}`} alt=""/>
                         </div>
                         <div className="requests-info"> 
-                            <b>{req.user.username}</b> <br/> <small> 8 mutal friends</small>
+                            <b>{req.user?.username}</b> <br/> <small> 8 mutal friends</small>
                         </div>
                     </div>
                     <div className="request-btn">

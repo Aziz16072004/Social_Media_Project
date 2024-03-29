@@ -92,12 +92,12 @@ export default function Bookmarks(){
                             <div className="icons-posts-right">
                             <img
   alt=""
-  src={post.post.peopleRated.some(rate => rate.user._id === data._id) ? loveColored : love}
+  src={post.post.peopleRated.some(rate => rate.user?._id === data._id) ? loveColored : love}
   onClick={async () => {
     try {
       let updatedRates;
 
-      if (!post.post.peopleRated.some(rate => rate.user._id === data._id)) {
+      if (!post.post.peopleRated.some(rate => rate.user?._id === data._id)) {
         await axios.post("http://localhost:8000/posts/addRate", {
           postId: post.post && post.post._id,
           userId: data && data._id,
@@ -116,8 +116,8 @@ export default function Bookmarks(){
           if (p._id === post.post._id) {
             return {
               ...p,
-              peopleRated: post.post.peopleRated.some(rate => rate.user._id === data._id)
-                ? p.peopleRated.filter(rate => rate.user._id !== data._id)
+              peopleRated: post.post.peopleRated.some(rate => rate.user?._id === data._id)
+                ? p.peopleRated.filter(rate => rate.user?._id !== data._id)
                 : [...p.peopleRated, { user: { _id: data._id } }],
               rates: updatedRates,
             };
@@ -150,10 +150,10 @@ export default function Bookmarks(){
                                   <div>
 
                                   {post.post.peopleRated.map((rater, index) => (
-  index < 3 ? <img src={`http://localhost:8000/${rater.user.profileImg}`} alt="" className={`img${index+1}`} /> : ""
+  index < 3 ? <img src={`http://localhost:8000/${rater.user?.profileImg}`} alt="" className={`img${index+1}`} /> : ""
 ))}
                                   </div>
-                                    <p onClick={()=>{fetchData(post.post._id) ;setShowRatings(true)}}>Like by <b>{post.post.peopleRated.length > 0 ? post.post.peopleRated[0].user.username : ""}</b> and <b>{post.post.rates > 0 ? post.post.rates - 1 : 0} other</b></p>
+                                    <p onClick={()=>{fetchData(post.post._id) ;setShowRatings(true)}}>Like by <b>{post.post.peopleRated.length > 0 ? post.post.peopleRated[0].user?.username : ""}</b> and <b>{post.post.rates > 0 ? post.post.rates - 1 : 0} other</b></p>
 </div>
 
 
@@ -168,12 +168,12 @@ export default function Bookmarks(){
         <div className="ratesBody">
           {ratingData && ratingData.peopleRated ? (
             ratingData.peopleRated.map((rate) => (
-              <div className="personRateInformation" key={rate.user._id}>
+              <div className="personRateInformation" key={rate.user?._id}>
                 <div>
-                  <img src={`http://localhost:8000/${rate.user.profileImg}`} alt="" />
+                  <img src={`http://localhost:8000/${rate.user?.profileImg}`} alt="" />
                   <img src={loveColored} className="coloredHeartRate" alt="Love Colored" />
                 </div>
-                <p>{rate.user.username}</p>
+                <p>{rate.user?.username}</p>
               </div>
             ))
           ) : (
@@ -195,9 +195,9 @@ export default function Bookmarks(){
                   
                             ratingData.comments.map((com)=>(
                               <div className="comment">
-                                    <img src={`http://localhost:8000/${com.user.profileImg}`} alt=""/>
+                                    <img src={`http://localhost:8000/${com.user?.profileImg}`} alt=""/>
                                     <div className="comment_description">
-                                      <p className="comment_title"><b>{com.user.username}</b></p>
+                                      <p className="comment_title"><b>{com.user?.username}</b></p>
                                       <p className="comment_writing"> {com.comment}</p>
                                     </div>
                                   </div>
@@ -225,9 +225,9 @@ export default function Bookmarks(){
                                 {post.post.comments.length>0 ?
                                   <div className="comment">
                                     
-                                    <img src={`http://localhost:8000/${post.post.comments[0].user.profileImg}`} alt=""/>
+                                    <img src={`http://localhost:8000/${post.post.comments[0].user?.profileImg}`} alt=""/>
                                     <div className="comment_description">
-                                      <p className="comment_title"><b>{post.post.comments[0].user.username}</b></p>
+                                      <p className="comment_title"><b>{post.post.comments[0].user?.username}</b></p>
                                       <p className="comment_writing"> {post.post.comments[0].comment}</p>
                                     </div>
                                   </div>

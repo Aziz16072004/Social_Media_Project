@@ -184,7 +184,7 @@ section{
     color: #808080;
 }
 .serachePersonInformation p{
-    color: black;
+    color: var(--color-dark);
     font-weight: 600;
     font-size: 17px;
 }
@@ -393,7 +393,8 @@ p{
     font-weight: 500;
     position: absolute;
     bottom: 0;
-    z-index: 5;
+    cursor: pointer;
+    z-index: 55;
 }
 .btn-addStory{
     background-color: var(--main-color);
@@ -406,7 +407,7 @@ p{
     
     border-radius: 39PX;
 }
-.allStories::-webkit-scrollbar {
+.allStories::-webkit-scrollbar ,.chatBar-content::-webkit-scrollbar  {
     display: none;
 }
 .img-profile-story{
@@ -467,6 +468,8 @@ p{
     height: 100px;
     background: linear-gradient(rgb(255 255 255 / 3%),rgb(0 0 0 / 45%) );
     border-radius: 15px;
+    z-index: 50;
+    cursor: pointer;
 }
 .addStory {
     position: absolute;
@@ -478,12 +481,12 @@ p{
     bottom: 25px;
     left: 50%;
     transform: translateX(-50%); 
-    z-index: 50;
+    z-index: 60;
     width: 40px;
     height: 40px;
     border-radius: 50px;
     border: 4px solid white;
-    background-color: #6c4be1;
+    background-color: var(--main-color);
 }
 .storyImg:hover{
     transform: scale(1);
@@ -531,6 +534,7 @@ p{
 main{
     background-color: var(--main-background-color);
     padding: 24px 0;
+    min-height: 100vh;
 }
 .story_info_create {
     position: absolute;
@@ -572,6 +576,7 @@ main{
     margin: 10px 0;
     background: var(--color-white);
     border-radius: 15px;
+    position: relative;
 }
 
 .post-name-utilisateur{
@@ -616,7 +621,7 @@ main{
     cursor: pointer;
 }
 .dontsubmit{
-    background-color: #eaebed !important;
+    background-color: var(--color-white) !important;
     color: rgb(167, 167, 167) !important;
     border: 1px solid gray !important;
 }
@@ -683,9 +688,19 @@ main{
 .profile-img-friends{
     position: relative;
 }
-
+.optionsButton{
+    position: absolute;
+    right: 30px;
+    top: 30px;
+}
+.MuiPaper-root{
+    box-shadow: 1px 2px 7px 0px #7a7a7a1a !important;
+}
 .show-friends{
     border-bottom: 4px solid var(--main-background-color);
+}
+.message-info{
+    max-width: 64%;
 }
 .message-person{
     display: flex;
@@ -694,6 +709,7 @@ main{
     align-items: center;
     border-radius: 19px;
     cursor: pointer;
+    overflow: hidden;
    
 }
 
@@ -926,6 +942,7 @@ main{
         width: 75% !important;
     }
 }
+
 @media (max-width: 768px){
     .logo h2{
         text-align: left;
@@ -1034,7 +1051,7 @@ main{
   }
   .change .container{
     box-shadow: -2px 4px 20px gray;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--color-white);
     align-items: center; 
     border-radius: 10px;
     text-align: center;
@@ -1043,7 +1060,10 @@ main{
     background-color: gray !important;
     border: none !important;
 }
-
+.imageAddComment{
+    border:none !important;
+    border-radius: initial !important;
+}
 .comment , .addComment{
     display: flex;
     gap: 11px;
@@ -1054,6 +1074,11 @@ main{
     background: var(--main-background-color);
     padding: 4px 16px;
     border-radius: 19px;
+}
+.imgSendMessage{
+    width: 40px;
+    height: 30px;
+    padding: 0 8px;
 }
 .addComment .comment_description{
     width: 100%;
@@ -1122,26 +1147,22 @@ img:hover {
     width: 100%;
     margin-top: 5px;
     padding-bottom: 15px;
-    border:1px solid white;
+    border:1px solid var(--color-white);
+    background-color: var(--color-white);
 }
 .addPostImage{
     border-radius: 5px;
     border: 1px solid gray;
     padding: 10px;
 }
-.albums:hover{
-    background-color: rgb(215, 216, 217) !important;
-}
-.exite-btn:hover{
-    background-color: rgb(215, 216, 217) !important;
-}
+
 .albums img{
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 .albums{
-    background-color: #eaebed;
+    background-color: var(--main-background-color);
     overflow: hidden;
     cursor: pointer;
     border-radius: 5px;
@@ -1228,7 +1249,7 @@ position: relative;
     width: 100%;
     height: 350px;
     overflow-y: scroll;
-    background-color: white;
+    background-color: var(--color-white);
     top: 50px;
     left: -50px;
     z-index: 100;
@@ -1257,6 +1278,10 @@ position: relative;
   }
   .profileContent{
     background-color: var(--main-background-color);
+    min-height: 100vh;
+  }
+  .profileItem{
+    max-height: 300px;
   }
   .profileContent .profileItem img{
     width: 200px;
@@ -1317,12 +1342,17 @@ position: relative;
 .chatBar {
     display: flex;
     flex-direction: column;
+    position: relative;
     gap: 10px;
     padding: 10px 5px;
+}
+.friendsBar  {
+    border-right: 5px solid var(--main-background-color);
 }
 .friendsBar ,.chatBar {
     height: 100%;
 }
+
 .friendsBar .message-person{
     margin-top: 8px;
 }
@@ -1337,20 +1367,24 @@ position: relative;
     position: relative;
 }
 .addChat input{
-    width: 97%;
-    padding: 11px;
-    border-radius: 10px;
+    width: 95%;
+    background: var(--main-background-color);
+    padding: 15px 10px;
+    border-radius: 19px;
+    
     border: none;
 }
 .addChat{
-    position: sticky;
+    position: absolute;
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     bottom: 10px;
   }
 .sender{
-    text-align: left;
+
+    
     padding: 12px 25px;
     width: 48%;
     position: relative;
@@ -1361,7 +1395,7 @@ position: relative;
 
 .discussion div{
     margin: 6px 0;
-    float: revert-layer;
+    /* float: revert-layer; */
 }
 .discussion{
     padding: 0px 0px 14px 70px;
@@ -1381,8 +1415,21 @@ position: relative;
     margin-left: 0;
 }
 .reciever{
-    display: flex;
+    display: inline-flex;
     justify-content: right;
+    direction: rtl;
+    width: 100%;
+    /* float: right; */
+    
+}
+.reciever div {
+    padding: 12px 25px;
+    
+    border-radius: 5px;
+    color: white;
+    align-self: right;
+    text-align: right;
+    background-color: blue;
 }
 .sender-content{
     background-color:   rgba(128, 128, 128, 0.41);
@@ -1431,11 +1478,15 @@ position: relative;
     align-items: center;
     gap: 9px;
 }
+.creatingStoryContainer{
+    background-color: var(--main-background-color);
+    min-height: 100vh;
+}
 .leftBar{
     padding: 0;
     box-shadow: 0 0 19px 0 #80808078;
-    height: 90vh;
     position: relative;
+    background-color: var(--color-white);
 }
 
 .storyImg img{
@@ -1456,7 +1507,7 @@ font-size: 20px ;
     color: white;
     font-weight: bold;
     cursor: pointer;
-    background-color: #6c4be1;
+    background-color: var(--main-color);
     border-radius: 50px;
 }
 .Storyheader{
@@ -1467,7 +1518,7 @@ font-size: 20px ;
 }
 .storyCreating{
     height: 90vh;
-    background-color: white;
+    background-color: var(--color-white);
     box-shadow: 0px 0px 19px 0px #80808078;
     border-radius: 15px;
 }
@@ -1481,10 +1532,11 @@ font-size: 20px ;
     text-align: center;
     font-size: 20px;
     cursor: pointer;
+    font-weight: 600;
     width: 30%;
     height: 60%;
     color: white;
-    background-color: #6c4be1;
+    background-color: var(--main-color);
     border-radius: 15px;
 }
 .RightBar input[type="file"]{
