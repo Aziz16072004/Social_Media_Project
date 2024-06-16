@@ -23,7 +23,7 @@ export default function Bookmarks(){
     async function fetchData(postId){
         setShowPostInformation(true);
         try {
-          const res = await axios.get(`http://localhost:8000/posts/showPost?postId=${postId}`);
+          const res = await axios.get(`http://localhost:8000/posts/showPost?postId=${postId}`,{withCredentials: true });
           setRatingData(res.data || {});
         } catch (error) {
           console.error('Error fetching data:', error);
@@ -55,7 +55,7 @@ export default function Bookmarks(){
       
         const fetchProducts = async () => {
           try {
-            const response = await axios.get(`http://localhost:8000/user/postMarkes/${id}`);
+            const response = await axios.get(`http://localhost:8000/user/postMarkes/${id}`,{withCredentials: true });
             setPosts(response.data);
         } catch (error) {
             console.error('Error fetching posts:', error);
@@ -101,12 +101,13 @@ export default function Bookmarks(){
         await axios.post("http://localhost:8000/posts/addRate", {
           postId: post.post && post.post._id,
           userId: data && data._id,
+          withCredentials: true 
         });
         updatedRates = post.post.rates + 1;
       } else {
         // Unlike: el qaleb el feragh (the heart is not colored)
         await axios.delete("http://localhost:8000/posts/removeRate", {
-          data: { postId: post.post && post.post._id, userId: data && data._id },
+          data: { postId: post.post && post.post._id, userId: data && data._id },withCredentials: true 
         });
         updatedRates = post.post.rates - 1;
       }
@@ -241,7 +242,8 @@ export default function Bookmarks(){
                                         await axios.post("http://localhost:8000/posts/addComment", {
                                           postId: post && post._id,
                                           userId: data && data._id,
-                                          comment : comment
+                                          comment : comment,
+                                          withCredentials: true 
                                         });
                                       }
                                       }/>

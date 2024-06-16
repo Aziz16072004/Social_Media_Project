@@ -10,7 +10,7 @@ function Stories({user}) {
     const hundleStorie = async (user) =>{
         setShowStories(true)
         try{
-            const res = await axios.get(`http://localhost:8000/story/getStoriesForSwipper?userId=${user}`)
+            const res = await axios.get(`http://localhost:8000/story/getStoriesForSwipper?userId=${user}`,{withCredentials: true })
             setStoriesContent(res.data);
         }catch(error){
             console.log(error);
@@ -19,7 +19,7 @@ function Stories({user}) {
     useEffect(()=>{
         const fetchStories = async ()=>{
             try {
-                const res = await axios.get(`http://localhost:8000/story/getAllStories`)
+                const res = await axios.get('http://localhost:8000/story/getAllStories', { withCredentials: true });
                 setStories(res.data);
             } catch (error) {
                 console.log(error);

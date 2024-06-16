@@ -60,7 +60,7 @@ export default function HomeSection({theme}) {
       
         setShowPostInformation(true);
         try {
-          const res = await axios.get(`http://localhost:8000/posts/showPost?postId=${postId}`);
+          const res = await axios.get(`http://localhost:8000/posts/showPost?postId=${postId}`,{ withCredentials: true });
           setRatingData(res.data || {});
         } catch (error) {
           console.error('Error fetching data:', error);
@@ -74,11 +74,13 @@ export default function HomeSection({theme}) {
             await axios.post("http://localhost:8000/posts/addRate", {
               postId: post && post._id,
               userId: data && data._id,
+              withCredentials: true 
             });
             updatedRates = post.rates + 1;
           } else {
             await axios.delete("http://localhost:8000/posts/removeRate", {
               data: { postId: post && post._id, userId: data && data._id },
+              withCredentials: true 
             });
             updatedRates = post.rates - 1;
           }
@@ -114,7 +116,7 @@ export default function HomeSection({theme}) {
       formData.append('image', postImage);
       formData.append('userId', data._id);
       try {
-        const response = await axios.post(/*'https://blushing-train-newt.cyclic.app/posts/upload'*/"http://localhost:8000/posts/upload", formData);
+        const response = await axios.post("http://localhost:8000/posts/upload", formData,{withCredentials: true });
         setPosts(prevPosts => [response.data,...prevPosts]);
       } catch (error) {
         console.error('Error uploading Post:', error);
@@ -143,7 +145,7 @@ export default function HomeSection({theme}) {
       }
       const fetchProducts = async () => {
         try {
-          const response = await axios.get("http://localhost:8000/posts");
+          const response = await axios.get("http://localhost:8000/posts",{ withCredentials: true });
           setPosts(response.data);
       } catch (error) {
           console.error('Error fetching posts:', error);
@@ -298,6 +300,8 @@ export default function HomeSection({theme}) {
                         const res = await axios.post("http://localhost:8000/posts/postMarkes" , {
                           postId: post && post._id,
                           userId: data && data._id,
+                           withCredentials: true ,
+                           
                         })
                         localStorage.setItem("user", JSON.stringify(res.data));
                         setData(res.data);
@@ -396,7 +400,8 @@ export default function HomeSection({theme}) {
                       await axios.post("http://localhost:8000/posts/addComment", {
                         postId: post && post._id,
                         userId: data && data._id,
-                        comment : comment
+                        comment : comment,
+                        withCredentials: true 
                       });
                       setPosts(prevPosts => {
                         const updatedPosts = prevPosts.map(p => {

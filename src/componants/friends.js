@@ -34,7 +34,7 @@ export default function Friends({socket , users}){
                     createdAt : Date.now()
                 });
                 }
-            const res = await axios.post("http://localhost:8000/user/acceptfriend", {recipient : userData._id, sender :  req.user?._id})
+            const res = await axios.post("http://localhost:8000/user/acceptfriend", {recipient : userData._id, sender :  req.user?._id,withCredentials: true })
             setFriends((prevFriends) => (Array.isArray(prevFriends) ? [...prevFriends, {user :res.data}] : [{user : res.data}]));
             setRequests(prevRequests => prevRequests.filter(request => request.user?._id !== req.user?._id))
         } catch (error) {
@@ -54,7 +54,7 @@ export default function Friends({socket , users}){
                 });
                 }
             await axios.delete("http://localhost:8000/user/rejectfriend", {
-                data: { recipient: userData._id, sender: req.user?._id }
+                data: { recipient: userData._id, sender: req.user?._id },withCredentials: true 
               })
             setRequests(prevRequests => prevRequests.filter(request => request.user?._id !== req.user?._id))
         } catch (error) {
@@ -65,17 +65,17 @@ export default function Friends({socket , users}){
     useEffect(()=>{
         const fetchData = async() =>{
             try {
-                const res = await axios.get(`http://localhost:8000/user/getuser/${userData._id}`)
+                const res = await axios.get(`http://localhost:8000/user/getuser/${userData._id}`,{withCredentials: true })
                 setFriends(res.data.friends)
                 setSearchUsers(res.data.friends)
-                console.log(res.data.friends);
+                
                 setRequests(res.data.requests)
                 const newLastMessages = [];
                 await Promise.all(
                 res.data.friends.map(async (friend) => {
                     try {
                     const lastMsgResponse = await axios.get(
-                        `http://localhost:8000/message/getLastMsg/?from=${userData._id}&to=${friend.user?._id}`
+                        `http://localhost:8000/message/getLastMsg/?from=${userData._id}&to=${friend.user?._id}`,{withCredentials: true }
                     );
                     const lastMessage = lastMsgResponse.data;
                     newLastMessages[friend.user?._id] = lastMessage;

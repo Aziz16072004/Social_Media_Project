@@ -65,6 +65,7 @@ export default function Chat({socket}){
                 from: id1,
                 to: showUser.user?._id,
                 message: message,
+                withCredentials: true 
             });
             setMessages((prevMessages) => [
                 ...prevMessages,
@@ -82,6 +83,7 @@ export default function Chat({socket}){
                     const response = await axios.post("http://localhost:8000/message/getmsg", {
                         from: id1,
                         to: showUser.user?._id,
+                        withCredentials: true 
                     });
                     setMessages(response.data);
                 }
@@ -94,9 +96,9 @@ export default function Chat({socket}){
     useEffect(()=>{
         const fetchData = async()=>{
             try {  
-                const res = await axios.get(`http://localhost:8000/user/getuser/${id1}`)
+                const res = await axios.get(`http://localhost:8000/user/getuser/${id1}`,{withCredentials: true })
                 if (id2) {
-                    const res2 = await axios.get(`http://localhost:8000/user/getuser/${id2}`)
+                    const res2 = await axios.get(`http://localhost:8000/user/getuser/${id2}`,{withCredentials: true })
                     setShowUser({user : res2.data})
                 }
                 setFriends(res.data.friends)

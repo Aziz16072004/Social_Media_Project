@@ -26,7 +26,9 @@ export default function Header({theme , color}){
         const fetchData=async()=>{
             
             try {
-                const res = await axios.get("http://localhost:8000/getAllUsers");
+                const res = await axios.get("http://localhost:8000/getAllUsers",{
+                    withCredentials: true,
+                });
                 setUsers(res.data);
                 setFilteredUsers(res.data)
             } catch (error) {

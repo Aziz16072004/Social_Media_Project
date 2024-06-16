@@ -13,20 +13,22 @@ function Singup() {
     email: yup.string().email("email invalide").required("Email required"),
     password: yup.string().required("Password required"),
   })
-  
 const {register , handleSubmit, formState :{errors}} = useForm({
   resolver : yupResolver(schema) ,
 }) ;
+const emailError = document.querySelector(".errorMessage.email");
+
 async function onSubmit(data) {
+  emailError.textContent = ""
   try {
-    const res = await axios.post(/*"https://blushing-train-newt.cyclic.app/signup"*/"http://localhost:8000/signup", {
+    const res = await axios.post(/*"https://blushing-train-newt.cyclic.app/signup"*/"http://localhost:8000/auth/signup", {
       username: data.username,
       email: data.email,
-      password: data.password
+      password: data.password,
+      withCredentials: true 
     });
-
     if (res.data === "existe") {
-      alert("User already exists");
+      emailError.textContent = "User already exists" 
     } else if (res.data === "nonexiste") {
       alert("Registering successfully");
       navigation("/");
@@ -54,7 +56,7 @@ async function onSubmit(data) {
   <input type="text" {...register("username")}/>
 
   <label >Email:</label>
-  <p className="errorMessage"> {errors.email?.message}</p>
+  <p className="errorMessage email"> {errors.email?.message}</p>
   <input type="email"   {...register("email")}/>
 
   <label >Password:</label>

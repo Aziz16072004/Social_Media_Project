@@ -4,6 +4,8 @@ import { useNavigate, Link } from "react-router-dom";
 import "./login.css"
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Cookies from 'js-cookie';
+
 import * as yup from "yup" ;
 function Login() {
     const navigate = useNavigate(); 
@@ -17,23 +19,23 @@ function Login() {
     }) ;
     async function onSubmit(data) {
       try {
-        const res = await axios.post(/*"https://blushing-train-newt.cyclic.app/"*/"http://localhost:8000/",  {
+        const res = await axios.post(/*"https://blushing-train-newt.cyclic.app/"*/"http://localhost:8000/auth/signin",  {
           email: data.email,
           password: data.password
         });
-        console.log(res);
-        if (res.data.email === data.email &&  res.data.password === data.password ) {
+        if (res.data.user.email === data.email &&  res.data.user.password === data.password ) {
+          console.log(res);
           navigate("/home");
-          localStorage.setItem("user",JSON.stringify(res.data));
-          
+          localStorage.setItem("user",JSON.stringify(res.data.user));
+          Cookies.set('jwt',res.data.token , { expires: 7 });
           
         } 
-        else if(res.data.email === data.email &&  res.data.password !== data.password )  {
+        else if(res.data.user.email === data.email &&  res.data.user.password !== data.password )  {
           alert("check your password")
         }
-        else if (res.data === "nonexiste") {
+        else if (res.data.user === "nonexiste") {
           alert("User has not registered");
-          console.log(res.data);
+          console.log(res.data.user);
         }
         else{
           alert("error")

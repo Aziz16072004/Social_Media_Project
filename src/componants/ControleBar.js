@@ -58,7 +58,7 @@ export default function ControleBar({socket , updateSetShowTheme}) {
     const handleNotifications = async()=>{
         setDisplay(!display)
         try{
-            await axios.post(`http://localhost:8000/notification/readAllNotifications?user=${dataStoraged._id}`)
+            await axios.post(`http://localhost:8000/notification/readAllNotifications?user=${dataStoraged._id}`,{withCredentials: true })
             setNewNotifi(0)
         }catch(err){
             console.log(err);
@@ -66,7 +66,7 @@ export default function ControleBar({socket , updateSetShowTheme}) {
     }
     const readOneNotification = async (Idnotifi) => {
         try {
-            const res = await axios.post(`http://localhost:8000/notification/readOneNotification?notifi=${Idnotifi}`);
+            const res = await axios.post(`http://localhost:8000/notification/readOneNotification?notifi=${Idnotifi}`,{withCredentials: true });
             if (res) {
                 const updatedNotifications = notification.map((notifi) => {
                     if (notifi._id === Idnotifi) {
@@ -86,7 +86,7 @@ export default function ControleBar({socket , updateSetShowTheme}) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`http://localhost:8000/notification/getNotification?receiver=${dataStoraged._id}`);
+                const res = await axios.get(`http://localhost:8000/notification/getNotification?receiver=${dataStoraged._id}`,{withCredentials: true });
                 setNotification(res.data)
             } catch (error) {
                 console.log(error);
@@ -97,7 +97,7 @@ export default function ControleBar({socket , updateSetShowTheme}) {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const res = await axios.get(`http://localhost:8000/user/getuser/${dataStoraged._id}`);
+            const res = await axios.get(`http://localhost:8000/user/getuser/${dataStoraged._id}`,{withCredentials: true });
             setData(res.data);
             setNewNotifi(res.data.newNotifi)
           } catch (error) {

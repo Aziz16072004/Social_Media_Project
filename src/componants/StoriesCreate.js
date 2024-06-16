@@ -54,7 +54,7 @@ const StoriesCreate = () => {
         formData.append('image', storyImage);
         console.log(formData);
         try {
-            const res = await axios.post("http://localhost:8000/story/addStory" , formData)
+            const res = await axios.post("http://localhost:8000/story/addStory" , formData,{withCredentials: true })
             setStories(prevStories => [res.data , ...prevStories]);
         } catch (error) {
             console.log(error);
